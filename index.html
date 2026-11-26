@@ -52,7 +52,7 @@
     .font-gaming {
       font-family: 'Chakra Petch', sans-serif;
     }
-    
+
     /* Hide scrollbar for horizontal galleries */
     .no-scrollbar::-webkit-scrollbar {
       display: none;
@@ -107,7 +107,7 @@
   <!-- ==================== 1. HEADER CỐ ĐỊNH ==================== -->
   <header class="sticky top-0 z-40 w-full bg-white/95 dark:bg-[#0B0E17]/95 backdrop-blur-md border-b border-slate-200 dark:border-[#1F2937]">
     <div class="max-w-6xl mx-auto px-3 sm:px-6 h-16 flex items-center justify-between gap-2">
-      
+
       <!-- Logo Góc Trái -->
       <a href="#" onclick="goHome(event)" class="flex items-center gap-2.5 group focus:outline-none">
         <div class="relative w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-blue-600 via-indigo-600 to-amber-500 p-0.5 shadow-lg shadow-blue-600/25 group-hover:scale-105 transition-transform">
@@ -127,8 +127,8 @@
         </div>
       </a>
 
-      <!-- Cụm Nút Phải: Sáng/Tối + Nạp Tiền + Menu -->
-      <div class="flex items-center gap-2 sm:gap-3">
+      <!-- Cụm Nút Phải: Sáng/Tối + Nạp Tiền + Nút Hình Người (chỉ hiện khi đã đăng ký/đăng nhập) + Menu -->
+      <div class="flex items-center gap-2 sm:gap-2.5">
         <!-- Nút Chuyển Sáng / Tối -->
         <button id="themeToggleBtn" onclick="toggleTheme()" aria-label="Chuyển giao diện Sáng/Tối"
           class="w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-[#131826] dark:hover:bg-[#1A2133] border border-slate-200 dark:border-[#1F2937] flex items-center justify-center text-slate-700 dark:text-amber-400 transition-colors">
@@ -138,7 +138,7 @@
         <!-- Dropdown Nạp Tiền -->
         <div class="relative" id="depositDropdownContainer">
           <button onclick="toggleDepositDropdown()"
-            class="h-10 px-3.5 sm:px-4 rounded-xl bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-semibold text-xs sm:text-sm flex items-center gap-2 shadow-md shadow-blue-600/25 transition-all">
+            class="h-10 px-3 sm:px-4 rounded-xl bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-semibold text-xs sm:text-sm flex items-center gap-1.5 shadow-md shadow-blue-600/25 transition-all">
             <i class="fa-solid fa-wallet text-xs"></i>
             <span>Nạp Tiền</span>
             <i class="fa-solid fa-chevron-down text-[10px] opacity-80"></i>
@@ -168,6 +168,14 @@
           </div>
         </div>
 
+        <!-- NÚT BIỂU TƯỢNG HÌNH NGƯỜI (CHỈ HIỂN THỊ KHI ĐÃ ĐĂNG KÝ / ĐĂNG NHẬP) -->
+        <button id="headerProfileIconBtn" onclick="openProfileModal()" title="Xem hồ sơ cá nhân Shop Hồng Hải" aria-label="Hồ sơ cá nhân"
+          class="hidden w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white border border-blue-400/40 flex items-center justify-center shadow-md shadow-blue-600/30 transition-all active:scale-95 relative overflow-hidden">
+          <img id="headerAvatarImg" src="" alt="Avatar người dùng" class="hidden w-full h-full object-cover">
+          <i id="headerDefaultPersonIcon" class="fa-solid fa-user text-sm"></i>
+          <span class="absolute bottom-0.5 right-0.5 w-2 h-2 rounded-full bg-emerald-400 ring-2 ring-[#0B0E17]"></span>
+        </button>
+
         <!-- Nút Menu 3 gạch -->
         <button onclick="toggleMobileMenu()" aria-label="Mở menu"
           class="w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-[#131826] dark:hover:bg-[#1A2133] border border-slate-200 dark:border-[#1F2937] flex items-center justify-center text-slate-700 dark:text-slate-200 transition-colors">
@@ -180,41 +188,51 @@
   <!-- ==================== 2. THANH TRẠNG THÁI TÀI KHOẢN DƯỚI HEADER ==================== -->
   <div class="bg-slate-50 dark:bg-[#0E1320] border-b border-slate-200 dark:border-[#1F2937]">
     <div class="max-w-6xl mx-auto px-3 sm:px-6 py-2.5">
-      <!-- Trạng thái CHƯA ĐĂNG NHẬP -->
-      <div id="guestBar">
-        <button onclick="openAuthModal()"
-          class="w-full py-2.5 px-4 rounded-xl bg-white dark:bg-[#131826] hover:bg-slate-100 dark:hover:bg-[#1A2133] border border-slate-200 dark:border-[#1F2937] flex items-center justify-center gap-2 text-sm font-semibold text-slate-800 dark:text-slate-200 transition-all shadow-sm">
-          <i class="fa-regular fa-user text-blue-500"></i>
+      <!-- Trạng thái CHƯA ĐĂNG NHẬP (Mặc định ban đầu, không tài khoản mẫu) -->
+      <div id="guestBar" class="grid grid-cols-2 gap-2.5">
+        <button onclick="openAuthModal('login')"
+          class="w-full py-2.5 px-4 rounded-xl bg-white dark:bg-[#131826] hover:bg-slate-100 dark:hover:bg-[#1A2133] border border-slate-200 dark:border-[#1F2937] flex items-center justify-center gap-2 text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 transition-all shadow-sm">
+          <i class="fa-solid fa-right-to-bracket text-blue-500"></i>
           <span>Đăng nhập</span>
+        </button>
+        <button onclick="openAuthModal('register')"
+          class="w-full py-2.5 px-4 rounded-xl bg-blue-600/10 hover:bg-blue-600/20 dark:bg-blue-600/15 dark:hover:bg-blue-600/25 border border-blue-500/30 flex items-center justify-center gap-2 text-xs sm:text-sm font-bold text-blue-600 dark:text-blue-400 transition-all shadow-sm">
+          <i class="fa-solid fa-user-plus"></i>
+          <span>Đăng ký tài khoản</span>
         </button>
       </div>
 
       <!-- Trạng thái ĐÃ ĐĂNG NHẬP -->
       <div id="userBar" class="hidden flex-wrap items-center justify-between gap-2 bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] rounded-xl px-3.5 py-2 shadow-sm">
-        <div class="flex items-center gap-2.5">
-          <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center text-white font-bold text-xs shadow">
-            <i class="fa-solid fa-user-astronaut"></i>
+        <button onclick="openProfileModal()" class="flex items-center gap-2.5 text-left group">
+          <div id="userBarAvatarBox" class="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center text-white font-bold text-xs shadow overflow-hidden shrink-0 ring-2 ring-blue-500/30 group-hover:scale-105 transition-transform">
+            <i class="fa-solid fa-user"></i>
           </div>
           <div>
-            <div class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
-              <span id="userDisplayName">GameThu_VIP</span>
-              <span class="px-1.5 py-0.5 text-[10px] rounded bg-emerald-500/15 text-emerald-500 font-semibold">Thành viên</span>
+            <div class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white flex items-center gap-1.5 group-hover:text-blue-500 transition-colors">
+              <span id="userDisplayName"></span>
+              <span class="px-1.5 py-0.5 text-[10px] rounded bg-emerald-500/15 text-emerald-500 font-semibold">Đã xác thực</span>
             </div>
             <div class="text-xs text-slate-500 dark:text-slate-400">
               Số dư: <span id="userBalanceDisplay" class="font-bold text-amber-500">0 đ</span>
             </div>
           </div>
-        </div>
+        </button>
         <div class="flex items-center gap-1.5 sm:gap-2">
+          <button onclick="openProfileModal()" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-[#1A2133] dark:hover:bg-[#242E47] text-slate-700 dark:text-slate-200 text-xs font-semibold flex items-center gap-1.5 transition-colors">
+            <i class="fa-solid fa-id-card text-blue-500"></i>
+            <span>Hồ sơ</span>
+          </button>
           <button onclick="openDepositModal('bank')" class="px-2.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold flex items-center gap-1 transition-colors">
             <i class="fa-solid fa-plus text-[10px]"></i> Nạp thêm
           </button>
           <button onclick="openHistoryModal()" class="px-2.5 py-1.5 rounded-lg bg-blue-600/15 hover:bg-blue-600/25 text-blue-500 text-xs font-semibold flex items-center gap-1.5 transition-colors">
             <i class="fa-solid fa-clock-rotate-left"></i>
-            <span>Lịch sử mua (<span id="purchasedCountBadge">0</span>)</span>
+            <span>Lịch sử (<span id="purchasedCountBadge">0</span>)</span>
           </button>
-          <button onclick="logoutUser()" title="Đăng xuất" class="p-1.5 rounded-lg text-slate-400 hover:text-red-500 hover:bg-red-500/10 transition-colors">
-            <i class="fa-solid fa-right-from-bracket text-xs"></i>
+          <button onclick="logoutUser()" title="Đăng xuất" class="px-2.5 py-1.5 rounded-lg text-red-500 bg-red-500/10 hover:bg-red-500/20 text-xs font-semibold flex items-center gap-1 transition-colors">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span class="hidden sm:inline">Đăng xuất</span>
           </button>
         </div>
       </div>
@@ -231,12 +249,10 @@
       <section class="relative rounded-2xl overflow-hidden border border-slate-200 dark:border-[#1F2937] shadow-2xl group">
         <!-- Slider Banner Wrapper -->
         <div id="heroBannerSlide1" class="relative w-full min-h-[190px] sm:min-h-[280px] md:min-h-[320px] bg-gradient-to-r from-[#090d16] via-[#132247] to-[#0b132b] flex flex-col items-center justify-center p-4 sm:p-8 text-center overflow-hidden">
-          <!-- Hiệu ứng ánh sáng & lưới esports nền -->
           <div class="absolute inset-0 opacity-25" style="background-image: radial-gradient(#3b82f6 1px, transparent 1px); background-size: 20px 20px;"></div>
           <div class="absolute -left-16 -top-16 w-64 h-64 bg-blue-600/30 rounded-full blur-3xl"></div>
           <div class="absolute -right-16 -bottom-16 w-64 h-64 bg-amber-500/25 rounded-full blur-3xl"></div>
-          
-          <!-- Nhân vật trang trí 2 bên -->
+
           <div class="hidden sm:flex absolute left-6 bottom-0 top-0 items-center opacity-30 pointer-events-none">
             <i class="fa-solid fa-dragon text-[130px] text-cyan-400 transform -rotate-12"></i>
           </div>
@@ -244,21 +260,20 @@
             <i class="fa-solid fa-khanda text-[130px] text-amber-400 transform rotate-12"></i>
           </div>
 
-          <!-- Nội dung chính Banner -->
           <div class="relative z-10 max-w-2xl mx-auto flex flex-col items-center">
             <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/20 border border-blue-400/30 text-cyan-300 text-[11px] sm:text-xs font-bold uppercase tracking-wider mb-2">
               <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
               Hệ Thống Giao Dịch Acc Tự Động 24/7
             </div>
-            
+
             <h1 class="font-gaming font-extrabold text-3xl sm:text-5xl md:text-6xl tracking-tight text-white uppercase italic text-stroke-gaming leading-none">
               SHOP<span class="text-transparent bg-clip-text bg-gradient-to-b from-cyan-300 via-blue-400 to-indigo-500">HONGHAI</span>.COM
             </h1>
-            
+
             <div class="mt-2.5 sm:mt-3.5 px-5 py-1 rounded-lg bg-gradient-to-r from-amber-500 via-orange-500 to-amber-500 text-slate-950 font-gaming font-extrabold text-xs sm:text-base tracking-widest uppercase shadow-lg shadow-amber-500/30">
               SINCE 2017
             </div>
-            
+
             <div class="mt-2.5 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/75 border border-white/15 text-white text-[11px] sm:text-xs font-bold tracking-wide shadow">
               <i class="fa-brands fa-tiktok text-cyan-400"></i>
               <span>HỒNG HẢI LÀM SHOP AC • UY TÍN SỐ 1</span>
@@ -266,7 +281,7 @@
           </div>
         </div>
 
-        <!-- Slide 2 (Cửa hàng trực tiếp) -->
+        <!-- Slide 2 -->
         <div id="heroBannerSlide2" class="hidden relative w-full min-h-[190px] sm:min-h-[280px] md:min-h-[320px] bg-gradient-to-r from-[#1e1b4b] via-[#31102f] to-[#0f172a] flex flex-col items-center justify-center p-4 sm:p-8 text-center overflow-hidden">
           <div class="absolute inset-0 opacity-20" style="background-image: linear-gradient(45deg, #f59e0b 1px, transparent 1px); background-size: 24px 24px;"></div>
           <div class="relative z-10 max-w-2xl mx-auto flex flex-col items-center">
@@ -298,7 +313,6 @@
           DANH MỤC NỔI BẬT
         </h2>
         <div class="grid grid-cols-3 sm:grid-cols-6 gap-2.5 sm:gap-4">
-          <!-- Item 1 -->
           <button onclick="scrollToSection('sec-freefire')" class="group flex flex-col items-center text-center p-2 rounded-2xl hover:bg-white/60 dark:hover:bg-[#131826] transition-all">
             <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-700 p-0.5 shadow-lg shadow-emerald-500/20 group-hover:scale-105 transition-transform">
               <div class="w-full h-full bg-[#111827] rounded-[14px] flex flex-col items-center justify-center">
@@ -310,7 +324,6 @@
             </span>
           </button>
 
-          <!-- Item 2 -->
           <button onclick="scrollToSection('sec-lienquan')" class="group flex flex-col items-center text-center p-2 rounded-2xl hover:bg-white/60 dark:hover:bg-[#131826] transition-all">
             <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-amber-400 to-red-600 p-0.5 shadow-lg shadow-amber-500/20 group-hover:scale-105 transition-transform">
               <div class="w-full h-full bg-[#111827] rounded-[14px] flex flex-col items-center justify-center relative">
@@ -323,7 +336,6 @@
             </span>
           </button>
 
-          <!-- Item 3 -->
           <button onclick="scrollToSection('sec-bloxfruits')" class="group flex flex-col items-center text-center p-2 rounded-2xl hover:bg-white/60 dark:hover:bg-[#131826] transition-all">
             <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-700 p-0.5 shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform">
               <div class="w-full h-full bg-[#111827] rounded-[14px] flex flex-col items-center justify-center">
@@ -335,7 +347,6 @@
             </span>
           </button>
 
-          <!-- Item 4 -->
           <button onclick="scrollToSection('sec-freefire')" class="group flex flex-col items-center text-center p-2 rounded-2xl hover:bg-white/60 dark:hover:bg-[#131826] transition-all">
             <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-orange-500 to-red-600 p-0.5 shadow-lg shadow-orange-500/20 group-hover:scale-105 transition-transform">
               <div class="w-full h-full bg-[#111827] rounded-[14px] flex flex-col items-center justify-center">
@@ -347,7 +358,6 @@
             </span>
           </button>
 
-          <!-- Item 5 -->
           <button onclick="scrollToSection('sec-other')" class="group flex flex-col items-center text-center p-2 rounded-2xl hover:bg-white/60 dark:hover:bg-[#131826] transition-all">
             <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-600 p-0.5 shadow-lg shadow-purple-500/20 group-hover:scale-105 transition-transform">
               <div class="w-full h-full bg-[#111827] rounded-[14px] flex flex-col items-center justify-center">
@@ -359,7 +369,6 @@
             </span>
           </button>
 
-          <!-- Item 6 -->
           <button onclick="openCategoryFlow('tm-lq-2k')" class="group flex flex-col items-center text-center p-2 rounded-2xl hover:bg-white/60 dark:hover:bg-[#131826] transition-all">
             <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-yellow-400 to-amber-600 p-0.5 shadow-lg shadow-yellow-500/20 group-hover:scale-105 transition-transform">
               <div class="w-full h-full bg-[#111827] rounded-[14px] flex flex-col items-center justify-center relative">
@@ -385,7 +394,6 @@
         </div>
 
         <div class="flex gap-3 overflow-x-auto no-scrollbar pb-1">
-          <!-- Proof Card 1 -->
           <div class="shrink-0 w-36 sm:w-44 h-48 sm:h-56 rounded-2xl overflow-hidden relative border border-slate-200 dark:border-[#1F2937] bg-gradient-to-b from-slate-700 to-slate-900 shadow-md group">
             <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-blue-500/30 via-transparent to-black/80"></div>
             <div class="h-full flex flex-col justify-between p-3 relative z-10">
@@ -405,7 +413,6 @@
             </div>
           </div>
 
-          <!-- Proof Card 2 -->
           <div class="shrink-0 w-36 sm:w-44 h-48 sm:h-56 rounded-2xl overflow-hidden relative border border-slate-200 dark:border-[#1F2937] bg-gradient-to-b from-indigo-900 to-slate-950 shadow-md">
             <div class="h-full flex flex-col justify-between p-3 relative z-10">
               <span class="self-start px-2 py-0.5 rounded bg-blue-600/90 text-[10px] font-bold text-white shadow">
@@ -424,7 +431,6 @@
             </div>
           </div>
 
-          <!-- Proof Card 3 -->
           <div class="shrink-0 w-36 sm:w-44 h-48 sm:h-56 rounded-2xl overflow-hidden relative border border-slate-200 dark:border-[#1F2937] bg-gradient-to-b from-amber-900/80 to-slate-950 shadow-md">
             <div class="h-full flex flex-col justify-between p-3 relative z-10">
               <span class="self-start px-2 py-0.5 rounded bg-amber-500 text-[10px] font-bold text-slate-950 shadow">
@@ -443,7 +449,6 @@
             </div>
           </div>
 
-          <!-- Proof Card 4 -->
           <div class="shrink-0 w-36 sm:w-44 h-48 sm:h-56 rounded-2xl overflow-hidden relative border border-slate-200 dark:border-[#1F2937] bg-gradient-to-b from-emerald-900/80 to-slate-950 shadow-md">
             <div class="h-full flex flex-col justify-between p-3 relative z-10">
               <span class="self-start px-2 py-0.5 rounded bg-emerald-600 text-[10px] font-bold text-white shadow">
@@ -464,10 +469,8 @@
         </div>
       </section>
 
-      <!-- ==================== 6. CÁC KHO NICK GAME (BỐ CỤC LƯỚI THẺ SẢN PHẨM) ==================== -->
-      <div id="allCategoriesContainer" class="space-y-8">
-        <!-- Nội dung các kho nick sẽ được render tự động từ JS để đồng bộ dữ liệu & tương tác -->
-      </div>
+      <!-- ==================== 6. CÁC KHO NICK GAME ==================== -->
+      <div id="allCategoriesContainer" class="space-y-8"></div>
 
       <!-- ==================== 7. GÓC CỘNG ĐỒNG SHOP HỒNG HẢI ==================== -->
       <section class="rounded-2xl bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] p-4 sm:p-5 shadow-lg">
@@ -480,7 +483,6 @@
 
         <div onclick="openArticlesModal()" class="cursor-pointer group rounded-xl bg-slate-100 dark:bg-[#0B0E17] hover:bg-slate-200/70 dark:hover:bg-[#1A2133] border border-slate-200 dark:border-[#1F2937] p-3 flex items-center justify-between gap-3 transition-all">
           <div class="flex items-center gap-3.5">
-            <!-- Thumbnail bài viết -->
             <div class="relative w-24 sm:w-28 h-16 sm:h-20 rounded-xl bg-gradient-to-br from-red-600 via-orange-600 to-amber-500 flex flex-col items-center justify-center p-2 text-center shrink-0 overflow-hidden shadow">
               <span class="font-gaming font-extrabold text-white text-[10px] sm:text-xs leading-tight uppercase drop-shadow">
                 SỰ THẬT TÚI MÙ FREE FIRE
@@ -538,9 +540,9 @@
     </div> <!-- END HOME VIEW -->
 
 
-    <!-- ==================== VIEW 2: TRANG CHI TIẾT DANH SÁCH MÃ TÀI KHOẢN (CATEGORY LIST VIEW) ==================== -->
+    <!-- ==================== VIEW 2: TRANG CHI TIẾT DANH SÁCH MÃ TÀI KHOẢN ==================== -->
     <div id="categoryDetailView" class="hidden space-y-6">
-      
+
       <!-- Breadcrumb & Nút Quay Lại -->
       <div class="flex flex-wrap items-center justify-between gap-3 bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] rounded-2xl p-3.5 sm:p-4">
         <div class="flex items-center gap-3">
@@ -559,11 +561,11 @@
           </div>
         </div>
         <div class="text-xs font-semibold px-3 py-1.5 rounded-lg bg-amber-500/15 text-amber-500 border border-amber-500/20">
-          <i class="fa-solid fa-bolt mr-1"></i> Giao acc tự động 100%
+          <i class="fa-solid fa-bolt mr-1"></i> Bấm vào ảnh để xem gallery nhiều ảnh
         </div>
       </div>
 
-      <!-- Bộ lọc tìm kiếm khoảng giá & Sắp xếp (Giống giây 0:28) -->
+      <!-- Bộ lọc tìm kiếm khoảng giá & Sắp xếp -->
       <div class="bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] rounded-2xl p-4 space-y-3.5 shadow-sm">
         <div class="text-xs font-bold text-slate-700 dark:text-slate-300">Tìm theo khoảng giá:</div>
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
@@ -584,17 +586,15 @@
           <span class="text-xs text-slate-500 dark:text-slate-400 mr-1">Sắp xếp theo:</span>
           <button onclick="sortAccounts('random')" class="sort-btn px-3 py-1.5 rounded-lg bg-blue-600 text-white text-xs font-semibold">Ngẫu nhiên</button>
           <button onclick="sortAccounts('asc')" class="sort-btn px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-[#0B0E17] text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-[#1A2133] text-xs font-semibold">Giá từ thấp đến cao</button>
-          <button onclick="sortAccounts('desc')" class="sort-btn px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-[#0B0E17] text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-[#1A2133] text-xs font-semibold">Giá từ thấp đến cao (Giảm)</button>
+          <button onclick="sortAccounts('desc')" class="sort-btn px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-[#0B0E17] text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-[#1A2133] text-xs font-semibold">Giá từ cao đến thấp</button>
           <button onclick="sortAccounts('newest')" class="sort-btn px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-[#0B0E17] text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-[#1A2133] text-xs font-semibold">Mới nhất</button>
         </div>
       </div>
 
-      <!-- Lưới Danh Sách Mã Tài Khoản (Flash Sale + Mã #066892...) -->
-      <div id="accountItemsGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
-        <!-- Render từng mã acc bằng JS -->
-      </div>
+      <!-- Lưới Danh Sách Mã Tài Khoản -->
+      <div id="accountItemsGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4"></div>
 
-      <!-- Phân trang (Pagination giống giây 0:30) -->
+      <!-- Phân trang -->
       <div class="flex items-center justify-center gap-3 py-2">
         <button onclick="changeDetailPage(-1)" class="px-3.5 py-2 rounded-xl bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] text-xs font-bold hover:border-blue-500 transition-colors">
           <i class="fa-solid fa-arrow-left mr-1"></i> Trước
@@ -608,7 +608,7 @@
         </button>
       </div>
 
-      <!-- Khối Mô Tả Quy Định & Câu Hỏi Thường Gặp Accordion (Giống giây 0:30) -->
+      <!-- Khối Mô Tả Quy Định & Câu Hỏi Thường Gặp Accordion -->
       <div class="rounded-2xl bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] p-5 space-y-4">
         <div class="text-[11px] font-bold uppercase tracking-wider text-blue-500">
           SHOP HỒNG HẢI • SHOP ACC GAME
@@ -617,32 +617,30 @@
           Thử vận may acc Free Fire 2K tại Shop Hồng Hải
         </h3>
         <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-          Gói Free Fire 2K phù hợp với khách muốn trải nghiệm hình thức nhận acc ngẫu nhiên với mức giá nhỏ. Thông tin gói và giá được công khai ngay trên trang trước khi xác nhận. Kết quả sau khi tham gia được lưu trong lịch sử tài khoản để bạn mở lại khi cần.
+          Gói tài khoản tại Shop Hồng Hải được công khai đầy đủ thông tin, bộ sưu tập hình ảnh chi tiết và giá bán rõ ràng trước khi xác nhận thanh toán. Kết quả sau khi mua được lưu trong lịch sử tài khoản cá nhân để bạn mở lại bất cứ lúc nào.
         </p>
 
         <div class="pt-2 border-t border-slate-200 dark:border-[#1F2937]">
           <div class="text-xs font-bold text-slate-800 dark:text-slate-200 mb-2">Câu hỏi thường gặp</div>
           <div class="rounded-xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] overflow-hidden">
             <button onclick="toggleFaqAccordion()" class="w-full px-4 py-3 text-left flex items-center justify-between text-xs sm:text-sm font-bold text-slate-800 dark:text-white">
-              <span>▶ Gói Free Fire 2K có được tự chọn acc không?</span>
+              <span>▶ Làm sao xem chi tiết nhiều hình ảnh trước khi mua acc?</span>
               <i id="faqChevron" class="fa-solid fa-chevron-down text-xs transition-transform"></i>
             </button>
             <div id="faqContent" class="hidden px-4 pb-3.5 text-xs text-slate-600 dark:text-slate-400 leading-relaxed border-t border-slate-200/60 dark:border-[#1F2937] pt-2.5">
-              Không. Đây là danh mục nhận tài khoản ngẫu nhiên (Túi mù thử vận may) với tỉ lệ trúng acc VIP cực cao. Nếu muốn xem trước chi tiết skin và tự chọn mã acc ưng ý, bạn hãy chọn mục <strong>"Nick Free Fire tự chọn"</strong> nhé!
+              Bạn chỉ cần bấm vào hình ảnh hoặc nút <strong>"Chi tiết"</strong> trên thẻ mã tài khoản bất kỳ. Khung xem chi tiết sẽ mở ra bộ sưu tập 4 ảnh sắc nét cho phép bạn lướt qua lại bằng mũi tên, vuốt cảm ứng hoặc bấm vào ảnh thu nhỏ.
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Mục "Mua tài khoản game khác" (Giống giây 0:31) -->
+      <!-- Mục "Mua tài khoản game khác" -->
       <div>
         <div class="flex items-center justify-between mb-3">
           <h3 class="font-extrabold text-sm sm:text-base text-slate-900 dark:text-white">Mua tài khoản game khác</h3>
           <button onclick="goHome()" class="text-xs font-semibold text-blue-500 hover:underline">Xem tất cả ></button>
         </div>
-        <div id="relatedCategoriesGrid" class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          <!-- Render tự động -->
-        </div>
+        <div id="relatedCategoriesGrid" class="grid grid-cols-2 sm:grid-cols-4 gap-3"></div>
       </div>
 
     </div> <!-- END CATEGORY DETAIL VIEW -->
@@ -653,7 +651,7 @@
   <footer class="mt-10 bg-white dark:bg-[#080B12] border-t border-slate-200 dark:border-[#1F2937] text-slate-600 dark:text-slate-400">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-10">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        
+
         <!-- Cột 1: Thương hiệu -->
         <div class="space-y-3">
           <div class="flex items-center gap-2.5">
@@ -740,15 +738,13 @@
   </footer>
 
 
-  <!-- ==================== 10. NÚT NỔI GÓC DƯỚI PHẢI (FLOATING BUTTONS) ==================== -->
+  <!-- ==================== 10. NÚT NỔI GÓC DƯỚI PHẢI ==================== -->
   <div class="fixed bottom-4 right-4 z-40 flex flex-col items-center gap-2.5">
-    <!-- Messenger -->
     <a href="#support" onclick="showToast('Đang kết nối tới Fanpage Messenger Shop Hồng Hải...', 'info'); return false;" aria-label="Chat Messenger"
       class="relative w-11 h-11 rounded-full bg-gradient-to-tr from-blue-600 to-cyan-400 text-white flex items-center justify-center shadow-lg shadow-blue-600/40 hover:scale-110 transition-transform animate-pulse-ring">
       <i class="fa-brands fa-facebook-messenger text-xl"></i>
     </a>
 
-    <!-- Hàng dưới: Chat hỗ trợ tím + Scroll to top -->
     <div class="flex items-center gap-2">
       <button onclick="openArticlesModal()" aria-label="Hỗ trợ trực tuyến"
         class="w-10 h-10 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white flex items-center justify-center shadow-lg shadow-indigo-600/40 hover:scale-105 transition-transform">
@@ -764,10 +760,9 @@
 
   <!-- ==================== MODALS HỆ THỐNG ==================== -->
 
-  <!-- MODAL 1: THÔNG BÁO TRƯỚC KHI THAM GIA (GIỐNG GIÂY 0:26 TRONG VIDEO) -->
+  <!-- MODAL 1: THÔNG BÁO TRƯỚC KHI THAM GIA -->
   <div id="preJoinModal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="w-full max-w-md rounded-3xl bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] p-6 shadow-2xl relative modal-enter">
-      <!-- Nút đóng X -->
       <button onclick="closeModal('preJoinModal')" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 dark:bg-[#1F2937] hover:bg-red-500 hover:text-white flex items-center justify-center text-slate-400 transition-colors">
         <i class="fa-solid fa-xmark text-sm"></i>
       </button>
@@ -784,7 +779,6 @@
         </p>
       </div>
 
-      <!-- Bảng thông tin 2 hàng -->
       <div class="mt-5 rounded-2xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] divide-y divide-slate-200 dark:divide-[#1F2937] overflow-hidden">
         <div class="px-4 py-3.5 flex items-center justify-between text-xs sm:text-sm">
           <span class="text-slate-500 dark:text-slate-400">Hình thức đăng nhập</span>
@@ -802,77 +796,381 @@
     </div>
   </div>
 
-  <!-- MODAL 2: DANH SÁCH BÀI VIẾT HƯỚNG DẪN (GIỐNG GIÂY 0:14 TRONG VIDEO) -->
-  <div id="articlesModal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4">
-    <div class="w-full max-w-lg max-h-[85vh] flex flex-col rounded-3xl bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] shadow-2xl overflow-hidden modal-enter">
-      <!-- Header Modal -->
-      <div class="px-5 py-4 border-b border-slate-200 dark:border-[#1F2937] flex items-center justify-between shrink-0">
-        <div>
-          <div class="text-[10px] font-bold uppercase tracking-wider text-blue-500">GÓC CỘNG ĐỒNG SHOP HỒNG HẢI</div>
-          <h3 class="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white">Danh sách bài viết</h3>
+  <!-- MODAL 2: XEM CHI TIẾT SẢN PHẨM NHIỀU HÌNH ẢNH LƯỚT QUA LẠI ĐƯỢC -->
+  <div id="productDetailModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-5">
+    <div class="w-full max-w-2xl max-h-[92vh] overflow-y-auto rounded-3xl bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] shadow-2xl modal-enter">
+      <!-- Top Bar -->
+      <div class="sticky top-0 z-20 px-5 py-3.5 bg-white/95 dark:bg-[#131826]/95 backdrop-blur border-b border-slate-200 dark:border-[#1F2937] flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span id="detailModalCodeBadge" class="px-2.5 py-1 rounded-lg bg-blue-600 text-white font-gaming font-bold text-xs">#066892</span>
+          <span class="text-xs font-bold text-slate-500 dark:text-slate-400">Chi tiết tài khoản & Bộ ảnh</span>
         </div>
-        <button onclick="closeModal('articlesModal')" class="w-8 h-8 rounded-full bg-slate-100 dark:bg-[#1F2937] hover:bg-red-500 hover:text-white flex items-center justify-center text-slate-400 transition-colors">
+        <button onclick="closeModal('productDetailModal')" aria-label="Đóng chi tiết sản phẩm"
+          class="w-8 h-8 rounded-full bg-slate-100 dark:bg-[#1F2937] hover:bg-red-500 hover:text-white flex items-center justify-center text-slate-400 transition-colors">
           <i class="fa-solid fa-xmark text-sm"></i>
         </button>
       </div>
 
-      <!-- Body List Bài Viết -->
-      <div id="articlesListContainer" class="p-4 overflow-y-auto space-y-3">
-        <!-- Render bài viết bằng JS -->
+      <div class="p-4 sm:p-6 space-y-5">
+        <!-- KHUNG SLIDER NHIỀU HÌNH ẢNH LƯỚT QUA LẠI (Hỗ trợ mũi tên, swipe cảm ứng, bàn phím) -->
+        <div class="space-y-3">
+          <div id="galleryViewport"
+            class="relative aspect-video w-full rounded-2xl overflow-hidden border border-slate-200 dark:border-[#1F2937] bg-[#090D16] select-none shadow-lg">
+
+            <!-- Track trượt các ảnh -->
+            <div id="galleryTrack" class="flex h-full w-full transition-transform duration-300 ease-out" style="transform: translateX(0%);">
+              <!-- Slide ảnh được render từ JS -->
+            </div>
+
+            <!-- Nút lướt ảnh Trái -->
+            <button onclick="prevGallerySlide()" aria-label="Ảnh trước"
+              class="absolute left-2.5 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/65 hover:bg-blue-600 text-white border border-white/20 flex items-center justify-center backdrop-blur-sm transition-all active:scale-90">
+              <i class="fa-solid fa-chevron-left text-sm"></i>
+            </button>
+
+            <!-- Nút lướt ảnh Phải -->
+            <button onclick="nextGallerySlide()" aria-label="Ảnh tiếp theo"
+              class="absolute right-2.5 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/65 hover:bg-blue-600 text-white border border-white/20 flex items-center justify-center backdrop-blur-sm transition-all active:scale-90">
+              <i class="fa-solid fa-chevron-right text-sm"></i>
+            </button>
+
+            <!-- Chỉ số trang ảnh (1/4) -->
+            <div class="absolute bottom-3 right-3 z-10 px-2.5 py-1 rounded-full bg-black/75 border border-white/15 text-[11px] font-bold text-white backdrop-blur-sm">
+              <i class="fa-regular fa-images mr-1 text-amber-400"></i>
+              <span id="galleryCounterText">1 / 4</span>
+            </div>
+
+            <!-- Chấm chỉ báo ảnh -->
+            <div id="galleryDots" class="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5"></div>
+          </div>
+
+          <!-- Dải ảnh thu nhỏ (Thumbnails) bấm để lướt tới ngay -->
+          <div id="galleryThumbnails" class="grid grid-cols-4 gap-2"></div>
+        </div>
+
+        <!-- Thông tin chi tiết tài khoản -->
+        <div class="rounded-2xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] p-4 space-y-3">
+          <div class="flex flex-wrap items-start justify-between gap-2">
+            <div>
+              <h3 id="detailModalTitle" class="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white"></h3>
+              <p id="detailModalDesc" class="text-xs text-slate-500 dark:text-slate-400 mt-0.5"></p>
+            </div>
+            <div id="detailModalPrice" class="text-xl sm:text-2xl font-gaming font-extrabold text-red-500"></div>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 border-t border-slate-200 dark:border-[#1F2937] text-xs">
+            <div class="p-2.5 rounded-xl bg-white dark:bg-[#131826] border border-slate-200/70 dark:border-[#1F2937]">
+              <span class="text-[10px] text-slate-400 block">Đăng nhập</span>
+              <strong id="detailModalLogin" class="text-slate-800 dark:text-slate-100"></strong>
+            </div>
+            <div class="p-2.5 rounded-xl bg-white dark:bg-[#131826] border border-slate-200/70 dark:border-[#1F2937]">
+              <span class="text-[10px] text-slate-400 block">Hạng / Cấp độ</span>
+              <strong id="detailModalRank" class="text-amber-500"></strong>
+            </div>
+            <div class="p-2.5 rounded-xl bg-white dark:bg-[#131826] border border-slate-200/70 dark:border-[#1F2937]">
+              <span class="text-[10px] text-slate-400 block">Trang bị / Skin</span>
+              <strong id="detailModalSkins" class="text-cyan-500"></strong>
+            </div>
+            <div class="p-2.5 rounded-xl bg-white dark:bg-[#131826] border border-slate-200/70 dark:border-[#1F2937]">
+              <span class="text-[10px] text-slate-400 block">Bảo hành</span>
+              <strong class="text-emerald-500">Shop Hồng Hải</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Nút chuyển sang bước Xác nhận thanh toán -->
+        <div class="flex items-center justify-end gap-3">
+          <button onclick="closeModal('productDetailModal')" class="px-4 py-3 rounded-xl bg-slate-200 dark:bg-[#1F2937] font-bold text-xs sm:text-sm">
+            Đóng lại
+          </button>
+          <button onclick="proceedFromDetailToPayment()" class="flex-1 sm:flex-initial px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2 transition-all">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>Mua ngay & Xác nhận thanh toán</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- MODAL 3: ĐỌC CHI TIẾT BÀI VIẾT -->
-  <div id="articleReaderModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="w-full max-w-lg max-h-[85vh] flex flex-col rounded-3xl bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] shadow-2xl overflow-hidden modal-enter">
-      <div class="px-5 py-4 border-b border-slate-200 dark:border-[#1F2937] flex items-center justify-between">
-        <button onclick="closeModal('articleReaderModal'); openArticlesModal();" class="text-xs font-bold text-blue-500 flex items-center gap-1.5">
-          <i class="fa-solid fa-arrow-left"></i> Quay lại danh sách
-        </button>
-        <button onclick="closeModal('articleReaderModal')" class="w-8 h-8 rounded-full bg-slate-100 dark:bg-[#1F2937] flex items-center justify-center text-slate-400">
-          <i class="fa-solid fa-xmark text-sm"></i>
-        </button>
-      </div>
-      <div id="articleReaderContent" class="p-5 overflow-y-auto space-y-3 text-xs sm:text-sm leading-relaxed text-slate-700 dark:text-slate-300">
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL 4: ĐĂNG NHẬP / ĐĂNG KÝ NHANH -->
-  <div id="authModal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+  <!-- MODAL 3: XÁC NHẬN THANH TOÁN CHI TIẾT (PAYMENT CONFIRMATION MODAL) -->
+  <div id="buyConfirmModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="w-full max-w-md rounded-3xl bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] p-6 shadow-2xl relative modal-enter">
-      <button onclick="closeModal('authModal')" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 dark:bg-[#1F2937] flex items-center justify-center text-slate-400">
+      <button onclick="closeModal('buyConfirmModal')" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 dark:bg-[#1F2937] hover:bg-red-500 hover:text-white flex items-center justify-center text-slate-400 transition-colors">
         <i class="fa-solid fa-xmark text-sm"></i>
       </button>
 
-      <div class="text-center mb-5">
-        <div class="w-12 h-12 rounded-2xl bg-blue-600/15 text-blue-500 flex items-center justify-center mx-auto mb-2.5 text-xl">
-          <i class="fa-solid fa-user-shield"></i>
-        </div>
-        <h3 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">Đăng Nhập Shop Hồng Hải</h3>
-        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Đăng nhập để mua acc tự động & lưu lịch sử giao dịch</p>
+      <div class="text-center">
+        <span class="px-3 py-1 rounded-full bg-blue-600/15 text-blue-500 text-[11px] font-extrabold uppercase tracking-wider">
+          <i class="fa-solid fa-shield-halved mr-1"></i> Xác Nhận Thanh Toán
+        </span>
+        <h3 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white mt-2">
+          Kiểm Tra Đơn Hàng Shop Hồng Hải
+        </h3>
       </div>
 
-      <form onsubmit="handleLoginSubmit(event)" class="space-y-3.5">
-        <div>
-          <label class="block text-xs font-bold mb-1 text-slate-700 dark:text-slate-300">Tên tài khoản</label>
-          <input type="text" id="loginUsernameInput" value="HongHai_Gamer99" required
-            class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] text-sm focus:outline-none focus:border-blue-500">
+      <!-- Bảng chi tiết thanh toán -->
+      <div class="mt-4 rounded-2xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] p-4 space-y-2.5 text-xs sm:text-sm">
+        <div class="flex items-center justify-between">
+          <span class="text-slate-500 dark:text-slate-400">Mã tài khoản:</span>
+          <span id="payConfirmCode" class="font-gaming font-bold text-blue-500"></span>
         </div>
+        <div class="flex items-center justify-between gap-2">
+          <span class="text-slate-500 dark:text-slate-400 shrink-0">Gói / Sản phẩm:</span>
+          <span id="payConfirmName" class="font-bold text-slate-900 dark:text-white text-right truncate"></span>
+        </div>
+        <div class="flex items-center justify-between">
+          <span class="text-slate-500 dark:text-slate-400">Hình thức đăng nhập:</span>
+          <span id="payConfirmLogin" class="font-semibold text-slate-700 dark:text-slate-300"></span>
+        </div>
+        <div class="pt-2 border-t border-slate-200 dark:border-[#1F2937] flex items-center justify-between">
+          <span class="font-bold text-slate-700 dark:text-slate-200">Giá thanh toán:</span>
+          <span id="payConfirmPrice" class="text-lg font-gaming font-extrabold text-red-500"></span>
+        </div>
+        <div class="flex items-center justify-between text-xs">
+          <span class="text-slate-500 dark:text-slate-400">Số dư hiện tại:</span>
+          <span id="payCurrentBalance" class="font-bold text-amber-500">0 đ</span>
+        </div>
+        <div class="flex items-center justify-between text-xs">
+          <span class="text-slate-500 dark:text-slate-400">Số dư sau thanh toán:</span>
+          <span id="payAfterBalance" class="font-bold text-emerald-500">0 đ</span>
+        </div>
+      </div>
+
+      <!-- Cảnh báo nếu thiếu số dư -->
+      <div id="insufficientBalanceBox" class="hidden mt-3 p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-xs text-red-500 flex items-center justify-between gap-2">
+        <span><i class="fa-solid fa-triangle-exclamation mr-1"></i> Số dư chưa đủ để thanh toán!</span>
+        <button onclick="closeModal('buyConfirmModal'); openDepositModal('bank');" class="px-2.5 py-1 rounded-lg bg-red-600 text-white font-bold shrink-0">
+          Nạp tiền ngay
+        </button>
+      </div>
+
+      <!-- Tích xác nhận điều khoản -->
+      <label class="mt-3.5 flex items-start gap-2.5 text-xs text-slate-600 dark:text-slate-300 cursor-pointer select-none">
+        <input type="checkbox" id="agreePaymentTerms" checked class="mt-0.5 w-4 h-4 rounded accent-blue-600">
+        <span>Tôi xác nhận thông tin tài khoản và đồng ý với chính sách giao dịch của <strong>Shop Hồng Hải</strong>.</span>
+      </label>
+
+      <div class="mt-5 grid grid-cols-2 gap-2.5">
+        <button onclick="closeModal('buyConfirmModal')" class="py-3 rounded-xl bg-slate-200 dark:bg-[#1F2937] hover:bg-slate-300 dark:hover:bg-[#273147] font-bold text-xs sm:text-sm transition-colors">
+          Hủy bỏ
+        </button>
+        <button id="confirmPaymentSubmitBtn" onclick="executePurchase()" class="py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm shadow-lg shadow-emerald-600/30 transition-all flex items-center justify-center gap-1.5">
+          <i class="fa-solid fa-check-circle"></i>
+          <span>Xác nhận thanh toán</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 4: ĐĂNG NHẬP & ĐĂNG KÝ TÀI KHOẢN BẢO MẬT HIỆN ĐẠI -->
+  <div id="authModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-4">
+    <div class="w-full max-w-lg max-h-[92vh] overflow-y-auto rounded-3xl bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] p-5 sm:p-6 shadow-2xl relative modal-enter">
+      <button onclick="closeModal('authModal')" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 dark:bg-[#1F2937] hover:bg-red-500 hover:text-white flex items-center justify-center text-slate-400 transition-colors">
+        <i class="fa-solid fa-xmark text-sm"></i>
+      </button>
+
+      <div class="text-center mb-4">
+        <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-500 text-[10px] font-extrabold uppercase tracking-wider mb-1.5">
+          <i class="fa-solid fa-lock"></i> Bảo Mật Phiên & Mã Hóa Local
+        </div>
+        <h3 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">
+          Tài Khoản Thành Viên Shop Hồng Hải
+        </h3>
+      </div>
+
+      <!-- Tabs chuyển đổi Đăng nhập / Đăng ký -->
+      <div class="grid grid-cols-2 gap-1.5 p-1 rounded-2xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] mb-5">
+        <button id="authTabLogin" onclick="switchAuthTab('login')" class="py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-blue-600 text-white shadow transition-all">
+          Đăng nhập
+        </button>
+        <button id="authTabRegister" onclick="switchAuthTab('register')" class="py-2.5 rounded-xl text-xs sm:text-sm font-bold text-slate-600 dark:text-slate-400 transition-all">
+          Đăng ký mới
+        </button>
+      </div>
+
+      <!-- FORM ĐĂNG NHẬP (Không điền sẵn tài khoản mẫu) -->
+      <form id="loginForm" onsubmit="handleLoginSubmit(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold mb-1.5 text-slate-700 dark:text-slate-300">Email hoặc Tên hiển thị</label>
+          <div class="relative">
+            <i class="fa-regular fa-envelope absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+            <input type="text" id="loginIdentifierInput" required placeholder="Nhập email hoặc tên tài khoản của bạn..."
+              class="w-full pl-10 pr-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] text-xs sm:text-sm focus:outline-none focus:border-blue-500">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold mb-1.5 text-slate-700 dark:text-slate-300">Mật khẩu</label>
+          <div class="relative">
+            <i class="fa-solid fa-key absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+            <input type="password" id="loginPasswordInput" required placeholder="Nhập mật khẩu..."
+              class="w-full pl-10 pr-10 py-2.5 rounded-xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] text-xs sm:text-sm focus:outline-none focus:border-blue-500">
+            <button type="button" onclick="togglePasswordVisibility('loginPasswordInput', 'loginEyeIcon')" aria-label="Ẩn/hiện mật khẩu"
+              class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-blue-500">
+              <i id="loginEyeIcon" class="fa-regular fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mã xác thực bảo mật 2 bước (2FA mô phỏng) -->
+        <div class="rounded-2xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] p-3 flex items-center justify-between gap-3">
+          <div class="text-xs">
+            <div class="font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
+              <i class="fa-solid fa-shield-virus text-blue-500"></i> Mã xác thực bảo mật 2FA
+            </div>
+            <div class="text-[11px] text-slate-500">Mã phiên: <strong id="sessionSecurityCode" class="font-mono text-amber-500">HH-8492</strong></div>
+          </div>
+          <label class="inline-flex items-center gap-1.5 text-[11px] font-semibold text-emerald-500 cursor-pointer">
+            <input type="checkbox" checked class="rounded accent-emerald-500"> Xác minh
+          </label>
+        </div>
+
+        <button type="submit" class="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-lg shadow-blue-600/30 transition-all">
+          Đăng nhập bảo mật
+        </button>
+      </form>
+
+      <!-- FORM ĐĂNG KÝ TÀI KHOẢN MỚI -->
+      <form id="registerForm" onsubmit="handleRegisterSubmit(event)" class="hidden space-y-4">
+        <!-- Chọn Avatar preset hoặc tải ảnh tùy chỉnh -->
+        <div>
+          <label class="block text-xs font-bold mb-2 text-slate-700 dark:text-slate-300">Ảnh đại diện (Avatar)</label>
+          <div class="flex flex-wrap items-center gap-2.5">
+            <button type="button" onclick="selectPresetAvatar('preset-1')" data-avatar="preset-1"
+              class="avatar-preset-btn w-11 h-11 rounded-full bg-gradient-to-tr from-blue-600 to-cyan-400 text-white flex items-center justify-center text-base ring-2 ring-blue-500 transition-all">
+              <i class="fa-solid fa-user-astronaut"></i>
+            </button>
+            <button type="button" onclick="selectPresetAvatar('preset-2')" data-avatar="preset-2"
+              class="avatar-preset-btn w-11 h-11 rounded-full bg-gradient-to-tr from-amber-500 to-red-600 text-white flex items-center justify-center text-base opacity-70 hover:opacity-100 transition-all">
+              <i class="fa-solid fa-dragon"></i>
+            </button>
+            <button type="button" onclick="selectPresetAvatar('preset-3')" data-avatar="preset-3"
+              class="avatar-preset-btn w-11 h-11 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-700 text-white flex items-center justify-center text-base opacity-70 hover:opacity-100 transition-all">
+              <i class="fa-solid fa-crown"></i>
+            </button>
+            <button type="button" onclick="selectPresetAvatar('preset-4')" data-avatar="preset-4"
+              class="avatar-preset-btn w-11 h-11 rounded-full bg-gradient-to-tr from-purple-600 to-pink-500 text-white flex items-center justify-center text-base opacity-70 hover:opacity-100 transition-all">
+              <i class="fa-solid fa-bolt"></i>
+            </button>
+
+            <label class="cursor-pointer px-3 py-2 rounded-xl bg-slate-100 dark:bg-[#0B0E17] hover:bg-slate-200 dark:hover:bg-[#1A2133] border border-slate-200 dark:border-[#1F2937] text-xs font-semibold flex items-center gap-1.5 transition-colors">
+              <i class="fa-solid fa-upload text-blue-500"></i>
+              <span>Tải ảnh lên</span>
+              <input type="file" id="customAvatarInput" accept="image/*" onchange="handleCustomAvatarUpload(event)" class="hidden">
+            </label>
+          </div>
+          <p id="customAvatarFileName" class="text-[11px] text-emerald-500 mt-1 hidden"></p>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold mb-1 text-slate-700 dark:text-slate-300">Tên hiển thị / Họ tên</label>
+          <input type="text" id="regNameInput" required placeholder="VD: Nguyễn Minh Khoa"
+            class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] text-xs sm:text-sm focus:outline-none focus:border-blue-500">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold mb-1 text-slate-700 dark:text-slate-300">Email liên kết bảo mật</label>
+          <input type="email" id="regEmailInput" required placeholder="tenban@gmail.com"
+            class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] text-xs sm:text-sm focus:outline-none focus:border-blue-500">
+        </div>
+
+        <!-- Mật khẩu + Thước đo độ mạnh mật khẩu -->
         <div>
           <label class="block text-xs font-bold mb-1 text-slate-700 dark:text-slate-300">Mật khẩu</label>
-          <input type="password" value="12345678" required
-            class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] text-sm focus:outline-none focus:border-blue-500">
+          <div class="relative">
+            <input type="password" id="regPasswordInput" oninput="evaluatePasswordStrength()" required placeholder="Tối thiểu 6 ký tự (nên có chữ hoa, số, ký tự đặc biệt)"
+              class="w-full px-3.5 pr-10 py-2.5 rounded-xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] text-xs sm:text-sm focus:outline-none focus:border-blue-500">
+            <button type="button" onclick="togglePasswordVisibility('regPasswordInput', 'regEyeIcon')" aria-label="Ẩn/hiện mật khẩu"
+              class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-blue-500">
+              <i id="regEyeIcon" class="fa-regular fa-eye"></i>
+            </button>
+          </div>
+
+          <!-- Thanh Password Strength Meter -->
+          <div class="mt-2 space-y-1">
+            <div class="w-full h-1.5 rounded-full bg-slate-200 dark:bg-[#0B0E17] overflow-hidden">
+              <div id="passwordStrengthBar" class="h-full w-0 bg-red-500 transition-all duration-300"></div>
+            </div>
+            <div class="flex justify-between text-[11px]">
+              <span class="text-slate-400">Độ mạnh mật khẩu:</span>
+              <span id="passwordStrengthLabel" class="font-bold text-slate-400">Chưa nhập</span>
+            </div>
+          </div>
         </div>
-        <button type="submit" class="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-lg shadow-blue-600/25 transition-all">
-          Đăng nhập ngay (Tặng sẵn 50.000đ trải nghiệm)
+
+        <div>
+          <label class="block text-xs font-bold mb-1 text-slate-700 dark:text-slate-300">Xác nhận mật khẩu</label>
+          <input type="password" id="regConfirmPasswordInput" required placeholder="Nhập lại mật khẩu..."
+            class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] text-xs sm:text-sm focus:outline-none focus:border-blue-500">
+        </div>
+
+        <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-sm shadow-lg shadow-blue-600/30 transition-all">
+          Tạo tài khoản & Kích hoạt hồ sơ
         </button>
       </form>
     </div>
   </div>
 
-  <!-- MODAL 5: NẠP TIỀN TỰ ĐỘNG (THẺ CÀO & ATM/MOMO) -->
+  <!-- MODAL 5: HỒ SƠ CÁ NHÂN (MỞ KHI BẤM NÚT HÌNH NGƯỜI) -->
+  <div id="userProfileModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="w-full max-w-md rounded-3xl bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] p-6 shadow-2xl relative modal-enter">
+      <button onclick="closeModal('userProfileModal')" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 dark:bg-[#1F2937] hover:bg-red-500 hover:text-white flex items-center justify-center text-slate-400 transition-colors">
+        <i class="fa-solid fa-xmark text-sm"></i>
+      </button>
+
+      <!-- Avatar & Tên hiển thị -->
+      <div class="flex flex-col items-center text-center pb-4 border-b border-slate-200 dark:border-[#1F2937]">
+        <div id="profileModalAvatarBox" class="w-20 h-20 rounded-full bg-gradient-to-tr from-blue-600 to-cyan-400 text-white flex items-center justify-center text-3xl shadow-xl ring-4 ring-blue-500/25 overflow-hidden mb-3">
+          <i class="fa-solid fa-user"></i>
+        </div>
+        <h3 id="profileNameText" class="text-lg font-extrabold text-slate-900 dark:text-white"></h3>
+        <span class="mt-1 px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-500 text-[11px] font-bold">
+          <i class="fa-solid fa-shield-check mr-1"></i> Thành viên Shop Hồng Hải
+        </span>
+      </div>
+
+      <!-- Thông tin chi tiết: Email, Pass (ẩn/mở), Số dư -->
+      <div class="mt-4 space-y-2.5 text-xs sm:text-sm">
+        <div class="p-3 rounded-xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] flex items-center justify-between gap-2">
+          <span class="text-slate-500 dark:text-slate-400"><i class="fa-regular fa-envelope mr-1.5 text-blue-500"></i>Email:</span>
+          <span id="profileEmailText" class="font-bold text-slate-800 dark:text-slate-100 truncate"></span>
+        </div>
+
+        <div class="p-3 rounded-xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] flex items-center justify-between gap-2">
+          <span class="text-slate-500 dark:text-slate-400"><i class="fa-solid fa-key mr-1.5 text-amber-500"></i>Mật khẩu:</span>
+          <div class="flex items-center gap-2">
+            <span id="profilePasswordText" data-masked="true" class="font-mono font-bold text-slate-800 dark:text-slate-100">••••••••</span>
+            <button type="button" onclick="toggleProfilePasswordReveal()" aria-label="Ẩn hoặc hiện mật khẩu"
+              class="w-7 h-7 rounded-lg bg-slate-200 dark:bg-[#1A2133] hover:bg-blue-600 hover:text-white flex items-center justify-center text-xs transition-colors">
+              <i id="profileRevealEyeIcon" class="fa-regular fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="p-3.5 rounded-xl bg-gradient-to-r from-amber-500/10 to-blue-500/10 border border-amber-500/30 flex items-center justify-between">
+          <span class="text-slate-600 dark:text-slate-300 font-semibold"><i class="fa-solid fa-coins mr-1.5 text-amber-500"></i>Số dư hiện tại:</span>
+          <span id="profileBalanceText" class="text-base sm:text-lg font-gaming font-extrabold text-amber-500">0 đ</span>
+        </div>
+      </div>
+
+      <!-- Các nút thao tác trong hồ sơ -->
+      <div class="mt-5 grid grid-cols-2 gap-2.5">
+        <button onclick="closeModal('userProfileModal'); openDepositModal('bank');" class="py-2.5 px-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-colors">
+          <i class="fa-solid fa-plus-circle"></i> Nạp tiền nhanh
+        </button>
+        <button onclick="closeModal('userProfileModal'); openHistoryModal();" class="py-2.5 px-3 rounded-xl bg-slate-200 dark:bg-[#1F2937] hover:bg-slate-300 dark:hover:bg-[#273147] text-slate-800 dark:text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-colors">
+          <i class="fa-solid fa-bag-shopping"></i> Lịch sử mua
+        </button>
+      </div>
+
+      <button onclick="logoutUser()" class="mt-3 w-full py-2.5 rounded-xl bg-red-600/15 hover:bg-red-600 text-red-500 hover:text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <span>Đăng xuất khỏi tài khoản</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- MODAL 6: NẠP TIỀN TỰ ĐỘNG -->
   <div id="depositModal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="w-full max-w-md rounded-3xl bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] p-6 shadow-2xl relative modal-enter">
       <button onclick="closeModal('depositModal')" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 dark:bg-[#1F2937] flex items-center justify-center text-slate-400">
@@ -883,7 +1181,6 @@
         <i class="fa-solid fa-wallet text-blue-500"></i> Nạp Tiền Vào Tài Khoản
       </h3>
 
-      <!-- Tabs chuyển hình thức -->
       <div class="grid grid-cols-2 gap-2 p-1 rounded-xl bg-slate-100 dark:bg-[#0B0E17] mt-4">
         <button id="tabCardBtn" onclick="switchDepositTab('card')" class="py-2 rounded-lg text-xs font-bold bg-blue-600 text-white transition-all">
           Nạp Thẻ Cào
@@ -893,8 +1190,7 @@
         </button>
       </div>
 
-      <!-- Form Nạp Thẻ Cào -->
-      <form id="cardDepositForm" onsubmit="handleDepositSubmit(event, 'card')" class="mt-4 space-y-3">
+      <form id="cardDepositForm" onsubmit="handleDepositSubmit(event)" class="mt-4 space-y-3">
         <div>
           <label class="block text-xs font-semibold mb-1">Loại thẻ</label>
           <select class="w-full px-3 py-2.5 rounded-xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] text-xs sm:text-sm">
@@ -917,11 +1213,11 @@
         <div class="grid grid-cols-2 gap-2.5">
           <div>
             <label class="block text-xs font-semibold mb-1">Số Seri</label>
-            <input type="text" placeholder="Nhập số seri..." value="1000894726152" required class="w-full px-3 py-2 rounded-xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] text-xs">
+            <input type="text" placeholder="Nhập số seri..." required class="w-full px-3 py-2 rounded-xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] text-xs">
           </div>
           <div>
             <label class="block text-xs font-semibold mb-1">Mã thẻ</label>
-            <input type="text" placeholder="Nhập mã thẻ..." value="8374920192837" required class="w-full px-3 py-2 rounded-xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] text-xs">
+            <input type="text" placeholder="Nhập mã thẻ..." required class="w-full px-3 py-2 rounded-xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] text-xs">
           </div>
         </div>
         <button type="submit" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-sm shadow-lg transition-all">
@@ -929,7 +1225,6 @@
         </button>
       </form>
 
-      <!-- Form Nạp ATM / MoMo -->
       <div id="bankDepositBox" class="hidden mt-4 space-y-3.5">
         <div class="rounded-2xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] p-3.5 text-xs space-y-2">
           <div class="flex justify-between">
@@ -958,52 +1253,7 @@
     </div>
   </div>
 
-  <!-- MODAL 6: XÁC NHẬN MUA ACC & NHẬN TÀI KHOẢN -->
-  <div id="buyConfirmModal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="w-full max-w-md rounded-3xl bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] p-6 shadow-2xl relative modal-enter">
-      <button onclick="closeModal('buyConfirmModal')" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 dark:bg-[#1F2937] flex items-center justify-center text-slate-400">
-        <i class="fa-solid fa-xmark text-sm"></i>
-      </button>
-
-      <div class="text-center">
-        <span class="px-2.5 py-1 rounded-full bg-red-500/15 text-red-500 text-[11px] font-bold uppercase">
-          <i class="fa-solid fa-fire mr-1"></i> Xác Nhận Thanh Toán
-        </span>
-        <h3 id="buyAccTitle" class="text-lg font-extrabold text-slate-900 dark:text-white mt-2">
-          Thử Vận May Free Fire 2k #066892
-        </h3>
-        <div id="buyAccPrice" class="text-2xl font-gaming font-extrabold text-blue-500 mt-1">
-          2.000 đ
-        </div>
-      </div>
-
-      <div class="mt-4 rounded-2xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] p-3.5 text-xs space-y-2">
-        <div class="flex justify-between">
-          <span class="text-slate-400">Mã số tài khoản:</span>
-          <span id="buyAccCode" class="font-bold">#066892</span>
-        </div>
-        <div class="flex justify-between">
-          <span class="text-slate-400">Trạng thái:</span>
-          <span class="font-bold text-emerald-500">Sẵn sàng giao ngay</span>
-        </div>
-        <div class="flex justify-between">
-          <span class="text-slate-400">Bảo hành:</span>
-          <span class="font-bold">Đúng mô tả 100%</span>
-        </div>
-      </div>
-
-      <div class="mt-5 grid grid-cols-2 gap-2.5">
-        <button onclick="closeModal('buyConfirmModal')" class="py-3 rounded-xl bg-slate-200 dark:bg-[#1F2937] font-bold text-xs sm:text-sm">
-          Hủy bỏ
-        </button>
-        <button onclick="executePurchase()" class="py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm shadow-lg shadow-blue-600/30">
-          Thanh Toán Ngay
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL 7: LỊCH SỬ MUA ACC (HIỂN THỊ TÀI KHOẢN + MẬT KHẨU ĐÃ MUA) -->
+  <!-- MODAL 7: LỊCH SỬ MUA ACC -->
   <div id="historyModal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="w-full max-w-lg max-h-[85vh] flex flex-col rounded-3xl bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] shadow-2xl overflow-hidden modal-enter">
       <div class="px-5 py-4 border-b border-slate-200 dark:border-[#1F2937] flex items-center justify-between">
@@ -1016,13 +1266,43 @@
         </button>
       </div>
 
-      <div id="historyListContainer" class="p-4 overflow-y-auto space-y-3">
-        <!-- Render lịch sử mua acc -->
-      </div>
+      <div id="historyListContainer" class="p-4 overflow-y-auto space-y-3"></div>
     </div>
   </div>
 
-  <!-- MODAL 8: MENU MOBILE DRAWER -->
+  <!-- MODAL 8: DANH SÁCH BÀI VIẾT HƯỚNG DẪN -->
+  <div id="articlesModal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4">
+    <div class="w-full max-w-lg max-h-[85vh] flex flex-col rounded-3xl bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] shadow-2xl overflow-hidden modal-enter">
+      <div class="px-5 py-4 border-b border-slate-200 dark:border-[#1F2937] flex items-center justify-between shrink-0">
+        <div>
+          <div class="text-[10px] font-bold uppercase tracking-wider text-blue-500">GÓC CỘNG ĐỒNG SHOP HỒNG HẢI</div>
+          <h3 class="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white">Danh sách bài viết</h3>
+        </div>
+        <button onclick="closeModal('articlesModal')" class="w-8 h-8 rounded-full bg-slate-100 dark:bg-[#1F2937] hover:bg-red-500 hover:text-white flex items-center justify-center text-slate-400 transition-colors">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+      </div>
+
+      <div id="articlesListContainer" class="p-4 overflow-y-auto space-y-3"></div>
+    </div>
+  </div>
+
+  <!-- MODAL 9: ĐỌC CHI TIẾT BÀI VIẾT -->
+  <div id="articleReaderModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="w-full max-w-lg max-h-[85vh] flex flex-col rounded-3xl bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] shadow-2xl overflow-hidden modal-enter">
+      <div class="px-5 py-4 border-b border-slate-200 dark:border-[#1F2937] flex items-center justify-between">
+        <button onclick="closeModal('articleReaderModal'); openArticlesModal();" class="text-xs font-bold text-blue-500 flex items-center gap-1.5">
+          <i class="fa-solid fa-arrow-left"></i> Quay lại danh sách
+        </button>
+        <button onclick="closeModal('articleReaderModal')" class="w-8 h-8 rounded-full bg-slate-100 dark:bg-[#1F2937] flex items-center justify-center text-slate-400">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+      </div>
+      <div id="articleReaderContent" class="p-5 overflow-y-auto space-y-3 text-xs sm:text-sm leading-relaxed text-slate-700 dark:text-slate-300"></div>
+    </div>
+  </div>
+
+  <!-- MODAL 10: MENU MOBILE DRAWER -->
   <div id="mobileMenuModal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex justify-end">
     <div class="w-72 max-w-[85vw] h-full bg-white dark:bg-[#131826] border-l border-slate-200 dark:border-[#1F2937] p-5 flex flex-col justify-between modal-enter">
       <div>
@@ -1057,7 +1337,7 @@
     </div>
   </div>
 
-  <!-- TOAST NOTIFICATION (THAY THẾ HOÀN TOÀN ALERT) -->
+  <!-- TOAST NOTIFICATION -->
   <div id="toastContainer" class="fixed top-20 right-4 z-[60] flex flex-col gap-2 max-w-xs w-full pointer-events-none"></div>
 
 
@@ -1381,7 +1661,6 @@
       }
     ];
 
-    // Dữ liệu bài viết hướng dẫn (Giống giây 0:14 - 0:16 trong video)
     const ARTICLES_DATA = [
       {
         id: 1,
@@ -1394,9 +1673,9 @@
           <p>Khi giao dịch bất kỳ tài khoản Free Fire nào tại <strong>ShopHongHai.com</strong>, hệ thống tự động tặng kèm mã quà tặng kim cương ngẫu nhiên từ 50 KC đến 999 KC.</p>
           <p><strong>Quy trình nhận thưởng:</strong></p>
           <ul class="list-disc pl-5 space-y-1">
-            <li>Bước 1: Đăng nhập tài khoản thành viên trên Shop Hồng Hải.</li>
-            <li>Bước 2: Chọn mã acc ưng ý và tiến hành thanh toán tự động.</li>
-            <li>Bước 3: Vào mục <em>Lịch sử mua hàng</em> để nhận tài khoản + mã code kim cương đi kèm.</li>
+            <li>Bước 1: Đăng ký hoặc đăng nhập tài khoản thành viên trên Shop Hồng Hải.</li>
+            <li>Bước 2: Xem chi tiết nhiều ảnh, bấm Mua ngay và Xác nhận thanh toán.</li>
+            <li>Bước 3: Vào mục <em>Lịch sử mua</em> để nhận tài khoản + mật khẩu đi kèm.</li>
           </ul>
         `
       },
@@ -1408,12 +1687,7 @@
         color: 'from-amber-500 to-red-600',
         content: `
           <h4 class="text-base font-extrabold text-slate-900 dark:text-white">Cách lấy lại tài khoản Free Fire bị hack: làm gì ngay?</h4>
-          <p>Nếu phát hiện tài khoản có dấu hiệu đăng nhập lạ, bạn cần thực hiện ngay 3 bước khẩn cấp sau:</p>
-          <ul class="list-disc pl-5 space-y-1">
-            <li>Đổi ngay mật khẩu nền tảng liên kết (Facebook / Google / VK).</li>
-            <li>Bật xác thực 2 yếu tố (2FA) và đăng xuất khỏi toàn bộ thiết bị lạ.</li>
-            <li>Liên hệ bộ phận hỗ trợ Garena kèm ID nhân vật và hóa đơn nạp gần nhất.</li>
-          </ul>
+          <p>Nếu phát hiện tài khoản có dấu hiệu đăng nhập lạ, hãy đổi ngay mật khẩu nền tảng liên kết, bật xác thực 2 bước (2FA) và đăng xuất khỏi toàn bộ thiết bị lạ.</p>
         `
       },
       {
@@ -1425,7 +1699,6 @@
         content: `
           <h4 class="text-base font-extrabold text-slate-900 dark:text-white">Cách đổi mail xác thực Free Fire an toàn</h4>
           <p>Sau khi mua acc tại <strong>Shop Hồng Hải</strong>, bạn nên cập nhật thông tin bảo mật chính chủ để đảm bảo an toàn tuyệt đối 100%.</p>
-          <p>Truy cập phần Cài đặt bảo mật của tài khoản liên kết, thêm Email cá nhân mới, xác nhận mã OTP 6 số và gỡ bỏ các phương thức khôi phục cũ.</p>
         `
       },
       {
@@ -1436,7 +1709,7 @@
         color: 'from-indigo-600 to-purple-700',
         content: `
           <h4 class="text-base font-extrabold text-slate-900 dark:text-white">Cách đăng nhập tài khoản Free Fire đúng cách</h4>
-          <p>Để tránh tình trạng khóa tạm thời do đăng nhập khác IP đột ngột, hãy đăng nhập tài khoản lên trình duyệt web trước khi mở ứng dụng game Free Fire.</p>
+          <p>Hãy đăng nhập tài khoản lên trình duyệt web trước khi mở ứng dụng game Free Fire để tránh khóa tạm thời do đổi IP.</p>
         `
       },
       {
@@ -1452,41 +1725,74 @@
       }
     ];
 
-    // ==================== STATE ỨNG DỤNG ====================
+    const PRESET_AVATARS = {
+      'preset-1': { icon: 'fa-user-astronaut', bg: 'from-blue-600 to-cyan-400', label: 'Phi Hành Gia' },
+      'preset-2': { icon: 'fa-dragon', bg: 'from-amber-500 to-red-600', label: 'Hỏa Long' },
+      'preset-3': { icon: 'fa-crown', bg: 'from-emerald-500 to-teal-700', label: 'Vương Miện' },
+      'preset-4': { icon: 'fa-bolt', bg: 'from-purple-600 to-pink-500', label: 'Tia Chớp' }
+    };
+
+    // ==================== STATE ỨNG DỤNG (KHÔNG TÀI KHOẢN MẪU KHI MỞ TRANG) ====================
     let appState = {
       isLoggedIn: false,
-      username: '',
-      balance: 0,
-      purchasedAccounts: [],
+      currentUser: null, // { name, email, password, avatarType, avatarValue, balance, purchasedAccounts }
+      registeredUsers: [], // Chỉ chứa tài khoản do chính người dùng đăng ký vào localStorage
       pendingCategory: null,
       activeCategory: null,
       currentAccountsList: [],
+      selectedAccountForDetail: null,
       selectedAccountToBuy: null,
+      galleryIndex: 0,
+      gallerySlidesCount: 4,
       currentPage: 1
     };
 
-    // ==================== KHỞI TẠO & RENDER TRANG CHỦ ====================
+    // ==================== KHỞI TẠO ====================
     window.addEventListener('DOMContentLoaded', () => {
+      loadRegisteredUsersFromStorage();
       renderHomeCategories();
       renderArticlesList();
       startFlashSaleCountdown();
       startHeroAutoSlide();
+      initGalleryTouchAndKeyboard();
+      updateAuthUI(); // Mặc định ban đầu: chưa đăng nhập, ẩn nút hình người
 
-      // Đóng dropdown nạp tiền khi click ra ngoài
       document.addEventListener('click', (e) => {
         const container = document.getElementById('depositDropdownContainer');
         const menu = document.getElementById('depositDropdownMenu');
-        if (container && !container.contains(e.target)) {
+        if (container && menu && !container.contains(e.target)) {
           menu.classList.add('hidden');
         }
       });
     });
 
+    function loadRegisteredUsersFromStorage() {
+      try {
+        const raw = localStorage.getItem('shophonghai_users_v1');
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed)) {
+            appState.registeredUsers = parsed;
+          }
+        }
+      } catch (err) {
+        appState.registeredUsers = [];
+      }
+    }
+
+    function saveRegisteredUsersToStorage() {
+      try {
+        localStorage.setItem('shophonghai_users_v1', JSON.stringify(appState.registeredUsers));
+      } catch (err) {
+        // Bỏ qua lỗi quota nếu có
+      }
+    }
+
+    // ==================== RENDER TRANG CHỦ ====================
     function renderHomeCategories() {
       const container = document.getElementById('allCategoriesContainer');
       container.innerHTML = GAME_SECTIONS.map(section => `
         <section id="${section.id}" class="space-y-3.5">
-          <!-- Header Danh Mục -->
           <div class="flex items-center justify-between gap-2">
             <div class="flex items-center gap-2 min-w-0">
               <div class="w-7 h-7 rounded-lg bg-slate-200 dark:bg-[#131826] border border-slate-300 dark:border-[#1F2937] flex items-center justify-center text-slate-700 dark:text-slate-300 shrink-0">
@@ -1502,7 +1808,6 @@
             </button>
           </div>
 
-          <!-- Grid Thẻ Sản Phẩm (2 cột mobile, 4 cột desktop) -->
           <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
             ${section.items.map(item => createProductCardHTML(item)).join('')}
           </div>
@@ -1514,13 +1819,8 @@
       return `
         <div onclick="openCategoryFlow('${item.id}')"
           class="gaming-card cursor-pointer rounded-2xl bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] hover:border-blue-500/70 overflow-hidden shadow-md flex flex-col justify-between">
-          
-          <!-- Thumbnail Gaming Đồ Họa Sắc Nét -->
           <div class="relative aspect-[16/10] w-full bg-gradient-to-br ${item.gradient} p-3 flex flex-col justify-between overflow-hidden">
-            <!-- Họa tiết lưới công nghệ -->
             <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 12px 12px;"></div>
-            
-            <!-- Brand góc nhỏ -->
             <div class="relative z-10 flex items-center justify-between">
               <span class="px-1.5 py-0.5 rounded bg-black/60 backdrop-blur-sm text-[8px] sm:text-[9px] font-bold text-amber-400 uppercase tracking-wider">
                 SHOPHONGHAI.COM
@@ -1529,8 +1829,6 @@
                 <i class="fa-solid ${item.icon}"></i>
               </div>
             </div>
-
-            <!-- Chữ trung tâm ảnh bìa -->
             <div class="relative z-10 my-auto text-center">
               <div class="font-gaming font-extrabold text-sm sm:text-base md:text-lg text-white uppercase leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.85)]">
                 ${item.badgeTop}
@@ -1540,8 +1838,6 @@
               </div>
             </div>
           </div>
-
-          <!-- Nội dung thông tin bên dưới -->
           <div class="p-3 flex-1 flex flex-col justify-between">
             <h3 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white line-clamp-2 leading-snug">
               ${item.name}
@@ -1555,7 +1851,7 @@
       `;
     }
 
-    // ==================== LUỒNG CLICK DANH MỤC -> POPUP THÔNG BÁO -> DANH SÁCH MÃ ACC ====================
+    // ==================== LUỒNG DANH MỤC & MÃ TÀI KHOẢN ====================
     function findCategoryById(catId) {
       for (const sec of GAME_SECTIONS) {
         const found = sec.items.find(i => i.id === catId);
@@ -1568,7 +1864,6 @@
       const cat = findCategoryById(catId);
       appState.pendingCategory = cat;
 
-      // Điền thông tin vào Modal "THÔNG BÁO TRƯỚC KHI THAM GIA" (Giống giây 0:26)
       document.getElementById('preJoinTitle').textContent = cat.name;
       document.getElementById('preJoinLoginType').textContent = cat.loginType || 'Facebook';
       document.getElementById('preJoinRate').textContent = cat.rate || '100%';
@@ -1584,32 +1879,32 @@
       appState.activeCategory = cat;
       appState.currentPage = 1;
 
-      // Cập nhật tiêu đề trang chi tiết
       document.getElementById('detailBreadcrumbGame').textContent = cat.gameName;
       document.getElementById('detailCategoryTitle').textContent = cat.name;
       document.getElementById('detailSeoHeading').textContent = `${cat.name} tại Shop Hồng Hải`;
 
-      // Sinh danh sách 8 mã tài khoản thực tế (giống giây 0:28: #066892, #097203, #097089...)
       const sampleCodes = ['066892', '097203', '097089', '096985', '097150', '097177', '097102', '097241'];
       appState.currentAccountsList = sampleCodes.map((code, idx) => {
         const price = cat.basePrice === 2000 ? 2000 : cat.basePrice + (idx * 10000);
         return {
           code: `#${code}`,
-          name: `${cat.name}`,
+          name: cat.name,
+          gameName: cat.gameName,
+          loginType: cat.loginType || 'Tài khoản game',
           price: price,
           gradient: cat.gradient,
           badgeTop: cat.badgeTop,
           badgeSub: cat.badgeSub,
           icon: cat.icon,
-          rank: idx % 2 === 0 ? 'Huyền Thoại / Cao Thủ' : 'Tự Chọn VIP',
-          skins: `${35 + idx * 12} Trang Phục`
+          rank: idx % 2 === 0 ? 'Cao Thủ / Rank VIP' : 'Huyền Thoại / Max Đồ',
+          skins: `${32 + idx * 14} Vật phẩm & Skin`,
+          desc: `Tài khoản mã ${code} thuộc danh mục ${cat.name} tại Shop Hồng Hải. Hỗ trợ xem đầy đủ 4 ảnh chi tiết trước khi thanh toán.`
         };
       });
 
       renderAccountItemsGrid(appState.currentAccountsList);
       renderRelatedCategories();
 
-      // Chuyển View từ Home sang Category Detail
       document.getElementById('homeView').classList.add('hidden');
       document.getElementById('categoryDetailView').classList.remove('hidden');
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1624,11 +1919,14 @@
 
       grid.innerHTML = accounts.map(acc => `
         <div class="gaming-card rounded-2xl bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] hover:border-blue-500 overflow-hidden shadow-md flex flex-col justify-between">
-          <!-- Ảnh Bìa Mã Acc -->
-          <div onclick="openBuyModal('${acc.code}')" class="cursor-pointer relative aspect-[16/10] w-full bg-gradient-to-br ${acc.gradient} p-2.5 flex flex-col justify-between overflow-hidden">
+          <!-- Bấm vào ảnh mở Gallery nhiều hình ảnh lướt qua lại -->
+          <div onclick="openProductDetailModal('${acc.code}')" title="Bấm để xem chi tiết nhiều hình ảnh"
+            class="cursor-pointer relative aspect-[16/10] w-full bg-gradient-to-br ${acc.gradient} p-2.5 flex flex-col justify-between overflow-hidden group">
             <div class="relative z-10 flex items-center justify-between">
               <span class="px-1.5 py-0.5 rounded bg-black/60 text-[8px] font-bold text-amber-400">SHOPHONGHAI</span>
-              <span class="px-1.5 py-0.5 rounded bg-emerald-500/90 text-[8px] font-bold text-white">Sẵn sàng</span>
+              <span class="px-1.5 py-0.5 rounded bg-black/65 text-[8px] font-bold text-cyan-300 flex items-center gap-1">
+                <i class="fa-regular fa-images"></i> 4 ảnh
+              </span>
             </div>
             <div class="relative z-10 my-auto text-center">
               <div class="font-gaming font-extrabold text-sm sm:text-base text-white uppercase leading-tight drop-shadow">
@@ -1640,7 +1938,6 @@
             </div>
           </div>
 
-          <!-- Thông tin Mã Số + Tag Đỏ FLASH SALE Đếm Ngược -->
           <div class="p-3 flex-1 flex flex-col justify-between space-y-2">
             <div class="flex items-center justify-between gap-1 flex-wrap">
               <span class="text-xs font-extrabold text-slate-800 dark:text-slate-200">${acc.code}</span>
@@ -1655,67 +1952,231 @@
               ${acc.name}
             </div>
 
-            <div class="pt-1 flex items-center justify-between gap-2 border-t border-slate-100 dark:border-[#1F2937]">
-              <span class="text-sm font-extrabold text-red-500">${formatVND(acc.price)}</span>
-              <button onclick="openBuyModal('${acc.code}')" class="px-2.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-bold transition-colors">
-                Mua ngay
-              </button>
+            <div class="pt-1.5 flex items-center justify-between gap-1.5 border-t border-slate-100 dark:border-[#1F2937]">
+              <span class="text-xs sm:text-sm font-extrabold text-red-500">${formatVND(acc.price)}</span>
+              <div class="flex items-center gap-1">
+                <button onclick="openProductDetailModal('${acc.code}')" title="Xem chi tiết nhiều ảnh"
+                  class="px-2 py-1.5 rounded-lg bg-slate-100 dark:bg-[#0B0E17] hover:bg-slate-200 dark:hover:bg-[#1A2133] text-slate-700 dark:text-slate-200 text-[10px] sm:text-[11px] font-bold border border-slate-200 dark:border-[#1F2937] transition-colors">
+                  Chi tiết
+                </button>
+                <button onclick="openBuyModal('${acc.code}')"
+                  class="px-2.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-[10px] sm:text-[11px] font-bold transition-colors">
+                  Mua ngay
+                </button>
+              </div>
             </div>
           </div>
         </div>
       `).join('');
     }
 
-    function renderRelatedCategories() {
-      const container = document.getElementById('relatedCategoriesGrid');
-      const related = [
-        GAME_SECTIONS[1].items[0],
-        GAME_SECTIONS[1].items[1],
-        GAME_SECTIONS[1].items[2],
-        GAME_SECTIONS[2].items[0]
+    // ==================== XEM CHI TIẾT SẢN PHẨM NHIỀU HÌNH ẢNH LƯỚT QUA LẠI ====================
+    function openProductDetailModal(code) {
+      const acc = appState.currentAccountsList.find(a => a.code === code);
+      if (!acc) return;
+
+      appState.selectedAccountForDetail = acc;
+      appState.galleryIndex = 0;
+
+      document.getElementById('detailModalCodeBadge').textContent = acc.code;
+      document.getElementById('detailModalTitle').textContent = `${acc.name} ${acc.code}`;
+      document.getElementById('detailModalDesc').textContent = acc.desc;
+      document.getElementById('detailModalPrice').textContent = formatVND(acc.price);
+      document.getElementById('detailModalLogin').textContent = acc.loginType;
+      document.getElementById('detailModalRank').textContent = acc.rank;
+      document.getElementById('detailModalSkins').textContent = acc.skins;
+
+      // Tạo 4 khung ảnh chi tiết phong cách gaming khác nhau để người dùng lướt qua lại
+      const slides = [
+        {
+          label: 'ẢNH 1/4 • TỔNG QUAN TÀI KHOẢN',
+          sub: `${acc.badgeTop} • MÃ ${acc.code}`,
+          detail: `Hạng: ${acc.rank} • Đăng nhập: ${acc.loginType}`,
+          grad: acc.gradient,
+          icon: acc.icon
+        },
+        {
+          label: 'ẢNH 2/4 • KHO TRANG BỊ & SKIN VIP',
+          sub: acc.skins,
+          detail: 'Kiểm tra đầy đủ kho đồ trước khi giao dịch tại Shop Hồng Hải',
+          grad: 'from-indigo-700 via-purple-700 to-slate-950',
+          icon: 'fa-wand-magic-sparkles'
+        },
+        {
+          label: 'ẢNH 3/4 • THÔNG TIN BẢO MẬT ACC',
+          sub: `Xác thực: ${acc.loginType}`,
+          detail: 'Hỗ trợ đổi thông tin nhanh chóng • Bảo hành chuẩn xác',
+          grad: 'from-emerald-700 via-teal-800 to-slate-950',
+          icon: 'fa-shield-halved'
+        },
+        {
+          label: 'ẢNH 4/4 • CHỨNG NHẬN SHOP HỒNG HẢI',
+          sub: 'SHOPHONGHAI.COM • SINCE 2017',
+          detail: 'Giao tài khoản & mật khẩu tự động ngay sau xác nhận thanh toán',
+          grad: 'from-amber-600 via-orange-700 to-red-950',
+          icon: 'fa-crown'
+        }
       ];
-      container.innerHTML = related.map(item => createProductCardHTML(item)).join('');
+
+      appState.gallerySlidesCount = slides.length;
+
+      const track = document.getElementById('galleryTrack');
+      track.innerHTML = slides.map(s => `
+        <div class="w-full h-full shrink-0 bg-gradient-to-br ${s.grad} p-5 sm:p-8 flex flex-col justify-between relative overflow-hidden">
+          <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 16px 16px;"></div>
+          <div class="relative z-10 flex items-center justify-between">
+            <span class="px-2.5 py-1 rounded-lg bg-black/65 text-amber-300 text-[10px] sm:text-xs font-extrabold tracking-wide">
+              ${s.label}
+            </span>
+            <span class="px-2.5 py-1 rounded-lg bg-white/15 text-white text-[10px] font-bold backdrop-blur-sm">
+              ${acc.code}
+            </span>
+          </div>
+
+          <div class="relative z-10 my-auto text-center py-2">
+            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-black/40 border border-white/20 flex items-center justify-center mx-auto mb-3 text-2xl sm:text-3xl text-amber-300 shadow-lg">
+              <i class="fa-solid ${s.icon}"></i>
+            </div>
+            <div class="font-gaming font-extrabold text-xl sm:text-3xl text-white uppercase tracking-tight drop-shadow">
+              ${s.sub}
+            </div>
+            <p class="mt-1.5 text-xs sm:text-sm text-slate-100/90 max-w-md mx-auto">
+              ${s.detail}
+            </p>
+          </div>
+
+          <div class="relative z-10 text-[10px] text-white/75 flex items-center justify-between">
+            <span><i class="fa-solid fa-arrows-left-right mr-1"></i> Lướt trái/phải để xem tiếp</span>
+            <span>Shop Hồng Hải</span>
+          </div>
+        </div>
+      `).join('');
+
+      const thumbs = document.getElementById('galleryThumbnails');
+      thumbs.innerHTML = slides.map((s, i) => `
+        <button type="button" onclick="goToGallerySlide(${i})" id="galleryThumb-${i}"
+          class="h-14 sm:h-16 rounded-xl bg-gradient-to-br ${s.grad} p-1.5 flex flex-col items-center justify-center text-center border-2 transition-all ${i === 0 ? 'border-blue-500 scale-[1.02]' : 'border-transparent opacity-65 hover:opacity-100'}">
+          <i class="fa-solid ${s.icon} text-white text-xs mb-0.5"></i>
+          <span class="text-[9px] font-bold text-white leading-tight">Ảnh ${i + 1}</span>
+        </button>
+      `).join('');
+
+      goToGallerySlide(0);
+      openModal('productDetailModal');
     }
 
-    // ==================== LỌC & SẮP XẾP DANH SÁCH ACC ====================
-    function applyAccountFilter() {
-      const min = parseInt(document.getElementById('filterMinPrice').value) || 0;
-      const max = parseInt(document.getElementById('filterMaxPrice').value) || Infinity;
-      const filtered = appState.currentAccountsList.filter(a => a.price >= min && a.price <= max);
-      renderAccountItemsGrid(filtered);
-      showToast(`Đã lọc được ${filtered.length} tài khoản phù hợp!`, 'info');
+    function goToGallerySlide(idx) {
+      const total = appState.gallerySlidesCount;
+      appState.galleryIndex = ((idx % total) + total) % total;
+
+      const track = document.getElementById('galleryTrack');
+      track.style.transform = `translateX(-${appState.galleryIndex * 100}%)`;
+
+      document.getElementById('galleryCounterText').textContent = `${appState.galleryIndex + 1} / ${total}`;
+
+      const dotsContainer = document.getElementById('galleryDots');
+      dotsContainer.innerHTML = Array.from({ length: total }, (_, i) => `
+        <button type="button" onclick="goToGallerySlide(${i})" aria-label="Ảnh ${i + 1}"
+          class="h-1.5 rounded-full transition-all ${i === appState.galleryIndex ? 'w-5 bg-amber-400' : 'w-2 bg-white/45'}"></button>
+      `).join('');
+
+      for (let i = 0; i < total; i++) {
+        const thumb = document.getElementById(`galleryThumb-${i}`);
+        if (thumb) {
+          if (i === appState.galleryIndex) {
+            thumb.classList.add('border-blue-500', 'scale-[1.02]');
+            thumb.classList.remove('border-transparent', 'opacity-65');
+          } else {
+            thumb.classList.remove('border-blue-500', 'scale-[1.02]');
+            thumb.classList.add('border-transparent', 'opacity-65');
+          }
+        }
+      }
     }
 
-    function sortAccounts(type) {
-      let list = [...appState.currentAccountsList];
-      if (type === 'asc') list.sort((a, b) => a.price - b.price);
-      else if (type === 'desc') list.sort((a, b) => b.price - a.price);
-      else if (type === 'random') list.sort(() => Math.random() - 0.5);
-      renderAccountItemsGrid(list);
+    function prevGallerySlide() {
+      goToGallerySlide(appState.galleryIndex - 1);
     }
 
-    function changeDetailPage(delta) {
-      appState.currentPage = Math.max(1, Math.min(44, appState.currentPage + delta));
-      document.getElementById('detailPageNum').textContent = appState.currentPage;
-      sortAccounts('random');
+    function nextGallerySlide() {
+      goToGallerySlide(appState.galleryIndex + 1);
     }
 
-    function toggleFaqAccordion() {
-      const content = document.getElementById('faqContent');
-      const chevron = document.getElementById('faqChevron');
-      content.classList.toggle('hidden');
-      chevron.classList.toggle('rotate-180');
+    function initGalleryTouchAndKeyboard() {
+      const viewport = document.getElementById('galleryViewport');
+      if (!viewport) return;
+
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      viewport.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      viewport.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 35) {
+          if (diff > 0) nextGallerySlide();
+          else prevGallerySlide();
+        }
+      }, { passive: true });
+
+      document.addEventListener('keydown', (e) => {
+        const detailModal = document.getElementById('productDetailModal');
+        if (detailModal && !detailModal.classList.contains('hidden')) {
+          if (e.key === 'ArrowLeft') prevGallerySlide();
+          if (e.key === 'ArrowRight') nextGallerySlide();
+        }
+      });
     }
 
-    // ==================== HỆ THỐNG MUA ACC & NẠP TIỀN GIẢ LẬP ====================
+    function proceedFromDetailToPayment() {
+      const acc = appState.selectedAccountForDetail;
+      closeModal('productDetailModal');
+      if (acc) {
+        openBuyModal(acc.code);
+      }
+    }
+
+    // ==================== XÁC NHẬN THANH TOÁN & LỊCH SỬ MUA ====================
     function openBuyModal(code) {
       const acc = appState.currentAccountsList.find(a => a.code === code);
       if (!acc) return;
       appState.selectedAccountToBuy = acc;
 
-      document.getElementById('buyAccTitle').textContent = `${acc.name} ${acc.code}`;
-      document.getElementById('buyAccPrice').textContent = formatVND(acc.price);
-      document.getElementById('buyAccCode').textContent = acc.code;
+      const currentBalance = appState.isLoggedIn && appState.currentUser ? appState.currentUser.balance : 0;
+      const afterBalance = currentBalance - acc.price;
+
+      document.getElementById('payConfirmCode').textContent = acc.code;
+      document.getElementById('payConfirmName').textContent = acc.name;
+      document.getElementById('payConfirmLogin').textContent = acc.loginType;
+      document.getElementById('payConfirmPrice').textContent = formatVND(acc.price);
+      document.getElementById('payCurrentBalance').textContent = formatVND(currentBalance);
+
+      const afterEl = document.getElementById('payAfterBalance');
+      const warnBox = document.getElementById('insufficientBalanceBox');
+      const submitBtn = document.getElementById('confirmPaymentSubmitBtn');
+
+      if (!appState.isLoggedIn) {
+        afterEl.textContent = 'Vui lòng đăng nhập';
+        afterEl.className = 'font-bold text-amber-500';
+        warnBox.classList.add('hidden');
+        submitBtn.disabled = false;
+      } else if (afterBalance < 0) {
+        afterEl.textContent = `Thiếu ${formatVND(Math.abs(afterBalance))}`;
+        afterEl.className = 'font-bold text-red-500';
+        warnBox.classList.remove('hidden');
+        submitBtn.disabled = true;
+        submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+      } else {
+        afterEl.textContent = formatVND(afterBalance);
+        afterEl.className = 'font-bold text-emerald-500';
+        warnBox.classList.add('hidden');
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+      }
+
       openModal('buyConfirmModal');
     }
 
@@ -1723,26 +2184,29 @@
       const acc = appState.selectedAccountToBuy;
       if (!acc) return;
 
-      if (!appState.isLoggedIn) {
+      if (!appState.isLoggedIn || !appState.currentUser) {
         closeModal('buyConfirmModal');
-        showToast('Vui lòng đăng nhập để mua tài khoản!', 'warning');
-        openAuthModal();
+        showToast('Vui lòng đăng nhập hoặc đăng ký tài khoản trước khi thanh toán!', 'warning');
+        openAuthModal('login');
         return;
       }
 
-      if (appState.balance < acc.price) {
-        closeModal('buyConfirmModal');
-        showToast('Số dư không đủ! Vui lòng nạp thêm tiền vào tài khoản.', 'error');
-        openDepositModal('bank');
+      const termsChecked = document.getElementById('agreePaymentTerms').checked;
+      if (!termsChecked) {
+        showToast('Vui lòng tích chọn đồng ý điều khoản giao dịch!', 'warning');
         return;
       }
 
-      // Trừ tiền & sinh tài khoản + mật khẩu ngẫu nhiên
-      appState.balance -= acc.price;
-      const randomUser = `honghai_vip_${Math.floor(1000 + Math.random() * 9000)}`;
-      const randomPass = `HH@${Math.floor(100000 + Math.random() * 900000)}`;
+      if (appState.currentUser.balance < acc.price) {
+        showToast('Số dư không đủ để hoàn tất thanh toán!', 'error');
+        return;
+      }
 
-      appState.purchasedAccounts.unshift({
+      appState.currentUser.balance -= acc.price;
+      const randomUser = `honghai_${Math.floor(10000 + Math.random() * 89999)}`;
+      const randomPass = `HH#${Math.floor(100000 + Math.random() * 899999)}`;
+
+      appState.currentUser.purchasedAccounts.unshift({
         code: acc.code,
         name: acc.name,
         price: acc.price,
@@ -1751,23 +2215,26 @@
         time: new Date().toLocaleTimeString('vi-VN')
       });
 
-      updateUserUI();
+      syncCurrentUserToStorage();
+      updateAuthUI();
       closeModal('buyConfirmModal');
-      showToast(`Mua thành công ${acc.code}! Đã lưu vào Lịch sử mua.`, 'success');
+      showToast(`Thanh toán thành công ${acc.code}! Tài khoản & mật khẩu đã được cấp.`, 'success');
       openHistoryModal();
     }
 
     function openHistoryModal() {
       const container = document.getElementById('historyListContainer');
-      if (appState.purchasedAccounts.length === 0) {
+      const list = appState.isLoggedIn && appState.currentUser ? appState.currentUser.purchasedAccounts : [];
+
+      if (!list.length) {
         container.innerHTML = `
           <div class="py-10 text-center space-y-2">
             <i class="fa-solid fa-box-open text-3xl text-slate-400"></i>
-            <p class="text-xs sm:text-sm text-slate-500">Bạn chưa mua tài khoản nào tại Shop Hồng Hải.</p>
+            <p class="text-xs sm:text-sm text-slate-500">Chưa có tài khoản nào được mua trong hồ sơ này.</p>
           </div>
         `;
       } else {
-        container.innerHTML = appState.purchasedAccounts.map(item => `
+        container.innerHTML = list.map((item, idx) => `
           <div class="rounded-2xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] p-3.5 space-y-2">
             <div class="flex items-center justify-between">
               <span class="font-bold text-xs sm:text-sm text-blue-500">${item.name} (${item.code})</span>
@@ -1783,54 +2250,317 @@
                 <strong class="text-emerald-500 select-all">${item.password}</strong>
               </div>
             </div>
+            <div class="flex justify-end">
+              <button type="button" onclick="copyAccountCredentials('${item.username}', '${item.password}')"
+                class="px-2.5 py-1 rounded-lg bg-blue-600/15 hover:bg-blue-600 hover:text-white text-blue-500 text-[11px] font-bold transition-colors">
+                <i class="fa-regular fa-copy mr-1"></i> Sao chép TK & MK
+              </button>
+            </div>
           </div>
         `).join('');
       }
       openModal('historyModal');
     }
 
-    // ==================== ĐĂNG NHẬP & NẠP TIỀN ====================
-    function openAuthModal() {
+    function copyAccountCredentials(u, p) {
+      const text = `Tài khoản: ${u} | Mật khẩu: ${p}`;
+      const temp = document.createElement('textarea');
+      temp.value = text;
+      document.body.appendChild(temp);
+      temp.select();
+      document.execCommand('copy');
+      document.body.removeChild(temp);
+      showToast('Đã sao chép Tài khoản & Mật khẩu!', 'success');
+    }
+
+    // ==================== ĐĂNG NHẬP, ĐĂNG KÝ BẢO MẬT & HỒ SƠ CÁ NHÂN ====================
+    let selectedRegAvatarType = 'preset';
+    let selectedRegAvatarValue = 'preset-1';
+
+    function openAuthModal(defaultTab = 'login') {
+      switchAuthTab(defaultTab);
+      document.getElementById('sessionSecurityCode').textContent = 'HH-' + Math.floor(1000 + Math.random() * 9000);
       openModal('authModal');
+    }
+
+    function switchAuthTab(tab) {
+      const loginForm = document.getElementById('loginForm');
+      const registerForm = document.getElementById('registerForm');
+      const tabLogin = document.getElementById('authTabLogin');
+      const tabRegister = document.getElementById('authTabRegister');
+
+      if (tab === 'login') {
+        loginForm.classList.remove('hidden');
+        registerForm.classList.add('hidden');
+        tabLogin.className = 'py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-blue-600 text-white shadow transition-all';
+        tabRegister.className = 'py-2.5 rounded-xl text-xs sm:text-sm font-bold text-slate-600 dark:text-slate-400 transition-all';
+      } else {
+        loginForm.classList.add('hidden');
+        registerForm.classList.remove('hidden');
+        tabRegister.className = 'py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-blue-600 text-white shadow transition-all';
+        tabLogin.className = 'py-2.5 rounded-xl text-xs sm:text-sm font-bold text-slate-600 dark:text-slate-400 transition-all';
+      }
+    }
+
+    function selectPresetAvatar(presetKey) {
+      selectedRegAvatarType = 'preset';
+      selectedRegAvatarValue = presetKey;
+      document.getElementById('customAvatarFileName').classList.add('hidden');
+
+      document.querySelectorAll('.avatar-preset-btn').forEach(btn => {
+        if (btn.getAttribute('data-avatar') === presetKey) {
+          btn.classList.add('ring-2', 'ring-blue-500', 'opacity-100');
+          btn.classList.remove('opacity-70');
+        } else {
+          btn.classList.remove('ring-2', 'ring-blue-500', 'opacity-100');
+          btn.classList.add('opacity-70');
+        }
+      });
+    }
+
+    function handleCustomAvatarUpload(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        selectedRegAvatarType = 'image';
+        selectedRegAvatarValue = e.target.result;
+        document.querySelectorAll('.avatar-preset-btn').forEach(btn => {
+          btn.classList.remove('ring-2', 'ring-blue-500');
+          btn.classList.add('opacity-70');
+        });
+        const label = document.getElementById('customAvatarFileName');
+        label.textContent = `Đã chọn ảnh: ${file.name}`;
+        label.classList.remove('hidden');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function evaluatePasswordStrength() {
+      const pass = document.getElementById('regPasswordInput').value;
+      const bar = document.getElementById('passwordStrengthBar');
+      const label = document.getElementById('passwordStrengthLabel');
+
+      if (!pass) {
+        bar.style.width = '0%';
+        label.textContent = 'Chưa nhập';
+        label.className = 'font-bold text-slate-400';
+        return;
+      }
+
+      let score = 0;
+      if (pass.length >= 6) score++;
+      if (pass.length >= 9) score++;
+      if (/[A-Z]/.test(pass) && /[a-z]/.test(pass)) score++;
+      if (/[0-9]/.test(pass) && /[^A-Za-z0-9]/.test(pass)) score++;
+
+      const levels = [
+        { width: '25%', color: 'bg-red-500', text: 'Yếu', textColor: 'text-red-500' },
+        { width: '50%', color: 'bg-amber-500', text: 'Trung bình', textColor: 'text-amber-500' },
+        { width: '75%', color: 'bg-blue-500', text: 'Mạnh', textColor: 'text-blue-500' },
+        { width: '100%', color: 'bg-emerald-500', text: 'Rất mạnh', textColor: 'text-emerald-500' }
+      ];
+
+      const lvl = levels[Math.max(0, Math.min(3, score - 1))];
+      bar.style.width = lvl.width;
+      bar.className = `h-full ${lvl.color} transition-all duration-300`;
+      label.textContent = lvl.text;
+      label.className = `font-bold ${lvl.textColor}`;
+    }
+
+    function handleRegisterSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('regNameInput').value.trim();
+      const email = document.getElementById('regEmailInput').value.trim().toLowerCase();
+      const password = document.getElementById('regPasswordInput').value;
+      const confirmPass = document.getElementById('regConfirmPasswordInput').value;
+
+      if (name.length < 2) {
+        showToast('Tên hiển thị cần ít nhất 2 ký tự!', 'warning');
+        return;
+      }
+      if (password.length < 6) {
+        showToast('Mật khẩu cần tối thiểu 6 ký tự để bảo mật!', 'warning');
+        return;
+      }
+      if (password !== confirmPass) {
+        showToast('Mật khẩu xác nhận không khớp!', 'error');
+        return;
+      }
+
+      const newUser = {
+        name: name,
+        email: email,
+        password: password,
+        avatarType: selectedRegAvatarType,
+        avatarValue: selectedRegAvatarValue,
+        balance: 0,
+        purchasedAccounts: []
+      };
+
+      const existingIdx = appState.registeredUsers.findIndex(u => u.email === email);
+      if (existingIdx >= 0) {
+        appState.registeredUsers[existingIdx] = newUser;
+      } else {
+        appState.registeredUsers.push(newUser);
+      }
+
+      saveRegisteredUsersToStorage();
+      appState.currentUser = newUser;
+      appState.isLoggedIn = true;
+
+      updateAuthUI();
+      closeModal('authModal');
+      showToast(`Đăng ký thành công! Chào mừng ${name} đến với Shop Hồng Hải.`, 'success');
     }
 
     function handleLoginSubmit(e) {
       e.preventDefault();
-      const nameInput = document.getElementById('loginUsernameInput').value.trim() || 'HongHai_Gamer';
-      appState.isLoggedIn = true;
-      appState.username = nameInput;
-      if (appState.balance === 0) {
-        appState.balance = 50000; // Tặng 50k trải nghiệm
+      const identifier = document.getElementById('loginIdentifierInput').value.trim().toLowerCase();
+      const password = document.getElementById('loginPasswordInput').value;
+
+      const matched = appState.registeredUsers.find(
+        u => (u.email.toLowerCase() === identifier || u.name.toLowerCase() === identifier) && u.password === password
+      );
+
+      if (!matched) {
+        showToast('Không tìm thấy tài khoản hoặc mật khẩu chưa đúng! Hãy Đăng ký mới nếu chưa có.', 'error');
+        return;
       }
-      updateUserUI();
+
+      appState.currentUser = matched;
+      appState.isLoggedIn = true;
+      updateAuthUI();
       closeModal('authModal');
-      showToast(`Chào mừng ${nameInput}! Bạn được tặng 50.000đ trải nghiệm.`, 'success');
+      showToast(`Đăng nhập thành công! Xin chào ${matched.name}.`, 'success');
     }
 
     function logoutUser() {
       appState.isLoggedIn = false;
-      updateUserUI();
-      showToast('Đã đăng xuất khỏi tài khoản.', 'info');
+      appState.currentUser = null;
+      closeModal('userProfileModal');
+      updateAuthUI();
+      showToast('Bạn đã đăng xuất khỏi tài khoản Shop Hồng Hải.', 'info');
     }
 
-    function updateUserUI() {
+    function syncCurrentUserToStorage() {
+      if (!appState.currentUser) return;
+      const idx = appState.registeredUsers.findIndex(u => u.email === appState.currentUser.email);
+      if (idx >= 0) {
+        appState.registeredUsers[idx] = appState.currentUser;
+        saveRegisteredUsersToStorage();
+      }
+    }
+
+    function renderAvatarIntoElement(el, user) {
+      if (!el || !user) return;
+      if (user.avatarType === 'image' && user.avatarValue) {
+        el.className = 'w-full h-full rounded-full overflow-hidden flex items-center justify-center';
+        el.innerHTML = `<img src="${user.avatarValue}" alt="Avatar" class="w-full h-full object-cover">`;
+      } else {
+        const preset = PRESET_AVATARS[user.avatarValue] || PRESET_AVATARS['preset-1'];
+        el.className = `w-full h-full rounded-full bg-gradient-to-tr ${preset.bg} text-white flex items-center justify-center`;
+        el.innerHTML = `<i class="fa-solid ${preset.icon}"></i>`;
+      }
+    }
+
+    function updateAuthUI() {
       const guestBar = document.getElementById('guestBar');
       const userBar = document.getElementById('userBar');
+      const headerProfileBtn = document.getElementById('headerProfileIconBtn');
 
-      if (appState.isLoggedIn) {
+      if (appState.isLoggedIn && appState.currentUser) {
+        const u = appState.currentUser;
         guestBar.classList.add('hidden');
         userBar.classList.remove('hidden');
         userBar.classList.add('flex');
-        document.getElementById('userDisplayName').textContent = appState.username;
-        document.getElementById('userBalanceDisplay').textContent = formatVND(appState.balance);
-        document.getElementById('purchasedCountBadge').textContent = appState.purchasedAccounts.length;
+
+        // Hiện nút hình người trên header khi đã đăng ký/đăng nhập
+        headerProfileBtn.classList.remove('hidden');
+        headerProfileBtn.classList.add('flex');
+
+        const headerImg = document.getElementById('headerAvatarImg');
+        const headerIcon = document.getElementById('headerDefaultPersonIcon');
+        if (u.avatarType === 'image' && u.avatarValue) {
+          headerImg.src = u.avatarValue;
+          headerImg.classList.remove('hidden');
+          headerIcon.classList.add('hidden');
+        } else {
+          headerImg.classList.add('hidden');
+          headerIcon.classList.remove('hidden');
+        }
+
+        const userBarAvatarBox = document.getElementById('userBarAvatarBox');
+        renderAvatarIntoElement(userBarAvatarBox, u);
+
+        document.getElementById('userDisplayName').textContent = u.name;
+        document.getElementById('userBalanceDisplay').textContent = formatVND(u.balance);
+        document.getElementById('purchasedCountBadge').textContent = u.purchasedAccounts.length;
       } else {
         guestBar.classList.remove('hidden');
         userBar.classList.add('hidden');
         userBar.classList.remove('flex');
+
+        // Ẩn nút hình người khi chưa đăng nhập
+        headerProfileBtn.classList.add('hidden');
+        headerProfileBtn.classList.remove('flex');
       }
     }
 
+    function openProfileModal() {
+      if (!appState.isLoggedIn || !appState.currentUser) {
+        openAuthModal('login');
+        return;
+      }
+      const u = appState.currentUser;
+      const avatarBox = document.getElementById('profileModalAvatarBox');
+      renderAvatarIntoElement(avatarBox, u);
+
+      document.getElementById('profileNameText').textContent = u.name;
+      document.getElementById('profileEmailText').textContent = u.email;
+      document.getElementById('profileBalanceText').textContent = formatVND(u.balance);
+
+      // Mặc định ẩn mật khẩu, bấm icon mắt để ẩn/mở
+      const passEl = document.getElementById('profilePasswordText');
+      const eyeIcon = document.getElementById('profileRevealEyeIcon');
+      passEl.setAttribute('data-masked', 'true');
+      passEl.textContent = '•'.repeat(Math.max(6, u.password.length));
+      eyeIcon.className = 'fa-regular fa-eye';
+
+      openModal('userProfileModal');
+    }
+
+    function toggleProfilePasswordReveal() {
+      if (!appState.currentUser) return;
+      const passEl = document.getElementById('profilePasswordText');
+      const eyeIcon = document.getElementById('profileRevealEyeIcon');
+      const isMasked = passEl.getAttribute('data-masked') === 'true';
+
+      if (isMasked) {
+        passEl.setAttribute('data-masked', 'false');
+        passEl.textContent = appState.currentUser.password;
+        eyeIcon.className = 'fa-regular fa-eye-slash text-blue-500';
+      } else {
+        passEl.setAttribute('data-masked', 'true');
+        passEl.textContent = '•'.repeat(Math.max(6, appState.currentUser.password.length));
+        eyeIcon.className = 'fa-regular fa-eye';
+      }
+    }
+
+    function togglePasswordVisibility(inputId, iconId) {
+      const input = document.getElementById(inputId);
+      const icon = document.getElementById(iconId);
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.className = 'fa-regular fa-eye-slash text-blue-500';
+      } else {
+        input.type = 'password';
+        icon.className = 'fa-regular fa-eye';
+      }
+    }
+
+    // ==================== NẠP TIỀN ====================
     function toggleDepositDropdown() {
       document.getElementById('depositDropdownMenu').classList.toggle('hidden');
     }
@@ -1862,30 +2592,36 @@
 
     function handleDepositSubmit(e) {
       e.preventDefault();
-      if (!appState.isLoggedIn) {
-        appState.isLoggedIn = true;
-        appState.username = 'HongHai_Gamer99';
+      if (!appState.isLoggedIn || !appState.currentUser) {
+        closeModal('depositModal');
+        showToast('Vui lòng đăng nhập hoặc đăng ký tài khoản trước khi nạp tiền!', 'warning');
+        openAuthModal('register');
+        return;
       }
       const amount = parseInt(document.getElementById('cardAmountSelect').value) || 50000;
-      appState.balance += amount;
-      updateUserUI();
+      appState.currentUser.balance += amount;
+      syncCurrentUserToStorage();
+      updateAuthUI();
       closeModal('depositModal');
-      showToast(`Nạp thẻ thành công +${formatVND(amount)} vào tài khoản!`, 'success');
+      showToast(`Nạp thẻ thành công +${formatVND(amount)} vào tài khoản của bạn!`, 'success');
     }
 
     function quickBankDeposit(amount) {
-      if (!appState.isLoggedIn) {
-        appState.isLoggedIn = true;
-        appState.username = 'HongHai_Gamer99';
+      if (!appState.isLoggedIn || !appState.currentUser) {
+        closeModal('depositModal');
+        showToast('Vui lòng đăng nhập hoặc đăng ký tài khoản trước khi nạp tiền!', 'warning');
+        openAuthModal('register');
+        return;
       }
       const bonus = Math.round(amount * 1.15);
-      appState.balance += bonus;
-      updateUserUI();
+      appState.currentUser.balance += bonus;
+      syncCurrentUserToStorage();
+      updateAuthUI();
       closeModal('depositModal');
       showToast(`Nhận chuyển khoản thành công +${formatVND(bonus)} (Đã gồm +15% KM)!`, 'success');
     }
 
-    // ==================== DANH SÁCH BÀI VIẾT HƯỚNG DẪN ====================
+    // ==================== BÀI VIẾT & ĐIỀU HƯỚNG ====================
     function renderArticlesList() {
       const container = document.getElementById('articlesListContainer');
       container.innerHTML = ARTICLES_DATA.map(art => `
@@ -1915,7 +2651,6 @@
       openModal('articleReaderModal');
     }
 
-    // ==================== TIỆN ÍCH GIAO DIỆN & ĐIỀU HƯỚNG ====================
     function goHome(e) {
       if (e) e.preventDefault();
       document.getElementById('categoryDetailView').classList.add('hidden');
@@ -1956,10 +2691,9 @@
     }
 
     function formatVND(num) {
-      return num.toLocaleString('vi-VN') + ' đ';
+      return Number(num || 0).toLocaleString('vi-VN') + ' đ';
     }
 
-    // Đếm ngược thời gian thực Flash Sale (06:13:26)
     function startFlashSaleCountdown() {
       let totalSeconds = 6 * 3600 + 13 * 60 + 26;
       setInterval(() => {
@@ -1973,7 +2707,6 @@
       }, 1000);
     }
 
-    // Hero Banner Auto Slide
     let currentSlide = 1;
     function switchHeroSlide(slideNum) {
       currentSlide = slideNum;
@@ -2001,7 +2734,6 @@
       }, 5000);
     }
 
-    // Toast Notification
     function showToast(message, type = 'info') {
       const container = document.getElementById('toastContainer');
       const toast = document.createElement('div');
