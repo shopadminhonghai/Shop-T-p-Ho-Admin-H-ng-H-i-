@@ -41,7 +41,6 @@
   </script>
 
   <style>
-    /* Custom Scrollbar & Smooth Transitions */
     html {
       scroll-behavior: smooth;
     }
@@ -53,7 +52,6 @@
       font-family: 'Chakra Petch', sans-serif;
     }
 
-    /* Hide scrollbar for horizontal galleries */
     .no-scrollbar::-webkit-scrollbar {
       display: none;
     }
@@ -62,7 +60,6 @@
       scrollbar-width: none;
     }
 
-    /* Gaming Card Shine Effect */
     .gaming-card {
       transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, border-color 0.2s ease;
     }
@@ -70,13 +67,11 @@
       transform: translateY(-4px);
     }
 
-    /* Custom Banner Text Outline */
     .text-stroke-gaming {
       -webkit-text-stroke: 1.5px #0f172a;
       text-shadow: 0 4px 12px rgba(0, 0, 0, 0.75);
     }
 
-    /* Pulse ring for floating buttons */
     @keyframes pulse-ring {
       0% { transform: scale(0.95); opacity: 0.7; }
       70% { transform: scale(1.25); opacity: 0; }
@@ -92,7 +87,6 @@
       animation: pulse-ring 2s infinite;
     }
 
-    /* Modal Backdrop Animation */
     .modal-enter {
       animation: modalFadeIn 0.22s ease-out forwards;
     }
@@ -108,7 +102,6 @@
   <header class="sticky top-0 z-40 w-full bg-white/95 dark:bg-[#0B0E17]/95 backdrop-blur-md border-b border-slate-200 dark:border-[#1F2937]">
     <div class="max-w-6xl mx-auto px-3 sm:px-6 h-16 flex items-center justify-between gap-2">
 
-      <!-- Logo Góc Trái -->
       <a href="#" onclick="goHome(event)" class="flex items-center gap-2.5 group focus:outline-none">
         <div class="relative w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-blue-600 via-indigo-600 to-amber-500 p-0.5 shadow-lg shadow-blue-600/25 group-hover:scale-105 transition-transform">
           <div class="w-full h-full bg-[#0F172A] rounded-[10px] flex flex-col items-center justify-center relative overflow-hidden">
@@ -127,15 +120,12 @@
         </div>
       </a>
 
-      <!-- Cụm Nút Phải: Sáng/Tối + Nạp Tiền + Nút Hình Người (chỉ hiện khi đã đăng ký/đăng nhập) + Menu -->
       <div class="flex items-center gap-2 sm:gap-2.5">
-        <!-- Nút Chuyển Sáng / Tối -->
         <button id="themeToggleBtn" onclick="toggleTheme()" aria-label="Chuyển giao diện Sáng/Tối"
           class="w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-[#131826] dark:hover:bg-[#1A2133] border border-slate-200 dark:border-[#1F2937] flex items-center justify-center text-slate-700 dark:text-amber-400 transition-colors">
           <i id="themeIcon" class="fa-solid fa-sun text-base"></i>
         </button>
 
-        <!-- Dropdown Nạp Tiền -->
         <div class="relative" id="depositDropdownContainer">
           <button onclick="openDepositModal('bank')"
             class="h-10 px-3 sm:px-4 rounded-xl bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-semibold text-xs sm:text-sm flex items-center gap-1.5 shadow-md shadow-blue-600/25 transition-all">
@@ -144,7 +134,6 @@
           </button>
         </div>
 
-        <!-- NÚT BIỂU TƯỢNG HÌNH NGƯỜI (CHỈ HIỂN THỊ KHI ĐÃ ĐĂNG KÝ / ĐĂNG NHẬP) -->
         <button id="headerProfileIconBtn" onclick="openProfileModal()" title="Xem hồ sơ cá nhân Shop Hồng Hải" aria-label="Hồ sơ cá nhân"
           class="hidden w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white border border-blue-400/40 flex items-center justify-center shadow-md shadow-blue-600/30 transition-all active:scale-95 relative overflow-hidden">
           <img id="headerAvatarImg" src="" alt="Avatar người dùng" class="hidden w-full h-full object-cover">
@@ -152,7 +141,6 @@
           <span class="absolute bottom-0.5 right-0.5 w-2 h-2 rounded-full bg-emerald-400 ring-2 ring-[#0B0E17]"></span>
         </button>
 
-        <!-- Nút Menu 3 gạch -->
         <button onclick="toggleMobileMenu()" aria-label="Mở menu"
           class="w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-[#131826] dark:hover:bg-[#1A2133] border border-slate-200 dark:border-[#1F2937] flex items-center justify-center text-slate-700 dark:text-slate-200 transition-colors">
           <i class="fa-solid fa-bars text-base"></i>
@@ -164,7 +152,6 @@
   <!-- ==================== 2. THANH TRẠNG THÁI TÀI KHOẢN DƯỚI HEADER ==================== -->
   <div class="bg-slate-50 dark:bg-[#0E1320] border-b border-slate-200 dark:border-[#1F2937]">
     <div class="max-w-6xl mx-auto px-3 sm:px-6 py-2.5">
-      <!-- Trạng thái CHƯA ĐĂNG NHẬP (Mặc định ban đầu, không tài khoản mẫu) -->
       <div id="guestBar" class="grid grid-cols-2 gap-2.5">
         <button onclick="openAuthModal('login')"
           class="w-full py-2.5 px-4 rounded-xl bg-white dark:bg-[#131826] hover:bg-slate-100 dark:hover:bg-[#1A2133] border border-slate-200 dark:border-[#1F2937] flex items-center justify-center gap-2 text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 transition-all shadow-sm">
@@ -178,7 +165,6 @@
         </button>
       </div>
 
-      <!-- Trạng thái ĐÃ ĐĂNG NHẬP -->
       <div id="userBar" class="hidden flex-wrap items-center justify-between gap-2 bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] rounded-xl px-3.5 py-2 shadow-sm">
         <button onclick="openProfileModal()" class="flex items-center gap-2.5 text-left group">
           <div id="userBarAvatarBox" class="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center text-white font-bold text-xs shadow overflow-hidden shrink-0 ring-2 ring-blue-500/30 group-hover:scale-105 transition-transform">
@@ -223,7 +209,6 @@
 
       <!-- 3. HERO BANNER LỚN BO GÓC -->
       <section class="relative rounded-2xl overflow-hidden border border-slate-200 dark:border-[#1F2937] shadow-2xl group">
-        <!-- Slider Banner Wrapper -->
         <div id="heroBannerSlide1" class="relative w-full min-h-[190px] sm:min-h-[280px] md:min-h-[320px] bg-gradient-to-r from-[#090d16] via-[#132247] to-[#0b132b] flex flex-col items-center justify-center p-4 sm:p-8 text-center overflow-hidden">
           <div class="absolute inset-0 opacity-25" style="background-image: radial-gradient(#3b82f6 1px, transparent 1px); background-size: 20px 20px;"></div>
           <div class="absolute -left-16 -top-16 w-64 h-64 bg-blue-600/30 rounded-full blur-3xl"></div>
@@ -257,7 +242,6 @@
           </div>
         </div>
 
-        <!-- Slide 2 -->
         <div id="heroBannerSlide2" class="hidden relative w-full min-h-[190px] sm:min-h-[280px] md:min-h-[320px] bg-gradient-to-r from-[#1e1b4b] via-[#31102f] to-[#0f172a] flex flex-col items-center justify-center p-4 sm:p-8 text-center overflow-hidden">
           <div class="absolute inset-0 opacity-20" style="background-image: linear-gradient(45deg, #f59e0b 1px, transparent 1px); background-size: 24px 24px;"></div>
           <div class="relative z-10 max-w-2xl mx-auto flex flex-col items-center">
@@ -265,18 +249,17 @@
               <i class="fa-solid fa-store mr-1"></i> GIAO DỊCH TRỰC TIẾP & ONLINE
             </span>
             <h2 class="font-gaming font-extrabold text-2xl sm:text-4xl md:text-5xl text-amber-400 uppercase tracking-tight">
-              THU MUA & THANH LÝ ACC GIÁ CAO
+              KHO BALO ACC FF TỰ CHỌN
             </h2>
             <p class="mt-2 text-xs sm:text-sm text-slate-200 max-w-lg">
-              Hỗ trợ giải ngân trong 3 phút qua ATM / MoMo. Bảo hành thông tin trọn đời tại <strong>Shop Hồng Hải</strong>.
+              Mô tả chuẩn 100%, nhiều ảnh show acc rõ nét và bảo hành minh bạch tại <strong>Shop Hồng Hải</strong>.
             </p>
-            <button onclick="openDepositModal('bank')" class="mt-4 px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm shadow-lg">
-              Nạp Tiền Bank Ngay
+            <button onclick="scrollToSection('sec-kho-balo')" class="mt-4 px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm shadow-lg">
+              Xem Kho (Balo) Ngay
             </button>
           </div>
         </div>
 
-        <!-- Dots chuyển slide -->
         <div class="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex items-center gap-1.5 z-20">
           <button onclick="switchHeroSlide(1)" id="dot1" class="w-5 h-1.5 rounded-full bg-white transition-all"></button>
           <button onclick="switchHeroSlide(2)" id="dot2" class="w-2 h-1.5 rounded-full bg-white/40 transition-all"></button>
@@ -289,71 +272,70 @@
           DANH MỤC NỔI BẬT
         </h2>
         <div class="grid grid-cols-3 sm:grid-cols-6 gap-2.5 sm:gap-4">
-          <button onclick="scrollToSection('sec-freefire')" class="group flex flex-col items-center text-center p-2 rounded-2xl hover:bg-white/60 dark:hover:bg-[#131826] transition-all">
-            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-700 p-0.5 shadow-lg shadow-emerald-500/20 group-hover:scale-105 transition-transform">
+          <button onclick="scrollToSection('sec-kho-balo')" class="group flex flex-col items-center text-center p-2 rounded-2xl hover:bg-white/60 dark:hover:bg-[#131826] transition-all">
+            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-700 p-0.5 shadow-lg shadow-amber-500/20 group-hover:scale-105 transition-transform">
               <div class="w-full h-full bg-[#111827] rounded-[14px] flex flex-col items-center justify-center">
-                <i class="fa-solid fa-hand-holding-dollar text-emerald-400 text-xl sm:text-2xl"></i>
+                <i class="fa-solid fa-briefcase text-amber-400 text-xl sm:text-2xl"></i>
               </div>
             </div>
             <span class="mt-2 text-[10px] sm:text-xs font-bold uppercase leading-tight text-slate-700 dark:text-slate-200 line-clamp-2">
-              THU ACC THANH LÝ ALL...
+              KHO BALO TÀI KHOẢN
             </span>
           </button>
 
-          <button onclick="scrollToSection('sec-lienquan')" class="group flex flex-col items-center text-center p-2 rounded-2xl hover:bg-white/60 dark:hover:bg-[#131826] transition-all">
-            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-amber-400 to-red-600 p-0.5 shadow-lg shadow-amber-500/20 group-hover:scale-105 transition-transform">
+          <button onclick="openKhoBaloDetail('kho-1-acc-ff-tu-chon')" class="group flex flex-col items-center text-center p-2 rounded-2xl hover:bg-white/60 dark:hover:bg-[#131826] transition-all">
+            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-orange-500 to-red-600 p-0.5 shadow-lg shadow-orange-500/20 group-hover:scale-105 transition-transform">
               <div class="w-full h-full bg-[#111827] rounded-[14px] flex flex-col items-center justify-center relative">
-                <i class="fa-solid fa-shield-halved text-amber-400 text-xl sm:text-2xl"></i>
-                <span class="absolute -bottom-1 px-1.5 bg-red-600 text-[8px] font-extrabold text-white rounded">SALE</span>
+                <i class="fa-solid fa-fire-flame-curved text-orange-400 text-xl sm:text-2xl"></i>
+                <span class="absolute -bottom-1 px-1.5 bg-red-600 text-[8px] font-extrabold text-white rounded">MỤC 1</span>
               </div>
             </div>
             <span class="mt-2 text-[10px] sm:text-xs font-bold uppercase leading-tight text-slate-700 dark:text-slate-200 line-clamp-2">
-              ACC LIÊN QUÂN SALE
+              ACC FF TỰ CHỌN
             </span>
           </button>
 
-          <button onclick="scrollToSection('sec-bloxfruits')" class="group flex flex-col items-center text-center p-2 rounded-2xl hover:bg-white/60 dark:hover:bg-[#131826] transition-all">
+          <button onclick="openKhoBaloDetail('kho-1-acc-ff-tu-chon')" class="group flex flex-col items-center text-center p-2 rounded-2xl hover:bg-white/60 dark:hover:bg-[#131826] transition-all">
             <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-700 p-0.5 shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform">
               <div class="w-full h-full bg-[#111827] rounded-[14px] flex flex-col items-center justify-center">
-                <i class="fa-solid fa-apple-whole text-cyan-400 text-xl sm:text-2xl"></i>
+                <i class="fa-regular fa-images text-cyan-400 text-xl sm:text-2xl"></i>
               </div>
             </div>
             <span class="mt-2 text-[10px] sm:text-xs font-bold uppercase leading-tight text-slate-700 dark:text-slate-200 line-clamp-2">
-              ACC BLOX FRUITS GIÁ RẺ
+              SHOW ACC NHIỀU ẢNH
             </span>
           </button>
 
-          <button onclick="scrollToSection('sec-freefire')" class="group flex flex-col items-center text-center p-2 rounded-2xl hover:bg-white/60 dark:hover:bg-[#131826] transition-all">
-            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-orange-500 to-red-600 p-0.5 shadow-lg shadow-orange-500/20 group-hover:scale-105 transition-transform">
+          <button onclick="openKhoBaloDetail('kho-1-acc-ff-tu-chon')" class="group flex flex-col items-center text-center p-2 rounded-2xl hover:bg-white/60 dark:hover:bg-[#131826] transition-all">
+            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-700 p-0.5 shadow-lg shadow-emerald-500/20 group-hover:scale-105 transition-transform">
               <div class="w-full h-full bg-[#111827] rounded-[14px] flex flex-col items-center justify-center">
-                <i class="fa-solid fa-fire-flame-curved text-orange-400 text-xl sm:text-2xl"></i>
+                <i class="fa-solid fa-shield-halved text-emerald-400 text-xl sm:text-2xl"></i>
               </div>
             </div>
             <span class="mt-2 text-[10px] sm:text-xs font-bold uppercase leading-tight text-slate-700 dark:text-slate-200 line-clamp-2">
-              ACC FREE FIRE GIÁ RẺ
+              BẢO HÀNH CHUẨN 100%
             </span>
           </button>
 
-          <button onclick="scrollToSection('sec-other')" class="group flex flex-col items-center text-center p-2 rounded-2xl hover:bg-white/60 dark:hover:bg-[#131826] transition-all">
+          <button onclick="openDepositModal('bank')" class="group flex flex-col items-center text-center p-2 rounded-2xl hover:bg-white/60 dark:hover:bg-[#131826] transition-all">
             <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-600 p-0.5 shadow-lg shadow-purple-500/20 group-hover:scale-105 transition-transform">
               <div class="w-full h-full bg-[#111827] rounded-[14px] flex flex-col items-center justify-center">
-                <i class="fa-solid fa-chess-knight text-purple-400 text-xl sm:text-2xl"></i>
+                <i class="fa-solid fa-building-columns text-purple-400 text-xl sm:text-2xl"></i>
               </div>
             </div>
             <span class="mt-2 text-[10px] sm:text-xs font-bold uppercase leading-tight text-slate-700 dark:text-slate-200 line-clamp-2">
-              ACC TFT ĐTCL GIÁ RẺ
+              NẠP TIỀN BANK
             </span>
           </button>
 
-          <button onclick="openCategoryFlow('tm-lq-2k')" class="group flex flex-col items-center text-center p-2 rounded-2xl hover:bg-white/60 dark:hover:bg-[#131826] transition-all">
+          <button onclick="openHistoryModal()" class="group flex flex-col items-center text-center p-2 rounded-2xl hover:bg-white/60 dark:hover:bg-[#131826] transition-all">
             <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-yellow-400 to-amber-600 p-0.5 shadow-lg shadow-yellow-500/20 group-hover:scale-105 transition-transform">
               <div class="w-full h-full bg-[#111827] rounded-[14px] flex flex-col items-center justify-center relative">
-                <i class="fa-solid fa-gift text-yellow-400 text-xl sm:text-2xl"></i>
-                <span class="absolute -bottom-1 px-1.5 bg-amber-500 text-[8px] font-extrabold text-slate-950 rounded">2K</span>
+                <i class="fa-solid fa-clock-rotate-left text-yellow-400 text-xl sm:text-2xl"></i>
               </div>
             </div>
             <span class="mt-2 text-[10px] sm:text-xs font-bold uppercase leading-tight text-slate-700 dark:text-slate-200 line-clamp-2">
-              TÚI MÙ LIÊN QUÂN 2K
+              LỊCH SỬ MUA ACC
             </span>
           </button>
         </div>
@@ -381,7 +363,7 @@
                   <i class="fa-solid fa-handshake text-amber-400 text-xl"></i>
                 </div>
                 <p class="text-white font-bold text-xs">Khách qua Shop Hà Nội</p>
-                <p class="text-slate-300 text-[10px] mt-0.5">Chốt Acc FF VIP 3.500.000đ</p>
+                <p class="text-slate-300 text-[10px] mt-0.5">Chốt Acc FF Tự Chọn VIP</p>
               </div>
               <div class="text-[10px] text-amber-400 font-semibold text-center border-t border-white/10 pt-1.5">
                 ShopHongHai.com
@@ -398,11 +380,11 @@
                 <div class="w-12 h-12 rounded-full bg-white/10 backdrop-blur flex items-center justify-center border border-white/20 mb-2">
                   <i class="fa-solid fa-user-check text-cyan-400 text-xl"></i>
                 </div>
-                <p class="text-white font-bold text-xs">Giao dịch trực tiếp</p>
-                <p class="text-slate-300 text-[10px] mt-0.5">Acc Liên Quân Full SSS</p>
+                <p class="text-white font-bold text-xs">Show Acc Đa Góc</p>
+                <p class="text-slate-300 text-[10px] mt-0.5">Lướt xem nhiều ảnh chi tiết</p>
               </div>
               <div class="text-[10px] text-cyan-400 font-semibold text-center border-t border-white/10 pt-1.5">
-                Bảo hành trọn đời
+                Mô tả chuẩn 100%
               </div>
             </div>
           </div>
@@ -416,8 +398,8 @@
                 <div class="w-12 h-12 rounded-full bg-white/10 backdrop-blur flex items-center justify-center border border-white/20 mb-2">
                   <i class="fa-solid fa-gem text-amber-300 text-xl"></i>
                 </div>
-                <p class="text-white font-bold text-xs">Thu mua Acc Blox Fruits</p>
-                <p class="text-slate-300 text-[10px] mt-0.5">Giải ngân bank 2 phút</p>
+                <p class="text-white font-bold text-xs">Mệnh Giá Công Khai</p>
+                <p class="text-slate-300 text-[10px] mt-0.5">Xác nhận mua nhanh gọn</p>
               </div>
               <div class="text-[10px] text-amber-400 font-semibold text-center border-t border-white/10 pt-1.5">
                 Hồng Hải Gaming Store
@@ -432,21 +414,39 @@
               </span>
               <div class="my-auto flex flex-col items-center text-center">
                 <div class="w-12 h-12 rounded-full bg-white/10 backdrop-blur flex items-center justify-center border border-white/20 mb-2">
-                  <i class="fa-solid fa-trophy text-yellow-400 text-xl"></i>
+                  <i class="fa-solid fa-shield-halved text-yellow-400 text-xl"></i>
                 </div>
-                <p class="text-white font-bold text-xs">Trúng Túi Mù 2K</p>
-                <p class="text-slate-300 text-[10px] mt-0.5">Nổ hũ Acc MP40 Mãng Xà</p>
+                <p class="text-white font-bold text-xs">Bảo Hành Minh Bạch</p>
+                <p class="text-slate-300 text-[10px] mt-0.5">Hỗ trợ tận tâm 24/7</p>
               </div>
               <div class="text-[10px] text-emerald-400 font-semibold text-center border-t border-white/10 pt-1.5">
-                100% Có Tài Khoản
+                Cam kết uy tín
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- ==================== 6. CÁC KHO NICK GAME ==================== -->
-      <div id="allCategoriesContainer" class="space-y-8"></div>
+      <!-- ==================== 6. KHO (BALO) TÀI KHOẢN GAME ==================== -->
+      <section id="sec-kho-balo" class="space-y-4">
+        <div class="flex items-center justify-between gap-2">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 text-white flex items-center justify-center shadow">
+              <i class="fa-solid fa-briefcase text-sm"></i>
+            </div>
+            <div>
+              <h2 class="font-extrabold text-sm sm:text-base uppercase tracking-wide text-slate-900 dark:text-white">
+                KHO (BALO) TÀI KHOẢN GAME
+              </h2>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400">
+                Chọn mục trong balo để truy cập kho tài khoản chi tiết
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div id="baloWarehouseGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+      </section>
 
       <!-- ==================== 7. GÓC CỘNG ĐỒNG SHOP HỒNG HẢI ==================== -->
       <section class="rounded-2xl bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] p-4 sm:p-5 shadow-lg">
@@ -461,10 +461,10 @@
           <div class="flex items-center gap-3.5">
             <div class="relative w-24 sm:w-28 h-16 sm:h-20 rounded-xl bg-gradient-to-br from-red-600 via-orange-600 to-amber-500 flex flex-col items-center justify-center p-2 text-center shrink-0 overflow-hidden shadow">
               <span class="font-gaming font-extrabold text-white text-[10px] sm:text-xs leading-tight uppercase drop-shadow">
-                SỰ THẬT TÚI MÙ FREE FIRE
+                HƯỚNG DẪN ACC FF TỰ CHỌN
               </span>
               <span class="mt-1 px-1.5 py-0.5 rounded bg-black/75 text-white text-[9px] font-bold">
-                10 bài viết
+                Bài viết
               </span>
             </div>
             <div>
@@ -475,7 +475,7 @@
                 Kho bài viết game
               </div>
               <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5 line-clamp-1">
-                Hướng dẫn đổi mật khẩu, bảo mật tài khoản & mẹo săn acc VIP
+                Hướng dẫn đổi mật khẩu, bảo mật tài khoản & kiểm tra thông tin acc
               </p>
             </div>
           </div>
@@ -485,30 +485,24 @@
         </div>
       </section>
 
-      <!-- ==================== 8. KHỐI GIỚI THIỆU SEO & 4 NÚT TRUY CẬP NHANH ==================== -->
+      <!-- ==================== 8. KHỐI GIỚI THIỆU SEO & NÚT TRUY CẬP NHANH ==================== -->
       <section class="rounded-2xl bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] p-5 sm:p-6 shadow-lg">
         <div class="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1">
           SHOP HỒNG HẢI • SHOP ACC GAME HÀ NỘI
         </div>
         <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white mb-2.5">
-          Shop acc Free Fire, Liên Quân, Blox Fruits và TFT
+          Kho Balo Acc FF Tự Chọn mô tả chuẩn 100% & bảo hành rõ ràng
         </h2>
         <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-5">
-          Shop Hồng Hải cung cấp kho tài khoản game với mã nick, hình ảnh và giá bán công khai. Khách có thể xem từng sản phẩm, nạp số dư và theo dõi lịch sử mua ngay trong tài khoản thành viên.
+          Shop Hồng Hải cung cấp mục kho (balo) với danh sách Acc FF Tự Chọn công khai mô tả chuẩn 100%, mệnh giá niêm yết, chính sách bảo hành minh bạch và bộ ảnh show acc lướt qua lại trước khi xác nhận mua.
         </p>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
-          <button onclick="openCategoryFlow('ff-tu-chon')" class="py-2.5 px-4 rounded-xl bg-slate-100 dark:bg-[#0B0E17] hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 border border-slate-200 dark:border-[#1F2937] text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 transition-all text-center">
-            Acc Free Fire tự chọn
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+          <button onclick="openKhoBaloDetail('kho-1-acc-ff-tu-chon')" class="py-2.5 px-4 rounded-xl bg-slate-100 dark:bg-[#0B0E17] hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 border border-slate-200 dark:border-[#1F2937] text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 transition-all text-center">
+            Truy cập Mục 1: ACC FF TỰ CHỌN
           </button>
-          <button onclick="openCategoryFlow('lq-trang-tt')" class="py-2.5 px-4 rounded-xl bg-slate-100 dark:bg-[#0B0E17] hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 border border-slate-200 dark:border-[#1F2937] text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 transition-all text-center">
-            Acc Liên Quân
-          </button>
-          <button onclick="openCategoryFlow('bf-tu-chon')" class="py-2.5 px-4 rounded-xl bg-slate-100 dark:bg-[#0B0E17] hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 border border-slate-200 dark:border-[#1F2937] text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 transition-all text-center">
-            Acc Roblox Blox Fruits
-          </button>
-          <button onclick="openCategoryFlow('tft-acc')" class="py-2.5 px-4 rounded-xl bg-slate-100 dark:bg-[#0B0E17] hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 border border-slate-200 dark:border-[#1F2937] text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 transition-all text-center">
-            Acc TFT và Valorant
+          <button onclick="openDepositModal('bank')" class="py-2.5 px-4 rounded-xl bg-slate-100 dark:bg-[#0B0E17] hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 border border-slate-200 dark:border-[#1F2937] text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 transition-all text-center">
+            Nạp tiền số dư tài khoản
           </button>
         </div>
       </section>
@@ -516,10 +510,9 @@
     </div> <!-- END HOME VIEW -->
 
 
-    <!-- ==================== VIEW 2: TRANG CHI TIẾT DANH SÁCH MÃ TÀI KHOẢN ==================== -->
+    <!-- ==================== VIEW 2: TRANG CHI TIẾT DANH SÁCH ACC FF TỰ CHỌN ==================== -->
     <div id="categoryDetailView" class="hidden space-y-6">
 
-      <!-- Breadcrumb & Nút Quay Lại -->
       <div class="flex flex-wrap items-center justify-between gap-3 bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] rounded-2xl p-3.5 sm:p-4">
         <div class="flex items-center gap-3">
           <button onclick="goHome()" class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-[#0B0E17] hover:bg-blue-600 hover:text-white flex items-center justify-center text-slate-700 dark:text-slate-200 transition-colors">
@@ -527,23 +520,23 @@
           </button>
           <div>
             <div class="text-[11px] text-slate-400 flex items-center gap-1.5">
-              <span class="cursor-pointer hover:text-blue-500" onclick="goHome()">Trang chủ</span>
+              <span class="cursor-pointer hover:text-blue-500" onclick="goHome()">Kho (Balo)</span>
               <span>/</span>
-              <span id="detailBreadcrumbGame" class="text-blue-500 font-semibold">Free Fire</span>
+              <span id="detailBreadcrumbGame" class="text-blue-500 font-semibold">MỤC 1 • KHO BALO</span>
             </div>
             <h1 id="detailCategoryTitle" class="text-base sm:text-xl font-extrabold text-slate-900 dark:text-white">
-              Thử Vận May Free Fire 2k
+              ACC FF TỰ CHỌN
             </h1>
           </div>
         </div>
         <div class="text-xs font-semibold px-3 py-1.5 rounded-lg bg-amber-500/15 text-amber-500 border border-amber-500/20">
-          <i class="fa-solid fa-bolt mr-1"></i> Bấm vào ảnh để xem gallery nhiều ảnh
+          <i class="fa-regular fa-images mr-1"></i> Bấm "Xem chi tiết" để lướt ảnh Show Acc
         </div>
       </div>
 
       <!-- Bộ lọc tìm kiếm khoảng giá & Sắp xếp -->
       <div class="bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] rounded-2xl p-4 space-y-3.5 shadow-sm">
-        <div class="text-xs font-bold text-slate-700 dark:text-slate-300">Tìm theo khoảng giá:</div>
+        <div class="text-xs font-bold text-slate-700 dark:text-slate-300">Tìm theo mệnh giá (VNĐ):</div>
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
           <div class="relative">
             <input type="number" id="filterMinPrice" placeholder="Giá từ" class="w-full px-3 py-2 pr-7 rounded-xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] text-xs sm:text-sm focus:outline-none focus:border-blue-500">
@@ -560,64 +553,42 @@
 
         <div class="flex flex-wrap items-center gap-2 pt-1 border-t border-slate-100 dark:border-[#1F2937]">
           <span class="text-xs text-slate-500 dark:text-slate-400 mr-1">Sắp xếp theo:</span>
-          <button onclick="sortAccounts('random')" class="sort-btn px-3 py-1.5 rounded-lg bg-blue-600 text-white text-xs font-semibold">Ngẫu nhiên</button>
-          <button onclick="sortAccounts('asc')" class="sort-btn px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-[#0B0E17] text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-[#1A2133] text-xs font-semibold">Giá từ thấp đến cao</button>
-          <button onclick="sortAccounts('desc')" class="sort-btn px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-[#0B0E17] text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-[#1A2133] text-xs font-semibold">Giá từ cao đến thấp</button>
-          <button onclick="sortAccounts('newest')" class="sort-btn px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-[#0B0E17] text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-[#1A2133] text-xs font-semibold">Mới nhất</button>
+          <button onclick="sortAccounts('default')" class="sort-btn px-3 py-1.5 rounded-lg bg-blue-600 text-white text-xs font-semibold">Mặc định</button>
+          <button onclick="sortAccounts('asc')" class="sort-btn px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-[#0B0E17] text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-[#1A2133] text-xs font-semibold">Mệnh giá thấp -> cao</button>
+          <button onclick="sortAccounts('desc')" class="sort-btn px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-[#0B0E17] text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-[#1A2133] text-xs font-semibold">Mệnh giá cao -> thấp</button>
         </div>
       </div>
 
-      <!-- Lưới Danh Sách Mã Tài Khoản -->
-      <div id="accountItemsGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4"></div>
-
-      <!-- Phân trang -->
-      <div class="flex items-center justify-center gap-3 py-2">
-        <button onclick="changeDetailPage(-1)" class="px-3.5 py-2 rounded-xl bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] text-xs font-bold hover:border-blue-500 transition-colors">
-          <i class="fa-solid fa-arrow-left mr-1"></i> Trước
-        </button>
-        <div class="text-xs text-slate-500 dark:text-slate-400 font-semibold text-center">
-          Trang <span id="detailPageNum" class="text-slate-900 dark:text-white font-bold">1</span> / 44
-          <div class="text-[10px]">1-8 / 654 acc</div>
-        </div>
-        <button onclick="changeDetailPage(1)" class="px-3.5 py-2 rounded-xl bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] text-xs font-bold hover:border-blue-500 transition-colors">
-          Sau <i class="fa-solid fa-arrow-right ml-1"></i>
-        </button>
-      </div>
+      <!-- Lưới Danh Sách Acc FF Tự Chọn -->
+      <div id="accountItemsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4"></div>
 
       <!-- Khối Mô Tả Quy Định & Câu Hỏi Thường Gặp Accordion -->
       <div class="rounded-2xl bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] p-5 space-y-4">
         <div class="text-[11px] font-bold uppercase tracking-wider text-blue-500">
-          SHOP HỒNG HẢI • SHOP ACC GAME
+          SHOP HỒNG HẢI • KHO BALO ACC FF TỰ CHỌN
         </div>
         <h3 id="detailSeoHeading" class="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white">
-          Thử vận may acc Free Fire 2K tại Shop Hồng Hải
+          ACC FF TỰ CHỌN — Mô tả chuẩn 100% & Bảo hành tại Shop Hồng Hải
         </h3>
         <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-          Gói tài khoản tại Shop Hồng Hải được công khai đầy đủ thông tin, bộ sưu tập hình ảnh chi tiết và giá bán rõ ràng trước khi xác nhận thanh toán. Kết quả sau khi mua được lưu trong lịch sử tài khoản cá nhân để bạn mở lại bất cứ lúc nào.
+          Mỗi tài khoản trong mục ACC FF TỰ CHỌN đều có mô tả chuẩn 100%, mệnh giá rõ ràng, chính sách bảo hành minh bạch và bộ ảnh show acc cho phép lướt qua lại trước khi bấm xác nhận mua.
         </p>
 
         <div class="pt-2 border-t border-slate-200 dark:border-[#1F2937]">
           <div class="text-xs font-bold text-slate-800 dark:text-slate-200 mb-2">Câu hỏi thường gặp</div>
           <div class="rounded-xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] overflow-hidden">
             <button onclick="toggleFaqAccordion()" class="w-full px-4 py-3 text-left flex items-center justify-between text-xs sm:text-sm font-bold text-slate-800 dark:text-white">
-              <span>▶ Làm sao xem chi tiết nhiều hình ảnh trước khi mua acc?</span>
+              <span>▶ Làm sao lướt xem nhiều ảnh Show Acc và xác nhận mua?</span>
               <i id="faqChevron" class="fa-solid fa-chevron-down text-xs transition-transform"></i>
             </button>
             <div id="faqContent" class="hidden px-4 pb-3.5 text-xs text-slate-600 dark:text-slate-400 leading-relaxed border-t border-slate-200/60 dark:border-[#1F2937] pt-2.5">
-              Bạn chỉ cần bấm vào hình ảnh hoặc nút <strong>"Chi tiết"</strong> trên thẻ mã tài khoản bất kỳ. Khung xem chi tiết sẽ mở ra bộ sưu tập 4 ảnh sắc nét cho phép bạn lướt qua lại bằng mũi tên, vuốt cảm ứng hoặc bấm vào ảnh thu nhỏ.
+              Bấm nút <strong>"Xem chi tiết"</strong> trên acc bạn chọn để mở khung Show Acc gồm 4 ảnh (lướt trái/phải, bấm mũi tên, phím mũi tên hoặc ảnh thu nhỏ), kiểm tra mô tả chuẩn 100% & bảo hành rồi bấm <strong>"Xác nhận mua"</strong>.
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Mục "Mua tài khoản game khác" -->
-      <div>
-        <div class="flex items-center justify-between mb-3">
-          <h3 class="font-extrabold text-sm sm:text-base text-slate-900 dark:text-white">Mua tài khoản game khác</h3>
-          <button onclick="goHome()" class="text-xs font-semibold text-blue-500 hover:underline">Xem tất cả ></button>
-        </div>
-        <div id="relatedCategoriesGrid" class="grid grid-cols-2 sm:grid-cols-4 gap-3"></div>
-      </div>
+      <div id="relatedCategoriesGrid" class="hidden"></div>
 
     </div> <!-- END CATEGORY DETAIL VIEW -->
 
@@ -628,7 +599,6 @@
     <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-10">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-        <!-- Cột 1: Thương hiệu -->
         <div class="space-y-3">
           <div class="flex items-center gap-2.5">
             <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-amber-500 p-0.5">
@@ -641,38 +611,30 @@
             </span>
           </div>
           <p class="text-xs sm:text-sm leading-relaxed">
-            <strong class="text-slate-800 dark:text-slate-200">ShopHongHai.com</strong>. Bán nick Liên Quân, Free Fire, Roblox<br>
+            <strong class="text-slate-800 dark:text-slate-200">ShopHongHai.com</strong>. Kho (Balo) Acc FF Tự Chọn mô tả chuẩn 100%<br>
             <span class="font-bold text-amber-500">UY TÍN - GIÁ RẺ - CHẤT LƯỢNG</span>
           </p>
         </div>
 
-        <!-- Cột 2: THÔNG TIN CHUNG -->
         <div>
           <h4 class="font-extrabold text-xs sm:text-sm uppercase tracking-wider text-slate-900 dark:text-white mb-3">
             THÔNG TIN CHUNG
           </h4>
           <ul class="space-y-2 text-xs sm:text-sm">
             <li><a href="#" onclick="openArticlesModal(); return false;" class="hover:text-blue-500 transition-colors">Về chúng tôi</a></li>
-            <li><a href="#" onclick="openArticlesModal(); return false;" class="hover:text-blue-500 transition-colors">Chính sách bảo mật và đổi trả</a></li>
+            <li><a href="#" onclick="openArticlesModal(); return false;" class="hover:text-blue-500 transition-colors">Chính sách bảo hành và đổi trả</a></li>
             <li><a href="#" onclick="openArticlesModal(); return false;" class="hover:text-blue-500 transition-colors">Điều khoản sử dụng</a></li>
-            <li><a href="#" onclick="openDepositModal('card'); return false;" class="hover:text-blue-500 transition-colors">Hướng dẫn nạp tiền thẻ cào vào web</a></li>
             <li><a href="#" onclick="openDepositModal('bank'); return false;" class="hover:text-blue-500 transition-colors">Hướng dẫn nạp tiền ATM/chuyển khoản ngân hàng</a></li>
           </ul>
         </div>
 
-        <!-- Cột 3: SẢN PHẨM & HỖ TRỢ KHÁCH HÀNG -->
         <div class="space-y-5">
           <div>
             <h4 class="font-extrabold text-xs sm:text-sm uppercase tracking-wider text-slate-900 dark:text-white mb-3">
-              SẢN PHẨM
+              KHO (BALO)
             </h4>
             <ul class="space-y-2 text-xs sm:text-sm">
-              <li><a href="#" onclick="openCategoryFlow('lq-trang-tt'); return false;" class="hover:text-blue-500 transition-colors">Nick Liên Quân Giá Rẻ</a></li>
-              <li><a href="#" onclick="openCategoryFlow('ff-tu-chon'); return false;" class="hover:text-blue-500 transition-colors">Nick Free fire giá rẻ</a></li>
-              <li><a href="#" onclick="openCategoryFlow('bf-tu-chon'); return false;" class="hover:text-blue-500 transition-colors">Nick Bloxfruits giá rẻ</a></li>
-              <li><a href="#" onclick="openCategoryFlow('val-acc'); return false;" class="hover:text-blue-500 transition-colors">Nick Valorant giá rẻ</a></li>
-              <li><a href="#" onclick="openCategoryFlow('pubg-acc'); return false;" class="hover:text-blue-500 transition-colors">Nick PUBG Mobile giá rẻ</a></li>
-              <li><a href="#" onclick="openCategoryFlow('tft-acc'); return false;" class="hover:text-blue-500 transition-colors">Nick TFT Đấu trường chân lý</a></li>
+              <li><a href="#" onclick="openKhoBaloDetail('kho-1-acc-ff-tu-chon'); return false;" class="hover:text-blue-500 transition-colors">Mục 1: ACC FF TỰ CHỌN</a></li>
             </ul>
           </div>
 
@@ -745,93 +707,91 @@
 
       <div class="text-center">
         <div class="text-[11px] font-extrabold uppercase tracking-widest text-blue-500">
-          THÔNG BÁO TRƯỚC KHI THAM GIA
+          THÔNG BÁO TRƯỚC KHI TRUY CẬP
         </div>
         <h3 id="preJoinTitle" class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white mt-1.5">
-          Túi mù Free Fire 2K
+          ACC FF TỰ CHỌN
         </h3>
         <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
-          Vui lòng đọc kỹ thông tin và tỉ lệ trước khi tiếp tục.
+          Tài khoản mô tả chuẩn 100%, bảo hành minh bạch tại Shop Hồng Hải.
         </p>
       </div>
 
       <div class="mt-5 rounded-2xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] divide-y divide-slate-200 dark:divide-[#1F2937] overflow-hidden">
         <div class="px-4 py-3.5 flex items-center justify-between text-xs sm:text-sm">
           <span class="text-slate-500 dark:text-slate-400">Hình thức đăng nhập</span>
-          <span id="preJoinLoginType" class="font-bold text-slate-900 dark:text-white">Facebook</span>
+          <span id="preJoinLoginType" class="font-bold text-slate-900 dark:text-white">Facebook trắng TT</span>
         </div>
         <div class="px-4 py-3.5 flex items-center justify-between text-xs sm:text-sm">
-          <span class="text-slate-500 dark:text-slate-400">Tỉ lệ vào tài khoản</span>
-          <span id="preJoinRate" class="font-bold text-emerald-500">5%</span>
+          <span class="text-slate-500 dark:text-slate-400">Cam kết mô tả</span>
+          <span id="preJoinRate" class="font-bold text-emerald-500">Chuẩn 100%</span>
         </div>
       </div>
 
       <button onclick="confirmJoinCategory()" class="mt-6 w-full py-3.5 rounded-2xl bg-blue-600 hover:bg-blue-700 active:scale-[0.99] text-white font-bold text-sm shadow-lg shadow-blue-600/30 transition-all">
-        Tôi đã hiểu, tiếp tục
+        Tôi đã hiểu, truy cập kho
       </button>
     </div>
   </div>
 
-  <!-- MODAL 2: XEM CHI TIẾT SẢN PHẨM NHIỀU HÌNH ẢNH LƯỚT QUA LẠI ĐƯỢC -->
+  <!-- MODAL 2: XEM CHI TIẾT ACC FF TỰ CHỌN (NHIỀU ẢNH SHOW ACC + XÁC NHẬN MUA) -->
   <div id="productDetailModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-5">
     <div class="w-full max-w-2xl max-h-[92vh] overflow-y-auto rounded-3xl bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] shadow-2xl modal-enter">
-      <!-- Top Bar -->
       <div class="sticky top-0 z-20 px-5 py-3.5 bg-white/95 dark:bg-[#131826]/95 backdrop-blur border-b border-slate-200 dark:border-[#1F2937] flex items-center justify-between">
         <div class="flex items-center gap-2">
-          <span id="detailModalCodeBadge" class="px-2.5 py-1 rounded-lg bg-blue-600 text-white font-gaming font-bold text-xs">#066892</span>
-          <span class="text-xs font-bold text-slate-500 dark:text-slate-400">Chi tiết tài khoản & Bộ ảnh</span>
+          <span id="detailModalCodeBadge" class="px-2.5 py-1 rounded-lg bg-blue-600 text-white font-gaming font-bold text-xs">#FF101</span>
+          <span class="text-xs font-bold text-slate-500 dark:text-slate-400">Show Acc Chi Tiết • Shop Hồng Hải</span>
         </div>
-        <button onclick="closeModal('productDetailModal')" aria-label="Đóng chi tiết sản phẩm"
+        <button onclick="closeModal('productDetailModal')" aria-label="Đóng chi tiết acc"
           class="w-8 h-8 rounded-full bg-slate-100 dark:bg-[#1F2937] hover:bg-red-500 hover:text-white flex items-center justify-center text-slate-400 transition-colors">
           <i class="fa-solid fa-xmark text-sm"></i>
         </button>
       </div>
 
       <div class="p-4 sm:p-6 space-y-5">
-        <!-- KHUNG SLIDER NHIỀU HÌNH ẢNH LƯỚT QUA LẠI (Hỗ trợ mũi tên, swipe cảm ứng, bàn phím) -->
+        <!-- KHUNG SHOW ACC NHIỀU HÌNH ẢNH LƯỚT QUA LẠI -->
         <div class="space-y-3">
           <div id="galleryViewport"
             class="relative aspect-video w-full rounded-2xl overflow-hidden border border-slate-200 dark:border-[#1F2937] bg-[#090D16] select-none shadow-lg">
 
-            <!-- Track trượt các ảnh -->
-            <div id="galleryTrack" class="flex h-full w-full transition-transform duration-300 ease-out" style="transform: translateX(0%);">
-              <!-- Slide ảnh được render từ JS -->
-            </div>
+            <div id="galleryTrack" class="flex h-full w-full transition-transform duration-300 ease-out" style="transform: translateX(0%);"></div>
 
-            <!-- Nút lướt ảnh Trái -->
             <button onclick="prevGallerySlide()" aria-label="Ảnh trước"
               class="absolute left-2.5 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/65 hover:bg-blue-600 text-white border border-white/20 flex items-center justify-center backdrop-blur-sm transition-all active:scale-90">
               <i class="fa-solid fa-chevron-left text-sm"></i>
             </button>
 
-            <!-- Nút lướt ảnh Phải -->
             <button onclick="nextGallerySlide()" aria-label="Ảnh tiếp theo"
               class="absolute right-2.5 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/65 hover:bg-blue-600 text-white border border-white/20 flex items-center justify-center backdrop-blur-sm transition-all active:scale-90">
               <i class="fa-solid fa-chevron-right text-sm"></i>
             </button>
 
-            <!-- Chỉ số trang ảnh (1/4) -->
             <div class="absolute bottom-3 right-3 z-10 px-2.5 py-1 rounded-full bg-black/75 border border-white/15 text-[11px] font-bold text-white backdrop-blur-sm">
               <i class="fa-regular fa-images mr-1 text-amber-400"></i>
               <span id="galleryCounterText">1 / 4</span>
             </div>
 
-            <!-- Chấm chỉ báo ảnh -->
             <div id="galleryDots" class="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5"></div>
           </div>
 
-          <!-- Dải ảnh thu nhỏ (Thumbnails) bấm để lướt tới ngay -->
+          <!-- Dải ảnh thu nhỏ bấm lướt nhanh -->
           <div id="galleryThumbnails" class="grid grid-cols-4 gap-2"></div>
         </div>
 
-        <!-- Thông tin chi tiết tài khoản -->
+        <!-- MÔ TẢ CHUẨN 100%, MỆNH GIÁ & BẢO HÀNH -->
         <div class="rounded-2xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] p-4 space-y-3">
           <div class="flex flex-wrap items-start justify-between gap-2">
             <div>
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-500 text-[10px] font-extrabold uppercase mb-1">
+                <i class="fa-solid fa-circle-check"></i> Mô tả chuẩn 100%
+              </span>
               <h3 id="detailModalTitle" class="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white"></h3>
-              <p id="detailModalDesc" class="text-xs text-slate-500 dark:text-slate-400 mt-0.5"></p>
+              <p id="detailModalDesc" class="text-xs text-slate-600 dark:text-slate-300 mt-1 leading-relaxed"></p>
             </div>
-            <div id="detailModalPrice" class="text-xl sm:text-2xl font-gaming font-extrabold text-red-500"></div>
+            <div class="text-right">
+              <span class="text-[10px] text-slate-400 block">Mệnh giá</span>
+              <div id="detailModalPrice" class="text-xl sm:text-2xl font-gaming font-extrabold text-red-500"></div>
+            </div>
           </div>
 
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 border-t border-slate-200 dark:border-[#1F2937] text-xs">
@@ -840,35 +800,35 @@
               <strong id="detailModalLogin" class="text-slate-800 dark:text-slate-100"></strong>
             </div>
             <div class="p-2.5 rounded-xl bg-white dark:bg-[#131826] border border-slate-200/70 dark:border-[#1F2937]">
-              <span class="text-[10px] text-slate-400 block">Hạng / Cấp độ</span>
+              <span class="text-[10px] text-slate-400 block">Hạng / Rank</span>
               <strong id="detailModalRank" class="text-amber-500"></strong>
             </div>
             <div class="p-2.5 rounded-xl bg-white dark:bg-[#131826] border border-slate-200/70 dark:border-[#1F2937]">
-              <span class="text-[10px] text-slate-400 block">Trang bị / Skin</span>
+              <span class="text-[10px] text-slate-400 block">Trang bị / Súng</span>
               <strong id="detailModalSkins" class="text-cyan-500"></strong>
             </div>
             <div class="p-2.5 rounded-xl bg-white dark:bg-[#131826] border border-slate-200/70 dark:border-[#1F2937]">
               <span class="text-[10px] text-slate-400 block">Bảo hành</span>
-              <strong class="text-emerald-500">Shop Hồng Hải</strong>
+              <strong id="detailModalWarranty" class="text-emerald-500"></strong>
             </div>
           </div>
         </div>
 
-        <!-- Nút chuyển sang bước Xác nhận thanh toán -->
+        <!-- NÚT ĐÓNG & XÁC NHẬN MUA -->
         <div class="flex items-center justify-end gap-3">
           <button onclick="closeModal('productDetailModal')" class="px-4 py-3 rounded-xl bg-slate-200 dark:bg-[#1F2937] font-bold text-xs sm:text-sm">
             Đóng lại
           </button>
-          <button onclick="proceedFromDetailToPayment()" class="flex-1 sm:flex-initial px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2 transition-all">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span>Mua ngay & Xác nhận thanh toán</span>
+          <button onclick="proceedFromDetailToPayment()" class="flex-1 sm:flex-initial px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm shadow-lg shadow-emerald-600/30 flex items-center justify-center gap-2 transition-all">
+            <i class="fa-solid fa-check-circle"></i>
+            <span>Xác nhận mua</span>
           </button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- MODAL 3: XÁC NHẬN THANH TOÁN CHI TIẾT (PAYMENT CONFIRMATION MODAL) -->
+  <!-- MODAL 3: XÁC NHẬN THANH TOÁN CHI TIẾT -->
   <div id="buyConfirmModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="w-full max-w-md rounded-3xl bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] p-6 shadow-2xl relative modal-enter">
       <button onclick="closeModal('buyConfirmModal')" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 dark:bg-[#1F2937] hover:bg-red-500 hover:text-white flex items-center justify-center text-slate-400 transition-colors">
@@ -884,7 +844,6 @@
         </h3>
       </div>
 
-      <!-- Bảng chi tiết thanh toán -->
       <div class="mt-4 rounded-2xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] p-4 space-y-2.5 text-xs sm:text-sm">
         <div class="flex items-center justify-between">
           <span class="text-slate-500 dark:text-slate-400">Mã tài khoản:</span>
@@ -899,7 +858,7 @@
           <span id="payConfirmLogin" class="font-semibold text-slate-700 dark:text-slate-300"></span>
         </div>
         <div class="pt-2 border-t border-slate-200 dark:border-[#1F2937] flex items-center justify-between">
-          <span class="font-bold text-slate-700 dark:text-slate-200">Giá thanh toán:</span>
+          <span class="font-bold text-slate-700 dark:text-slate-200">Mệnh giá thanh toán:</span>
           <span id="payConfirmPrice" class="text-lg font-gaming font-extrabold text-red-500"></span>
         </div>
         <div class="flex items-center justify-between text-xs">
@@ -912,7 +871,6 @@
         </div>
       </div>
 
-      <!-- Cảnh báo nếu thiếu số dư -->
       <div id="insufficientBalanceBox" class="hidden mt-3 p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-xs text-red-500 flex items-center justify-between gap-2">
         <span><i class="fa-solid fa-triangle-exclamation mr-1"></i> Số dư chưa đủ để thanh toán!</span>
         <button onclick="closeModal('buyConfirmModal'); openDepositModal('bank');" class="px-2.5 py-1 rounded-lg bg-red-600 text-white font-bold shrink-0">
@@ -920,7 +878,6 @@
         </button>
       </div>
 
-      <!-- Tích xác nhận điều khoản -->
       <label class="mt-3.5 flex items-start gap-2.5 text-xs text-slate-600 dark:text-slate-300 cursor-pointer select-none">
         <input type="checkbox" id="agreePaymentTerms" checked class="mt-0.5 w-4 h-4 rounded accent-blue-600">
         <span>Tôi xác nhận thông tin tài khoản và đồng ý với chính sách giao dịch của <strong>Shop Hồng Hải</strong>.</span>
@@ -938,7 +895,7 @@
     </div>
   </div>
 
-  <!-- MODAL 4: ĐĂNG NHẬP & ĐĂNG KÝ TÀI KHOẢN BẢO MẬT HIỆN ĐẠI -->
+  <!-- MODAL 4: ĐĂNG NHẬP & ĐĂNG KÝ TÀI KHOẢN BẢO MẬT -->
   <div id="authModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-4">
     <div class="w-full max-w-lg max-h-[92vh] overflow-y-auto rounded-3xl bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] p-5 sm:p-6 shadow-2xl relative modal-enter">
       <button onclick="closeModal('authModal')" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 dark:bg-[#1F2937] hover:bg-red-500 hover:text-white flex items-center justify-center text-slate-400 transition-colors">
@@ -954,7 +911,6 @@
         </h3>
       </div>
 
-      <!-- Tabs chuyển đổi Đăng nhập / Đăng ký -->
       <div class="grid grid-cols-2 gap-1.5 p-1 rounded-2xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] mb-5">
         <button id="authTabLogin" onclick="switchAuthTab('login')" class="py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-blue-600 text-white shadow transition-all">
           Đăng nhập
@@ -964,7 +920,6 @@
         </button>
       </div>
 
-      <!-- FORM ĐĂNG NHẬP (Không điền sẵn tài khoản mẫu) -->
       <form id="loginForm" onsubmit="handleLoginSubmit(event)" class="space-y-4">
         <div>
           <label class="block text-xs font-bold mb-1.5 text-slate-700 dark:text-slate-300">Email hoặc Tên hiển thị</label>
@@ -988,7 +943,6 @@
           </div>
         </div>
 
-        <!-- Mã xác thực bảo mật 2 bước (2FA mô phỏng) -->
         <div class="rounded-2xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] p-3 flex items-center justify-between gap-3">
           <div class="text-xs">
             <div class="font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
@@ -1006,7 +960,6 @@
         </button>
       </form>
 
-      <!-- FORM ĐĂNG KÝ TÀI KHOẢN MỚI -->
       <form id="registerForm" onsubmit="handleRegisterSubmit(event)" class="hidden space-y-3.5">
         <div>
           <label class="block text-xs font-bold mb-1.5 text-slate-700 dark:text-slate-300">Chọn Avatar hoặc tải ảnh lên</label>
@@ -1077,7 +1030,7 @@
     </div>
   </div>
 
-  <!-- MODAL 5: HỒ SƠ CÁ NHÂN THU GỌN GỌN GÀNG (MỞ KHI BẤM NÚT HÌNH NGƯỜI) -->
+  <!-- MODAL 5: HỒ SƠ CÁ NHÂN THU GỌN -->
   <div id="userProfileModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-4">
     <div class="w-full max-w-sm rounded-2xl bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] p-4 sm:p-5 shadow-2xl relative modal-enter">
       <button onclick="closeModal('userProfileModal')" aria-label="Đóng hồ sơ"
@@ -1085,7 +1038,6 @@
         <i class="fa-solid fa-xmark"></i>
       </button>
 
-      <!-- Avatar cỡ gọn 88px & Tên hiển thị -->
       <div class="flex flex-col items-center text-center pb-3 border-b border-slate-200 dark:border-[#1F2937]">
         <div id="profileModalAvatarBox" class="w-[88px] h-[88px] rounded-full bg-gradient-to-tr from-blue-600 to-cyan-400 text-white flex items-center justify-center text-2xl shadow-lg ring-2 ring-blue-500/30 overflow-hidden mb-2">
           <i class="fa-solid fa-user"></i>
@@ -1096,7 +1048,6 @@
         </span>
       </div>
 
-      <!-- Thông tin chi tiết: Email, Mật khẩu (ẩn/mở), Số dư -->
       <div class="mt-3 space-y-2 text-xs">
         <div class="px-3 py-2 rounded-xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] flex items-center justify-between gap-2">
           <span class="text-slate-500 dark:text-slate-400 shrink-0"><i class="fa-regular fa-envelope mr-1.5 text-blue-500"></i>Email:</span>
@@ -1120,7 +1071,6 @@
         </div>
       </div>
 
-      <!-- Các nút thao tác gọn trong hồ sơ -->
       <div class="mt-3.5 grid grid-cols-2 gap-2">
         <button onclick="closeModal('userProfileModal'); openDepositModal('bank');" class="py-2 px-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-colors">
           <i class="fa-solid fa-building-columns"></i> Nạp tiền Bank
@@ -1137,7 +1087,7 @@
     </div>
   </div>
 
-  <!-- MODAL 6: NẠP TIỀN BANK NÂNG CAO (NHẬP MỆNH GIÁ + DỊCH MỆNH GIÁ + GỢI Ý + QR + NỘI DUNG naptien...) -->
+  <!-- MODAL 6: NẠP TIỀN BANK -->
   <div id="depositModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4">
     <div class="w-full max-w-md max-h-[92vh] overflow-y-auto rounded-3xl bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] p-5 sm:p-6 shadow-2xl relative modal-enter">
       <button onclick="closeModal('depositModal')" aria-label="Đóng nạp tiền"
@@ -1145,7 +1095,6 @@
         <i class="fa-solid fa-xmark"></i>
       </button>
 
-      <!-- BƯỚC 1: NHẬP MỆNH GIÁ & GỢI Ý NẠP BANK -->
       <div id="bankDepositStep1" class="space-y-4">
         <div>
           <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-600/15 text-blue-500 text-[10px] font-extrabold uppercase tracking-wider">
@@ -1159,7 +1108,6 @@
           </p>
         </div>
 
-        <!-- Ô nhập mệnh giá có chia dấu phẩy/chấm nghìn & chữ dịch mệnh giá -->
         <div class="rounded-2xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] p-3.5 space-y-2">
           <div class="flex items-center justify-between text-xs">
             <label for="bankAmountInput" class="font-bold text-slate-700 dark:text-slate-300">Nhập mệnh giá nạp (VNĐ):</label>
@@ -1172,7 +1120,6 @@
             <span class="absolute right-3.5 font-bold text-sm text-slate-400">đ</span>
           </div>
 
-          <!-- Dòng chữ dịch mệnh giá tiếng Việt -->
           <div class="pt-1.5 border-t border-slate-200/80 dark:border-[#1F2937] flex items-start gap-2">
             <span class="px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-500 text-[10px] font-extrabold shrink-0 mt-0.5">
               DỊCH MỆNH GIÁ
@@ -1182,14 +1129,12 @@
             </p>
           </div>
 
-          <!-- Thông báo lỗi nếu ngoài khoảng 20.000đ - 10.000.000đ -->
           <p id="bankAmountValidationMsg" class="hidden text-[11px] font-bold text-red-500 flex items-center gap-1">
             <i class="fa-solid fa-circle-exclamation"></i>
             <span id="bankAmountValidationText"></span>
           </p>
         </div>
 
-        <!-- Gợi ý nạp nhanh -->
         <div>
           <div class="text-[11px] font-bold text-slate-500 dark:text-slate-400 mb-2 flex items-center justify-between">
             <span><i class="fa-solid fa-bolt text-amber-500 mr-1"></i> Gợi ý mệnh giá nạp nhanh:</span>
@@ -1207,7 +1152,6 @@
           </div>
         </div>
 
-        <!-- Nút Lấy mã thanh toán -->
         <button type="button" onclick="generateBankPaymentCode()"
           class="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-extrabold text-sm shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2 transition-all active:scale-[0.99]">
           <i class="fa-solid fa-qrcode"></i>
@@ -1215,7 +1159,6 @@
         </button>
       </div>
 
-      <!-- BƯỚC 2: MENU THÔNG TIN CHUYỂN KHOẢN (QR, STK, CHỦ TK, MỆNH GIÁ, NỘI DUNG naptien...) -->
       <div id="bankDepositStep2" class="hidden space-y-4">
         <div class="flex items-center justify-between">
           <button type="button" onclick="backToBankAmountStep()" class="text-xs font-bold text-blue-500 hover:underline flex items-center gap-1">
@@ -1235,9 +1178,7 @@
           </p>
         </div>
 
-        <!-- Khung mã QR & thông tin chi tiết -->
         <div class="rounded-2xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] p-4 space-y-3.5">
-          <!-- QR Code Visual -->
           <div class="flex flex-col items-center justify-center">
             <div class="p-2.5 rounded-2xl bg-white shadow-md border border-slate-200">
               <div id="bankQrMatrix" class="w-28 h-28 grid grid-cols-7 gap-0.5 p-1 bg-white"></div>
@@ -1247,7 +1188,6 @@
             </span>
           </div>
 
-          <!-- Bảng thông tin STK, Chủ TK, Mệnh giá, Nội dung -->
           <div class="space-y-2 text-xs border-t border-slate-200 dark:border-[#1F2937] pt-3">
             <div class="flex items-center justify-between gap-2">
               <span class="text-slate-500 dark:text-slate-400">Ngân hàng:</span>
@@ -1289,7 +1229,6 @@
           </div>
         </div>
 
-        <!-- Nút Xác nhận tôi đã thanh toán -->
         <button type="button" onclick="confirmUserPaidBank()"
           class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-sm shadow-lg shadow-emerald-600/30 flex items-center justify-center gap-2 transition-all active:scale-[0.99]">
           <i class="fa-solid fa-check-double"></i>
@@ -1365,11 +1304,14 @@
           <button onclick="goHome(); toggleMobileMenu();" class="w-full px-3 py-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-[#1A2133] flex items-center gap-3 text-left">
             <i class="fa-solid fa-house text-blue-500 w-5"></i> Trang chủ
           </button>
+          <button onclick="openKhoBaloDetail('kho-1-acc-ff-tu-chon'); toggleMobileMenu();" class="w-full px-3 py-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-[#1A2133] flex items-center gap-3 text-left">
+            <i class="fa-solid fa-briefcase text-amber-500 w-5"></i> Kho (Balo) ACC FF TỰ CHỌN
+          </button>
           <button onclick="openDepositModal('bank'); toggleMobileMenu();" class="w-full px-3 py-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-[#1A2133] flex items-center gap-3 text-left">
             <i class="fa-solid fa-wallet text-emerald-500 w-5"></i> Nạp tiền tự động
           </button>
           <button onclick="openHistoryModal(); toggleMobileMenu();" class="w-full px-3 py-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-[#1A2133] flex items-center gap-3 text-left">
-            <i class="fa-solid fa-clock-rotate-left text-amber-500 w-5"></i> Lịch sử mua nick
+            <i class="fa-solid fa-clock-rotate-left text-blue-400 w-5"></i> Lịch sử mua nick
           </button>
           <button onclick="openArticlesModal(); toggleMobileMenu();" class="w-full px-3 py-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-[#1A2133] flex items-center gap-3 text-left">
             <i class="fa-solid fa-newspaper text-purple-500 w-5"></i> Kho bài viết hướng dẫn
@@ -1410,319 +1352,64 @@
 
   <!-- ==================== JAVASCRIPT LOGIC HOÀN CHỈNH ==================== -->
   <script>
-    // ==================== DỮ LIỆU KHO NICK GAME ====================
-    const GAME_SECTIONS = [
+    // ==================== DỮ LIỆU KHO (BALO) & ACC FF TỰ CHỌN ====================
+    const KHO_BALO_ITEMS = [
       {
-        id: 'sec-freefire',
-        title: 'KHO NICK FREE FIRE',
-        gameName: 'Free Fire',
-        items: [
+        id: 'kho-1-acc-ff-tu-chon',
+        balonLabel: 'MỤC 1 • KHO BALO',
+        title: 'ACC FF TỰ CHỌN',
+        intro: 'Kho tài khoản Free Fire tự chọn đầy đủ ảnh show acc thực tế, mô tả chuẩn 100% thông tin súng nâng cấp, đồ hiếm, hạng rank, mệnh giá niêm yết rõ ràng và chế độ bảo hành minh bạch tại Shop Hồng Hải.',
+        gradient: 'from-orange-600 via-red-600 to-amber-700',
+        badge: 'MÔ TẢ CHUẨN 100% • BẢO HÀNH RÕ RÀNG',
+        icon: 'fa-fire-flame-curved',
+        accounts: [
           {
-            id: 'ff-tu-chon',
-            name: 'Nick Free Fire tự chọn',
-            subText: 'Số tài khoản: 1.220',
-            priceText: '',
-            basePrice: 150000,
-            loginType: 'Facebook / VK',
-            rate: '100% Đúng Mô Tả',
-            gradient: 'from-amber-600 via-orange-600 to-red-700',
-            badgeTop: 'ACC FREE FIRE TỰ CHỌN',
-            badgeSub: 'FULL SKIN SÚNG NÂNG CẤP',
+            code: '#FF101',
+            name: 'Acc FF Tự Chọn - MP40 Mãng Xà & Scar Titan',
+            price: 450000,
+            loginType: 'Facebook trắng TT',
+            rank: 'Đại Cao Thủ',
+            skins: 'MP40 Mãng Xà Lv.7, Scar Titan, 180+ Trang phục',
+            warranty: 'Bảo hành trọn đời thông tin Shop Hồng Hải',
+            desc: 'Mô tả chuẩn 100%: Acc có MP40 Mãng Xà nâng cấp, Scar Titan, nhiều quần áo hot và thẻ đổi tên. Ảnh show acc đầy đủ 4 góc.',
+            gradient: 'from-amber-500 via-orange-600 to-red-700',
+            icon: 'fa-gun'
+          },
+          {
+            code: '#FF102',
+            name: 'Acc FF Tự Chọn - AK Rồng Xanh & M1014 Huyết Nguyệt',
+            price: 320000,
+            loginType: 'VK / Google',
+            rank: 'Cao Thủ',
+            skins: 'AK Rồng Xanh, M1014 Huyết Nguyệt, 135+ Skin',
+            warranty: 'Bảo hành đổi acc nếu sai mô tả 100%',
+            desc: 'Mô tả chuẩn 100%: Sở hữu AK Rồng Xanh, shotgun Huyết Nguyệt, full nhân vật và pet chiến đấu. Xem đủ 4 ảnh show acc trước khi mua.',
+            gradient: 'from-rose-600 via-red-700 to-slate-900',
             icon: 'fa-crosshairs'
           },
           {
-            id: 'ff-tvm-2k',
-            name: 'Thử Vận May Free Fire 2k',
-            subText: 'Số tài khoản: 654',
-            priceText: '2.000 đ',
-            basePrice: 2000,
+            code: '#FF103',
+            name: 'Acc FF Tự Chọn - Găng Tay Vô Cực & Quần Áo VIP',
+            price: 680000,
+            loginType: 'Facebook trắng TT',
+            rank: 'Thách Đấu',
+            skins: 'Găng Tay Vô Cực, UMP Booyah, 240+ Trang phục',
+            warranty: 'Bảo hành trọn đời chính chủ Shop Hồng Hải',
+            desc: 'Mô tả chuẩn 100%: Acc tầm trung - cao cấp có Găng Tay Vô Cực, đồ hiếm event cũ, đăng nhập sạch sẽ.',
+            gradient: 'from-purple-600 via-indigo-700 to-slate-950',
+            icon: 'fa-crown'
+          },
+          {
+            code: '#FF104',
+            name: 'Acc FF Tự Chọn - Khởi Nghiệp Súng Đẹp Giá Mềm',
+            price: 120000,
             loginType: 'Facebook',
-            rate: '5%',
-            gradient: 'from-yellow-500 via-amber-600 to-red-800',
-            badgeTop: 'THỬ VẬN MAY 2K',
-            badgeSub: 'FREE FIRE SIÊU NỔ HŨ',
-            icon: 'fa-fire'
-          },
-          {
-            id: 'ff-tui-mu-39k',
-            name: 'Túi mù Free Fire 39K',
-            subText: '',
-            priceText: '39.000 đ',
-            basePrice: 39000,
-            loginType: 'Facebook',
-            rate: '100% Có Acc',
-            gradient: 'from-purple-600 via-fuchsia-600 to-indigo-800',
-            badgeTop: 'TÚI MÙ FREE FIRE 39K',
-            badgeSub: 'MỞ RƯƠNG NGẪU NHIÊN',
-            icon: 'fa-box-open'
-          },
-          {
-            id: 'ff-vong-quay',
-            name: 'Vòng Quay Kim Cương',
-            subText: 'Quay thưởng Free Fire',
-            priceText: '',
-            basePrice: 19000,
-            loginType: 'ID Free Fire',
-            rate: 'Trúng tới 9.999 KC',
-            gradient: 'from-cyan-500 via-blue-600 to-indigo-900',
-            badgeTop: 'VÒNG QUAY KIM CƯƠNG',
-            badgeSub: 'RÚT KIM CƯƠNG TRONG 5S',
-            icon: 'fa-gem'
-          }
-        ]
-      },
-      {
-        id: 'sec-lienquan',
-        title: 'KHO NICK LIÊN QUÂN',
-        gameName: 'Liên Quân Mobile',
-        items: [
-          {
-            id: 'lq-trang-tt',
-            name: 'Nick Liên Quân Trắng Thông Tin',
-            subText: 'Số tài khoản: 2.139',
-            priceText: '',
-            basePrice: 120000,
-            loginType: 'Garena Trắng TT',
-            rate: '100% Đổi Được Pass',
-            gradient: 'from-sky-500 via-blue-600 to-indigo-900',
-            badgeTop: 'ACC LIÊN QUÂN',
-            badgeSub: 'TRẮNG THÔNG TIN 100%',
-            icon: 'fa-shield-halved'
-          },
-          {
-            id: 'lq-reg',
-            name: 'NICK LIÊN QUÂN REG',
-            subText: 'Số tài khoản: 2.929',
-            priceText: '',
-            basePrice: 25000,
-            loginType: 'Garena',
-            rate: '100%',
-            gradient: 'from-purple-600 via-violet-700 to-slate-900',
-            badgeTop: 'NICK LIÊN QUÂN',
-            badgeSub: 'ACC REG GIÁ SIÊU RẺ',
+            rank: 'Huyền Thoại',
+            skins: 'MP5 Tia Chớp, M4A1 Lôi Thần, 75+ Skin',
+            warranty: 'Bảo hành 30 ngày & hỗ trợ đổi mật khẩu',
+            desc: 'Mô tả chuẩn 100%: Phù hợp người chơi mới cần acc vào rank ngay, súng đẹp, thông tin rõ ràng.',
+            gradient: 'from-cyan-600 via-blue-700 to-slate-900',
             icon: 'fa-bolt'
-          },
-          {
-            id: 'lq-trai-nghiem',
-            name: 'Nick Trải Nghiệm Skin Tự Chọn',
-            subText: 'Số tài khoản: 7.319',
-            priceText: '',
-            basePrice: 50000,
-            loginType: 'Garena',
-            rate: '100%',
-            gradient: 'from-rose-600 via-red-700 to-slate-900',
-            badgeTop: 'NICK TRẢI NGHIỆM',
-            badgeSub: 'SKIN TỰ CHỌN VIP',
-            icon: 'fa-wand-magic-sparkles'
-          },
-          {
-            id: 'tm-lq-2k',
-            name: 'Random Túi Mù Liên Quân',
-            subText: 'Bấm để xem 5 loại',
-            priceText: '',
-            basePrice: 2000,
-            loginType: 'Garena',
-            rate: '80% Nổ Skin SS',
-            gradient: 'from-amber-500 via-orange-600 to-rose-800',
-            badgeTop: 'RANDOM TÚI MÙ',
-            badgeSub: 'LIÊN QUÂN 2K - 9K - 20K',
-            icon: 'fa-gift'
-          },
-          {
-            id: 'lq-chung-suc',
-            name: 'Chung Sức Liên Quân',
-            subText: 'Rương từ 39K - Vé từ 150K',
-            priceText: '',
-            basePrice: 39000,
-            loginType: 'Garena',
-            rate: '100%',
-            gradient: 'from-emerald-500 via-teal-600 to-cyan-900',
-            badgeTop: 'CHUNG SỨC LIÊN QUÂN',
-            badgeSub: '39K NHẬN SKIN SSS',
-            icon: 'fa-users'
-          }
-        ]
-      },
-      {
-        id: 'sec-bloxfruits',
-        title: 'KHO NICK BLOX FRUITS',
-        gameName: 'Roblox Blox Fruits',
-        items: [
-          {
-            id: 'bf-tu-chon',
-            name: 'Bán Acc Roblox Blox Fruits Tự Chọn',
-            subText: 'Số tài khoản: 306',
-            priceText: '',
-            basePrice: 90000,
-            loginType: 'Roblox Trắng TT',
-            rate: '100%',
-            gradient: 'from-blue-500 via-cyan-600 to-indigo-900',
-            badgeTop: 'ACC BLOX FRUITS',
-            badgeSub: 'MAX LEVEL • TRÁI XỊN',
-            icon: 'fa-apple-whole'
-          },
-          {
-            id: 'bf-steal-egg',
-            name: 'Bán Acc Steal An Egg',
-            subText: 'Số tài khoản: 8',
-            priceText: '',
-            basePrice: 65000,
-            loginType: 'Roblox',
-            rate: '100%',
-            gradient: 'from-amber-500 via-yellow-600 to-orange-800',
-            badgeTop: 'BÁN ACC STEAL AN EGG',
-            badgeSub: 'ROBLOX HOT TREND',
-            icon: 'fa-egg'
-          },
-          {
-            id: 'bf-random-99k',
-            name: 'Random Acc Blox Fruits Quốc Tế 99K',
-            subText: 'Số tài khoản: 0',
-            priceText: '99.000 đ',
-            basePrice: 99000,
-            loginType: 'Roblox Quốc Tế',
-            rate: '100% Có Kitsune/Leopard',
-            gradient: 'from-indigo-600 via-blue-700 to-slate-900',
-            badgeTop: 'TÚI MÙ BLOX FRUITS',
-            badgeSub: 'KITSUNE • LV 2600 MAX',
-            icon: 'fa-dragon'
-          },
-          {
-            id: 'bf-cay-thue',
-            name: 'Cày Thuê Blox Fruit',
-            subText: 'Số tài khoản: ...',
-            priceText: '',
-            basePrice: 30000,
-            loginType: 'Roblox',
-            rate: 'Hoàn thành trong 24h',
-            gradient: 'from-red-600 via-orange-600 to-amber-700',
-            badgeTop: 'NHẬN CÀY THUÊ',
-            badgeSub: 'BLOX FRUIT UY TÍN',
-            icon: 'fa-khanda'
-          }
-        ]
-      },
-      {
-        id: 'sec-other',
-        title: 'KHO NICK ĐẤU TRƯỜNG CHÂN LÝ + PUBG MOBILE + LIÊN MINH + VALORANT + FC ...',
-        gameName: 'Game Tổng Hợp',
-        items: [
-          {
-            id: 'tft-acc',
-            name: 'Nick ĐẤU TRƯỜNG CHÂN LÝ',
-            subText: 'Số tài khoản: 8',
-            priceText: '',
-            basePrice: 180000,
-            loginType: 'Riot Games',
-            rate: '100%',
-            gradient: 'from-amber-500 via-orange-600 to-purple-900',
-            badgeTop: 'ACC ĐẤU TRƯỜNG',
-            badgeSub: 'CHÂN LÝ TFT • LINH THÚ',
-            icon: 'fa-chess-queen'
-          },
-          {
-            id: 'pubg-acc',
-            name: 'Nick PUBG MOBILE',
-            subText: 'Số tài khoản: 120',
-            priceText: '',
-            basePrice: 220000,
-            loginType: 'Twitter / Facebook',
-            rate: '100%',
-            gradient: 'from-yellow-600 via-amber-700 to-stone-900',
-            badgeTop: 'BÁN ACC PUBG MOBILE',
-            badgeSub: 'SÚNG NÂNG CẤP • X-SUIT',
-            icon: 'fa-helmet-un'
-          },
-          {
-            id: 'htth-acc',
-            name: 'Nick Hải Tặc Tí Hon',
-            subText: 'Số tài khoản: 0',
-            priceText: '',
-            basePrice: 50000,
-            loginType: 'Teamobi',
-            rate: '100%',
-            gradient: 'from-cyan-500 via-sky-600 to-blue-900',
-            badgeTop: 'NICK HẢI TẶC TÍ HON',
-            badgeSub: 'ACC VIP FULL ĐỒ',
-            icon: 'fa-skull-crossbones'
-          },
-          {
-            id: 'nro-acc',
-            name: 'Nick Ngọc Rồng Online',
-            subText: 'Số tài khoản: 1.550',
-            priceText: '',
-            basePrice: 40000,
-            loginType: 'Teamobi',
-            rate: '100%',
-            gradient: 'from-orange-500 via-amber-600 to-emerald-800',
-            badgeTop: 'NICK NGỌC RỒNG',
-            badgeSub: 'SƠ SINH • BÔNG TAI',
-            icon: 'fa-star'
-          },
-          {
-            id: 'val-acc',
-            name: 'Nick VALORANT',
-            subText: 'Số tài khoản: 6',
-            priceText: '',
-            basePrice: 350000,
-            loginType: 'Riot Games',
-            rate: '100%',
-            gradient: 'from-rose-600 via-red-700 to-slate-950',
-            badgeTop: 'NICK VALORANT',
-            badgeSub: 'FULL SKIN DAO • VANDAL',
-            icon: 'fa-bullseye'
-          },
-          {
-            id: 'fcm-acc',
-            name: 'Nick FC Mobile',
-            subText: 'Số tài khoản: 181',
-            priceText: '',
-            basePrice: 110000,
-            loginType: 'EA / Facebook',
-            rate: '100%',
-            gradient: 'from-emerald-500 via-green-600 to-slate-900',
-            badgeTop: 'NICK FC MOBILE',
-            badgeSub: 'ĐỘI HÌNH OVR CAO',
-            icon: 'fa-futbol'
-          },
-          {
-            id: 'fo4-acc',
-            name: 'Nick Fifa Online 4 FC Online',
-            subText: 'Số tài khoản: 7',
-            priceText: '',
-            basePrice: 280000,
-            loginType: 'Garena',
-            rate: '100%',
-            gradient: 'from-blue-600 via-indigo-700 to-slate-950',
-            badgeTop: 'NICK FIFA ONLINE 4',
-            badgeSub: 'FC ONLINE GIÁ RẺ',
-            icon: 'fa-trophy'
-          },
-          {
-            id: 'lol-acc',
-            name: 'Nick Liên Minh Huyền Thoại',
-            subText: 'Số tài khoản: 1',
-            priceText: '',
-            basePrice: 190000,
-            loginType: 'Riot Games',
-            rate: '100%',
-            gradient: 'from-cyan-600 via-teal-700 to-slate-950',
-            badgeTop: 'NICK LIÊN MINH',
-            badgeSub: 'HUYỀN THOẠI FULL TƯỚNG',
-            icon: 'fa-shield'
-          },
-          {
-            id: 'all-games',
-            name: 'Acc Tổng Hợp - Danh Sách Game',
-            subText: '17 tựa game • Xem danh sách',
-            priceText: '',
-            basePrice: 50000,
-            loginType: 'Đa nền tảng',
-            rate: '100%',
-            gradient: 'from-slate-700 via-slate-800 to-black',
-            badgeTop: 'DANH SÁCH 17 GAME',
-            badgeSub: 'XEM TẤT CẢ TỰA GAME',
-            icon: 'fa-gamepad'
           }
         ]
       }
@@ -1731,63 +1418,24 @@
     const ARTICLES_DATA = [
       {
         id: 1,
-        tag: 'FREE FIRE • HƯỚNG DẪN',
-        title: 'Mua acc Free Fire tại Shop Hồng Hải – Tặng kim cương free ngẫu nhiên',
-        badge: 'ƯU ĐÃI ĐỘC QUYỀN',
+        tag: 'KHO BALO • ACC FF TỰ CHỌN',
+        title: 'Hướng dẫn kiểm tra mô tả chuẩn 100% & show acc trước khi mua',
+        badge: 'MÔ TẢ CHUẨN 100%',
         color: 'from-blue-600 to-cyan-600',
         content: `
-          <h4 class="text-base font-extrabold text-slate-900 dark:text-white">Mua acc Free Fire tại Shop Hồng Hải – Tặng kim cương free ngẫu nhiên</h4>
-          <p>Khi giao dịch bất kỳ tài khoản Free Fire nào tại <strong>ShopHongHai.com</strong>, hệ thống tự động tặng kèm mã quà tặng kim cương ngẫu nhiên từ 50 KC đến 999 KC.</p>
-          <p><strong>Quy trình nhận thưởng:</strong></p>
-          <ul class="list-disc pl-5 space-y-1">
-            <li>Bước 1: Đăng ký hoặc đăng nhập tài khoản thành viên trên Shop Hồng Hải.</li>
-            <li>Bước 2: Xem chi tiết nhiều ảnh, bấm Mua ngay và Xác nhận thanh toán.</li>
-            <li>Bước 3: Vào mục <em>Lịch sử mua</em> để nhận tài khoản + mật khẩu đi kèm.</li>
-          </ul>
+          <h4 class="text-base font-extrabold text-slate-900 dark:text-white">Hướng dẫn kiểm tra mô tả chuẩn 100% & show acc</h4>
+          <p>Tại <strong>ShopHongHai.com</strong>, bạn vào mục <strong>ACC FF TỰ CHỌN</strong>, bấm <strong>Xem chi tiết</strong> để lướt qua lại toàn bộ ảnh show acc, kiểm tra mệnh giá và chính sách bảo hành trước khi bấm <strong>Xác nhận mua</strong>.</p>
         `
       },
       {
         id: 2,
-        tag: 'FREE FIRE • HƯỚNG DẪN',
-        title: 'Cách lấy lại tài khoản Free Fire bị hack: làm gì ngay?',
-        badge: 'LẤY LẠI ACC BỊ HACK',
-        color: 'from-amber-500 to-red-600',
-        content: `
-          <h4 class="text-base font-extrabold text-slate-900 dark:text-white">Cách lấy lại tài khoản Free Fire bị hack: làm gì ngay?</h4>
-          <p>Nếu phát hiện tài khoản có dấu hiệu đăng nhập lạ, hãy đổi ngay mật khẩu nền tảng liên kết, bật xác thực 2 bước (2FA) và đăng xuất khỏi toàn bộ thiết bị lạ.</p>
-        `
-      },
-      {
-        id: 3,
-        tag: 'FREE FIRE • HƯỚNG DẪN',
-        title: 'Cách đổi mail xác thực Free Fire an toàn',
-        badge: 'ĐỔI MAIL XÁC THỰC',
+        tag: 'BẢO HÀNH • BẢO MẬT',
+        title: 'Chính sách bảo hành tài khoản tại Shop Hồng Hải',
+        badge: 'BẢO HÀNH RÕ RÀNG',
         color: 'from-emerald-500 to-teal-700',
         content: `
-          <h4 class="text-base font-extrabold text-slate-900 dark:text-white">Cách đổi mail xác thực Free Fire an toàn</h4>
-          <p>Sau khi mua acc tại <strong>Shop Hồng Hải</strong>, bạn nên cập nhật thông tin bảo mật chính chủ để đảm bảo an toàn tuyệt đối 100%.</p>
-        `
-      },
-      {
-        id: 4,
-        tag: 'FREE FIRE • HƯỚNG DẪN',
-        title: 'Cách đăng nhập tài khoản Free Fire đúng cách',
-        badge: 'ĐĂNG NHẬP ĐÚNG CÁCH',
-        color: 'from-indigo-600 to-purple-700',
-        content: `
-          <h4 class="text-base font-extrabold text-slate-900 dark:text-white">Cách đăng nhập tài khoản Free Fire đúng cách</h4>
-          <p>Hãy đăng nhập tài khoản lên trình duyệt web trước khi mở ứng dụng game Free Fire để tránh khóa tạm thời do đổi IP.</p>
-        `
-      },
-      {
-        id: 5,
-        tag: 'FREE FIRE • HƯỚNG DẪN',
-        title: 'Sự thật về túi mù Free Fire 49K, 99K, 199K tại Shop Hồng Hải',
-        badge: 'SỰ THẬT TÚI MÙ',
-        color: 'from-red-600 to-orange-600',
-        content: `
-          <h4 class="text-base font-extrabold text-slate-900 dark:text-white">Sự thật về túi mù Free Fire tại Shop Hồng Hải</h4>
-          <p>Tất cả túi mù tại Shop Hồng Hải đều công khai tỉ lệ rõ ràng trước khi tham gia, cam kết 100% nhận được tài khoản đúng mô tả.</p>
+          <h4 class="text-base font-extrabold text-slate-900 dark:text-white">Chính sách bảo hành tài khoản tại Shop Hồng Hải</h4>
+          <p>Mỗi tài khoản đều ghi rõ thời hạn và phạm vi bảo hành ngay trên thẻ sản phẩm và trong khung xem chi tiết để khách hàng yên tâm giao dịch.</p>
         `
       }
     ];
@@ -1799,38 +1447,26 @@
       'preset-4': { icon: 'fa-bolt', bg: 'from-purple-600 to-pink-500', label: 'Tia Chớp' }
     };
 
-    // ==================== STATE ỨNG DỤNG (KHÔNG TÀI KHOẢN MẪU KHI MỞ TRANG) ====================
     let appState = {
       isLoggedIn: false,
-      currentUser: null, // { name, email, password, avatarType, avatarValue, balance, purchasedAccounts }
-      registeredUsers: [], // Chỉ chứa tài khoản do chính người dùng đăng ký vào localStorage
+      currentUser: null,
+      registeredUsers: [],
       pendingCategory: null,
       activeCategory: null,
       currentAccountsList: [],
       selectedAccountForDetail: null,
       selectedAccountToBuy: null,
       galleryIndex: 0,
-      gallerySlidesCount: 4,
-      currentPage: 1
+      gallerySlidesCount: 4
     };
 
-    // ==================== KHỞI TẠO ====================
     window.addEventListener('DOMContentLoaded', () => {
       loadRegisteredUsersFromStorage();
       renderHomeCategories();
       renderArticlesList();
-      startFlashSaleCountdown();
       startHeroAutoSlide();
       initGalleryTouchAndKeyboard();
-      updateAuthUI(); // Mặc định ban đầu: chưa đăng nhập, ẩn nút hình người
-
-      document.addEventListener('click', (e) => {
-        const container = document.getElementById('depositDropdownContainer');
-        const menu = document.getElementById('depositDropdownMenu');
-        if (container && menu && !container.contains(e.target)) {
-          menu.classList.add('hidden');
-        }
-      });
+      updateAuthUI();
     });
 
     function loadRegisteredUsersFromStorage() {
@@ -1850,184 +1486,163 @@
     function saveRegisteredUsersToStorage() {
       try {
         localStorage.setItem('shophonghai_users_v1', JSON.stringify(appState.registeredUsers));
-      } catch (err) {
-        // Bỏ qua lỗi quota nếu có
-      }
+      } catch (err) {}
     }
 
-    // ==================== RENDER TRANG CHỦ ====================
+    // ==================== RENDER KHO (BALO) MỤC 1: ACC FF TỰ CHỌN ====================
     function renderHomeCategories() {
-      const container = document.getElementById('allCategoriesContainer');
-      container.innerHTML = GAME_SECTIONS.map(section => `
-        <section id="${section.id}" class="space-y-3.5">
-          <div class="flex items-center justify-between gap-2">
-            <div class="flex items-center gap-2 min-w-0">
-              <div class="w-7 h-7 rounded-lg bg-slate-200 dark:bg-[#131826] border border-slate-300 dark:border-[#1F2937] flex items-center justify-center text-slate-700 dark:text-slate-300 shrink-0">
-                <i class="fa-solid fa-gamepad text-xs"></i>
-              </div>
-              <h2 class="font-extrabold text-xs sm:text-sm uppercase tracking-wide text-slate-900 dark:text-white truncate">
-                ${section.title}
-              </h2>
+      const container = document.getElementById('baloWarehouseGrid');
+      if (!container) return;
+
+      container.innerHTML = KHO_BALO_ITEMS.map(kho => `
+        <div class="gaming-card rounded-2xl bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] hover:border-blue-500 overflow-hidden shadow-lg flex flex-col justify-between">
+          <div class="relative aspect-[16/9] w-full bg-gradient-to-br ${kho.gradient} p-4 flex flex-col justify-between overflow-hidden">
+            <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 14px 14px;"></div>
+            <div class="relative z-10 flex items-center justify-between gap-2">
+              <span class="px-2.5 py-1 rounded-lg bg-black/65 text-amber-300 text-[10px] sm:text-xs font-extrabold uppercase tracking-wider">
+                <i class="fa-solid fa-briefcase mr-1"></i> ${kho.balonLabel}
+              </span>
+              <span class="px-2.5 py-1 rounded-lg bg-emerald-500/90 text-white text-[10px] font-extrabold">
+                ${kho.accounts.length} Acc sẵn
+              </span>
             </div>
-            <button onclick="openCategoryFlow('${section.items[0].id}')" class="shrink-0 text-xs font-semibold text-slate-500 dark:text-slate-400 hover:text-blue-500 flex items-center gap-1 transition-colors">
-              <span>Xem tất cả</span>
-              <i class="fa-solid fa-chevron-right text-[10px]"></i>
-            </button>
+
+            <div class="relative z-10 my-auto text-center">
+              <div class="w-12 h-12 rounded-2xl bg-black/40 border border-white/20 flex items-center justify-center mx-auto mb-2 text-amber-300 text-xl shadow">
+                <i class="fa-solid ${kho.icon}"></i>
+              </div>
+              <h3 class="font-gaming font-extrabold text-2xl sm:text-3xl text-white uppercase tracking-tight drop-shadow">
+                ${kho.title}
+              </h3>
+              <div class="mt-1.5 inline-block px-2.5 py-0.5 rounded bg-amber-400 text-slate-950 font-extrabold text-[10px] uppercase">
+                ${kho.badge}
+              </div>
+            </div>
           </div>
 
-          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
-            ${section.items.map(item => createProductCardHTML(item)).join('')}
+          <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-4">
+            <div class="space-y-1.5">
+              <div class="text-[11px] font-bold uppercase tracking-wider text-blue-500">
+                Giới thiệu chi tiết
+              </div>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                ${kho.intro}
+              </p>
+            </div>
+
+            <button onclick="openKhoBaloDetail('${kho.id}')"
+              class="w-full py-3 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 active:scale-[0.99] text-white font-extrabold text-xs sm:text-sm shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2 transition-all">
+              <span>Truy cập ACC FF TỰ CHỌN</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
           </div>
-        </section>
+        </div>
       `).join('');
     }
 
-    function createProductCardHTML(item) {
-      return `
-        <div onclick="openCategoryFlow('${item.id}')"
-          class="gaming-card cursor-pointer rounded-2xl bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] hover:border-blue-500/70 overflow-hidden shadow-md flex flex-col justify-between">
-          <div class="relative aspect-[16/10] w-full bg-gradient-to-br ${item.gradient} p-3 flex flex-col justify-between overflow-hidden">
-            <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 12px 12px;"></div>
-            <div class="relative z-10 flex items-center justify-between">
-              <span class="px-1.5 py-0.5 rounded bg-black/60 backdrop-blur-sm text-[8px] sm:text-[9px] font-bold text-amber-400 uppercase tracking-wider">
-                SHOPHONGHAI.COM
-              </span>
-              <div class="w-6 h-6 rounded-full bg-white/15 backdrop-blur-sm flex items-center justify-center text-white text-xs">
-                <i class="fa-solid ${item.icon}"></i>
-              </div>
-            </div>
-            <div class="relative z-10 my-auto text-center">
-              <div class="font-gaming font-extrabold text-sm sm:text-base md:text-lg text-white uppercase leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.85)]">
-                ${item.badgeTop}
-              </div>
-              <div class="mt-1 inline-block px-2 py-0.5 rounded bg-amber-400 text-slate-950 font-extrabold text-[9px] sm:text-[10px] uppercase tracking-tight shadow">
-                ${item.badgeSub}
-              </div>
-            </div>
-          </div>
-          <div class="p-3 flex-1 flex flex-col justify-between">
-            <h3 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white line-clamp-2 leading-snug">
-              ${item.name}
-            </h3>
-            <div class="mt-2 space-y-0.5">
-              ${item.subText ? `<div class="text-[11px] text-slate-500 dark:text-slate-400">${item.subText}</div>` : ''}
-              ${item.priceText ? `<div class="text-xs sm:text-sm font-extrabold text-blue-500">${item.priceText}</div>` : ''}
-            </div>
-          </div>
-        </div>
-      `;
-    }
+    function openKhoBaloDetail(khoId) {
+      const kho = KHO_BALO_ITEMS.find(k => k.id === khoId) || KHO_BALO_ITEMS[0];
+      appState.activeCategory = kho;
+      appState.currentAccountsList = [...kho.accounts];
 
-    // ==================== LUỒNG DANH MỤC & MÃ TÀI KHOẢN ====================
-    function findCategoryById(catId) {
-      for (const sec of GAME_SECTIONS) {
-        const found = sec.items.find(i => i.id === catId);
-        if (found) return { ...found, gameName: sec.gameName };
-      }
-      return { ...GAME_SECTIONS[0].items[1], gameName: 'Free Fire' };
-    }
-
-    function openCategoryFlow(catId) {
-      const cat = findCategoryById(catId);
-      appState.pendingCategory = cat;
-
-      document.getElementById('preJoinTitle').textContent = cat.name;
-      document.getElementById('preJoinLoginType').textContent = cat.loginType || 'Facebook';
-      document.getElementById('preJoinRate').textContent = cat.rate || '100%';
-
-      openModal('preJoinModal');
-    }
-
-    function confirmJoinCategory() {
-      closeModal('preJoinModal');
-      const cat = appState.pendingCategory;
-      if (!cat) return;
-
-      appState.activeCategory = cat;
-      appState.currentPage = 1;
-
-      document.getElementById('detailBreadcrumbGame').textContent = cat.gameName;
-      document.getElementById('detailCategoryTitle').textContent = cat.name;
-      document.getElementById('detailSeoHeading').textContent = `${cat.name} tại Shop Hồng Hải`;
-
-      const sampleCodes = ['066892', '097203', '097089', '096985', '097150', '097177', '097102', '097241'];
-      appState.currentAccountsList = sampleCodes.map((code, idx) => {
-        const price = cat.basePrice === 2000 ? 2000 : cat.basePrice + (idx * 10000);
-        return {
-          code: `#${code}`,
-          name: cat.name,
-          gameName: cat.gameName,
-          loginType: cat.loginType || 'Tài khoản game',
-          price: price,
-          gradient: cat.gradient,
-          badgeTop: cat.badgeTop,
-          badgeSub: cat.badgeSub,
-          icon: cat.icon,
-          rank: idx % 2 === 0 ? 'Cao Thủ / Rank VIP' : 'Huyền Thoại / Max Đồ',
-          skins: `${32 + idx * 14} Vật phẩm & Skin`,
-          desc: `Tài khoản mã ${code} thuộc danh mục ${cat.name} tại Shop Hồng Hải. Hỗ trợ xem đầy đủ 4 ảnh chi tiết trước khi thanh toán.`
-        };
-      });
+      document.getElementById('detailBreadcrumbGame').textContent = kho.balonLabel;
+      document.getElementById('detailCategoryTitle').textContent = kho.title;
+      document.getElementById('detailSeoHeading').textContent = `${kho.title} — Mô tả chuẩn 100% & Bảo hành tại Shop Hồng Hải`;
 
       renderAccountItemsGrid(appState.currentAccountsList);
-      renderRelatedCategories();
 
       document.getElementById('homeView').classList.add('hidden');
       document.getElementById('categoryDetailView').classList.remove('hidden');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    function applyAccountFilter() {
+      const kho = appState.activeCategory || KHO_BALO_ITEMS[0];
+      const minVal = parseInt(document.getElementById('filterMinPrice').value, 10);
+      const maxVal = parseInt(document.getElementById('filterMaxPrice').value, 10);
+
+      const filtered = kho.accounts.filter(acc => {
+        if (!isNaN(minVal) && acc.price < minVal) return false;
+        if (!isNaN(maxVal) && acc.price > maxVal) return false;
+        return true;
+      });
+
+      appState.currentAccountsList = filtered;
+      renderAccountItemsGrid(filtered);
+    }
+
+    function sortAccounts(mode) {
+      const list = [...appState.currentAccountsList];
+      if (mode === 'asc') {
+        list.sort((a, b) => a.price - b.price);
+      } else if (mode === 'desc') {
+        list.sort((a, b) => b.price - a.price);
+      } else {
+        const kho = appState.activeCategory || KHO_BALO_ITEMS[0];
+        appState.currentAccountsList = [...kho.accounts];
+        renderAccountItemsGrid(appState.currentAccountsList);
+        return;
+      }
+      appState.currentAccountsList = list;
+      renderAccountItemsGrid(list);
+    }
+
     function renderAccountItemsGrid(accounts) {
       const grid = document.getElementById('accountItemsGrid');
       if (!accounts.length) {
-        grid.innerHTML = `<div class="col-span-full py-10 text-center text-sm text-slate-400">Không tìm thấy mã tài khoản nào trong khoảng giá này.</div>`;
+        grid.innerHTML = `<div class="col-span-full py-10 text-center text-sm text-slate-400">Không tìm thấy tài khoản nào trong khoảng mệnh giá này.</div>`;
         return;
       }
 
       grid.innerHTML = accounts.map(acc => `
         <div class="gaming-card rounded-2xl bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] hover:border-blue-500 overflow-hidden shadow-md flex flex-col justify-between">
-          <!-- Bấm vào ảnh mở Gallery nhiều hình ảnh lướt qua lại -->
-          <div onclick="openProductDetailModal('${acc.code}')" title="Bấm để xem chi tiết nhiều hình ảnh"
-            class="cursor-pointer relative aspect-[16/10] w-full bg-gradient-to-br ${acc.gradient} p-2.5 flex flex-col justify-between overflow-hidden group">
+          <div onclick="openProductDetailModal('${acc.code}')" title="Bấm để xem nhiều ảnh Show Acc"
+            class="cursor-pointer relative aspect-[16/10] w-full bg-gradient-to-br ${acc.gradient} p-3 flex flex-col justify-between overflow-hidden">
             <div class="relative z-10 flex items-center justify-between">
-              <span class="px-1.5 py-0.5 rounded bg-black/60 text-[8px] font-bold text-amber-400">SHOPHONGHAI</span>
-              <span class="px-1.5 py-0.5 rounded bg-black/65 text-[8px] font-bold text-cyan-300 flex items-center gap-1">
-                <i class="fa-regular fa-images"></i> 4 ảnh
+              <span class="px-2 py-0.5 rounded bg-black/65 text-[9px] font-bold text-amber-300">
+                ${acc.code} • CHUẨN 100%
+              </span>
+              <span class="px-2 py-0.5 rounded bg-black/65 text-[9px] font-bold text-cyan-300">
+                <i class="fa-regular fa-images mr-1"></i>4 ảnh Show
               </span>
             </div>
             <div class="relative z-10 my-auto text-center">
+              <i class="fa-solid ${acc.icon} text-white text-xl mb-1 drop-shadow"></i>
               <div class="font-gaming font-extrabold text-sm sm:text-base text-white uppercase leading-tight drop-shadow">
-                ${acc.badgeTop}
+                ACC FF TỰ CHỌN
               </div>
               <div class="mt-1 inline-block px-2 py-0.5 rounded bg-amber-400 text-slate-950 font-extrabold text-[9px] uppercase">
-                ${acc.badgeSub}
+                ${acc.rank}
               </div>
             </div>
           </div>
 
-          <div class="p-3 flex-1 flex flex-col justify-between space-y-2">
-            <div class="flex items-center justify-between gap-1 flex-wrap">
-              <span class="text-xs font-extrabold text-slate-800 dark:text-slate-200">${acc.code}</span>
-              <span class="px-1.5 py-0.5 rounded bg-red-600 text-white text-[9px] font-extrabold flex items-center gap-1 shadow-sm">
-                <i class="fa-solid fa-fire text-amber-300"></i>
-                <span>FLASH SALE</span>
-                <span class="flash-timer font-mono">06:13:26</span>
-              </span>
+          <div class="p-3 sm:p-3.5 flex-1 flex flex-col justify-between space-y-2.5">
+            <div class="space-y-1.5">
+              <h3 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white line-clamp-2 leading-snug">
+                ${acc.name}
+              </h3>
+              <p class="text-[11px] text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed">
+                ${acc.desc}
+              </p>
+              <div class="text-[10px] font-semibold text-emerald-500 flex items-center gap-1">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span class="truncate">${acc.warranty}</span>
+              </div>
             </div>
 
-            <div class="text-xs font-semibold text-slate-700 dark:text-slate-300 line-clamp-1">
-              ${acc.name}
-            </div>
-
-            <div class="pt-1.5 flex items-center justify-between gap-1.5 border-t border-slate-100 dark:border-[#1F2937]">
-              <span class="text-xs sm:text-sm font-extrabold text-red-500">${formatVND(acc.price)}</span>
-              <div class="flex items-center gap-1">
-                <button onclick="openProductDetailModal('${acc.code}')" title="Xem chi tiết nhiều ảnh"
-                  class="px-2 py-1.5 rounded-lg bg-slate-100 dark:bg-[#0B0E17] hover:bg-slate-200 dark:hover:bg-[#1A2133] text-slate-700 dark:text-slate-200 text-[10px] sm:text-[11px] font-bold border border-slate-200 dark:border-[#1F2937] transition-colors">
-                  Chi tiết
+            <div class="pt-2 border-t border-slate-100 dark:border-[#1F2937] space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] text-slate-400">Mệnh giá:</span>
+                <span class="text-xs sm:text-sm font-extrabold text-red-500">${formatVND(acc.price)}</span>
+              </div>
+              <div class="grid grid-cols-2 gap-1.5">
+                <button onclick="openProductDetailModal('${acc.code}')"
+                  class="py-1.5 px-2 rounded-lg bg-slate-100 dark:bg-[#0B0E17] hover:bg-slate-200 dark:hover:bg-[#1A2133] text-slate-800 dark:text-slate-200 text-[11px] font-bold border border-slate-200 dark:border-[#1F2937] transition-colors">
+                  Xem chi tiết
                 </button>
                 <button onclick="openBuyModal('${acc.code}')"
-                  class="px-2.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-[10px] sm:text-[11px] font-bold transition-colors">
+                  class="py-1.5 px-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-bold transition-colors">
                   Mua ngay
                 </button>
               </div>
@@ -2037,7 +1652,7 @@
       `).join('');
     }
 
-    // ==================== XEM CHI TIẾT SẢN PHẨM NHIỀU HÌNH ẢNH LƯỚT QUA LẠI ====================
+    // ==================== XEM CHI TIẾT SHOW ACC NHIỀU ẢNH LƯỚT QUA LẠI ====================
     function openProductDetailModal(code) {
       const acc = appState.currentAccountsList.find(a => a.code === code);
       if (!acc) return;
@@ -2046,65 +1661,64 @@
       appState.galleryIndex = 0;
 
       document.getElementById('detailModalCodeBadge').textContent = acc.code;
-      document.getElementById('detailModalTitle').textContent = `${acc.name} ${acc.code}`;
+      document.getElementById('detailModalTitle').textContent = acc.name;
       document.getElementById('detailModalDesc').textContent = acc.desc;
       document.getElementById('detailModalPrice').textContent = formatVND(acc.price);
       document.getElementById('detailModalLogin').textContent = acc.loginType;
       document.getElementById('detailModalRank').textContent = acc.rank;
       document.getElementById('detailModalSkins').textContent = acc.skins;
+      document.getElementById('detailModalWarranty').textContent = acc.warranty;
 
-      // Tạo 4 khung ảnh chi tiết phong cách gaming khác nhau để người dùng lướt qua lại
       const slides = [
         {
-          label: 'ẢNH 1/4 • TỔNG QUAN TÀI KHOẢN',
-          sub: `${acc.badgeTop} • MÃ ${acc.code}`,
-          detail: `Hạng: ${acc.rank} • Đăng nhập: ${acc.loginType}`,
+          label: 'SHOW ACC • ẢNH 1/4',
+          sub: `${acc.code} • MÔ TẢ CHUẨN 100%`,
+          detail: acc.name,
           grad: acc.gradient,
           icon: acc.icon
         },
         {
-          label: 'ẢNH 2/4 • KHO TRANG BỊ & SKIN VIP',
+          label: 'SHOW ACC • ẢNH 2/4 (TRANG BỊ)',
           sub: acc.skins,
-          detail: 'Kiểm tra đầy đủ kho đồ trước khi giao dịch tại Shop Hồng Hải',
+          detail: `Hạng hiện tại: ${acc.rank}`,
           grad: 'from-indigo-700 via-purple-700 to-slate-950',
           icon: 'fa-wand-magic-sparkles'
         },
         {
-          label: 'ẢNH 3/4 • THÔNG TIN BẢO MẬT ACC',
-          sub: `Xác thực: ${acc.loginType}`,
-          detail: 'Hỗ trợ đổi thông tin nhanh chóng • Bảo hành chuẩn xác',
+          label: 'SHOW ACC • ẢNH 3/4 (ĐĂNG NHẬP)',
+          sub: `Hình thức: ${acc.loginType}`,
+          detail: 'Thông tin rõ ràng, kiểm tra trực tiếp khi giao dịch',
           grad: 'from-emerald-700 via-teal-800 to-slate-950',
-          icon: 'fa-shield-halved'
+          icon: 'fa-key'
         },
         {
-          label: 'ẢNH 4/4 • CHỨNG NHẬN SHOP HỒNG HẢI',
-          sub: 'SHOPHONGHAI.COM • SINCE 2017',
-          detail: 'Giao tài khoản & mật khẩu tự động ngay sau xác nhận thanh toán',
+          label: 'SHOW ACC • ẢNH 4/4 (BẢO HÀNH)',
+          sub: acc.warranty,
+          detail: 'Shop Hồng Hải — Uy tín hàng đầu',
           grad: 'from-amber-600 via-orange-700 to-red-950',
-          icon: 'fa-crown'
+          icon: 'fa-shield-halved'
         }
       ];
 
       appState.gallerySlidesCount = slides.length;
 
-      const track = document.getElementById('galleryTrack');
-      track.innerHTML = slides.map(s => `
+      document.getElementById('galleryTrack').innerHTML = slides.map(s => `
         <div class="w-full h-full shrink-0 bg-gradient-to-br ${s.grad} p-5 sm:p-8 flex flex-col justify-between relative overflow-hidden">
           <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 16px 16px;"></div>
           <div class="relative z-10 flex items-center justify-between">
-            <span class="px-2.5 py-1 rounded-lg bg-black/65 text-amber-300 text-[10px] sm:text-xs font-extrabold tracking-wide">
+            <span class="px-2.5 py-1 rounded-lg bg-black/65 text-amber-300 text-[10px] sm:text-xs font-extrabold">
               ${s.label}
             </span>
-            <span class="px-2.5 py-1 rounded-lg bg-white/15 text-white text-[10px] font-bold backdrop-blur-sm">
+            <span class="px-2.5 py-1 rounded-lg bg-white/15 text-white text-[10px] font-bold">
               ${acc.code}
             </span>
           </div>
 
           <div class="relative z-10 my-auto text-center py-2">
-            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-black/40 border border-white/20 flex items-center justify-center mx-auto mb-3 text-2xl sm:text-3xl text-amber-300 shadow-lg">
+            <div class="w-14 h-14 rounded-2xl bg-black/40 border border-white/20 flex items-center justify-center mx-auto mb-3 text-2xl text-amber-300 shadow-lg">
               <i class="fa-solid ${s.icon}"></i>
             </div>
-            <div class="font-gaming font-extrabold text-xl sm:text-3xl text-white uppercase tracking-tight drop-shadow">
+            <div class="font-gaming font-extrabold text-lg sm:text-2xl text-white uppercase tracking-tight drop-shadow">
               ${s.sub}
             </div>
             <p class="mt-1.5 text-xs sm:text-sm text-slate-100/90 max-w-md mx-auto">
@@ -2112,19 +1726,18 @@
             </p>
           </div>
 
-          <div class="relative z-10 text-[10px] text-white/75 flex items-center justify-between">
-            <span><i class="fa-solid fa-arrows-left-right mr-1"></i> Lướt trái/phải để xem tiếp</span>
+          <div class="relative z-10 text-[10px] text-white/80 flex items-center justify-between">
+            <span><i class="fa-solid fa-arrows-left-right mr-1"></i> Lướt trái/phải hoặc bấm nút để xem ảnh khác</span>
             <span>Shop Hồng Hải</span>
           </div>
         </div>
       `).join('');
 
-      const thumbs = document.getElementById('galleryThumbnails');
-      thumbs.innerHTML = slides.map((s, i) => `
+      document.getElementById('galleryThumbnails').innerHTML = slides.map((s, i) => `
         <button type="button" onclick="goToGallerySlide(${i})" id="galleryThumb-${i}"
           class="h-14 sm:h-16 rounded-xl bg-gradient-to-br ${s.grad} p-1.5 flex flex-col items-center justify-center text-center border-2 transition-all ${i === 0 ? 'border-blue-500 scale-[1.02]' : 'border-transparent opacity-65 hover:opacity-100'}">
           <i class="fa-solid ${s.icon} text-white text-xs mb-0.5"></i>
-          <span class="text-[9px] font-bold text-white leading-tight">Ảnh ${i + 1}</span>
+          <span class="text-[9px] font-bold text-white leading-tight">Show ${i + 1}</span>
         </button>
       `).join('');
 
@@ -2206,7 +1819,7 @@
       }
     }
 
-    // ==================== XÁC NHẬN THANH TOÁN & LỊCH SỬ MUA ====================
+    // ==================== XÁC NHẬN MUA & LỊCH SỬ MUA ====================
     function openBuyModal(code) {
       const acc = appState.currentAccountsList.find(a => a.code === code);
       if (!acc) return;
@@ -2253,7 +1866,7 @@
 
       if (!appState.isLoggedIn || !appState.currentUser) {
         closeModal('buyConfirmModal');
-        showToast('Vui lòng đăng nhập hoặc đăng ký tài khoản trước khi thanh toán!', 'warning');
+        showToast('Vui lòng đăng nhập hoặc đăng ký tài khoản trước khi xác nhận mua!', 'warning');
         openAuthModal('login');
         return;
       }
@@ -2285,7 +1898,7 @@
       syncCurrentUserToStorage();
       updateAuthUI();
       closeModal('buyConfirmModal');
-      showToast(`Thanh toán thành công ${acc.code}! Tài khoản & mật khẩu đã được cấp.`, 'success');
+      showToast(`Mua thành công ${acc.code}! Tài khoản & mật khẩu đã lưu trong Lịch sử.`, 'success');
       openHistoryModal();
     }
 
@@ -2301,7 +1914,7 @@
           </div>
         `;
       } else {
-        container.innerHTML = list.map((item, idx) => `
+        container.innerHTML = list.map(item => `
           <div class="rounded-2xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] p-3.5 space-y-2">
             <div class="flex items-center justify-between">
               <span class="font-bold text-xs sm:text-sm text-blue-500">${item.name} (${item.code})</span>
@@ -2340,7 +1953,7 @@
       showToast('Đã sao chép Tài khoản & Mật khẩu!', 'success');
     }
 
-    // ==================== ĐĂNG NHẬP, ĐĂNG KÝ BẢO MẬT & HỒ SƠ CÁ NHÂN ====================
+    // ==================== ĐĂNG NHẬP, ĐĂNG KÝ & HỒ SƠ CÁ NHÂN ====================
     let selectedRegAvatarType = 'preset';
     let selectedRegAvatarValue = 'preset-1';
 
@@ -2543,7 +2156,6 @@
         userBar.classList.remove('hidden');
         userBar.classList.add('flex');
 
-        // Hiện nút hình người trên header khi đã đăng ký/đăng nhập
         headerProfileBtn.classList.remove('hidden');
         headerProfileBtn.classList.add('flex');
 
@@ -2569,7 +2181,6 @@
         userBar.classList.add('hidden');
         userBar.classList.remove('flex');
 
-        // Ẩn nút hình người khi chưa đăng nhập
         headerProfileBtn.classList.add('hidden');
         headerProfileBtn.classList.remove('flex');
       }
@@ -2588,7 +2199,6 @@
       document.getElementById('profileEmailText').textContent = u.email;
       document.getElementById('profileBalanceText').textContent = formatVND(u.balance);
 
-      // Mặc định ẩn mật khẩu, bấm icon mắt để ẩn/mở
       const passEl = document.getElementById('profilePasswordText');
       const eyeIcon = document.getElementById('profileRevealEyeIcon');
       passEl.setAttribute('data-masked', 'true');
@@ -2627,7 +2237,7 @@
       }
     }
 
-    // ==================== NẠP TIỀN BANK NÂNG CAO & KIỂM TRA 10 GIÂY ====================
+    // ==================== NẠP TIỀN BANK ====================
     const MIN_BANK_DEPOSIT = 20000;
     const MAX_BANK_DEPOSIT = 10000000;
     let selectedBankAmount = 50000;
@@ -2635,9 +2245,6 @@
     let bankCheckTimerInterval = null;
 
     function openDepositModal() {
-      const dd = document.getElementById('depositDropdownMenu');
-      if (dd) dd.classList.add('hidden');
-
       backToBankAmountStep();
       selectSuggestedBankAmount(50000);
       openModal('depositModal');
@@ -2664,7 +2271,6 @@
       const input = document.getElementById('bankAmountInput');
       const rawAmount = parseRawBankAmount(input.value);
 
-      // Tự động chia dấu chấm phân tách hàng nghìn cho dễ nhìn khi đang nhập
       if (rawAmount > 0) {
         input.value = rawAmount.toLocaleString('vi-VN');
       } else {
@@ -2732,7 +2338,6 @@
         hash = Math.imul(hash, 16777619);
       }
 
-      // Tạo ma trận QR 7x7 sinh động theo nội dung naptien(menhgiadachon) với các ô định vị góc
       const cells = [];
       for (let r = 0; r < 7; r++) {
         for (let c = 0; c < 7; c++) {
@@ -2759,9 +2364,7 @@
       temp.select();
       try {
         document.execCommand('copy');
-      } catch (e) {
-        // Bỏ qua lỗi sao chép trên môi trường hạn chế
-      }
+      } catch (e) {}
       document.body.removeChild(temp);
       showToast(toastMsg || 'Đã sao chép!', 'info');
     }
@@ -2796,13 +2399,11 @@
           bankCheckTimerInterval = null;
           progressBar.style.width = '0%';
           widget.classList.add('hidden');
-
           showToast('Nạp tiền không thành công — Chúng tôi chưa thấy tác động số dư nào từ bạn.', 'error');
         }
       }, 1000);
     }
 
-    // Chuyển đổi số tiền sang chữ tiếng Việt (hỗ trợ đến 10.000.000đ)
     function convertNumberToVietnameseWords(num) {
       const n = Math.floor(Number(num) || 0);
       if (n <= 0) return 'Không đồng';
@@ -2846,15 +2447,9 @@
       const dong = n % 1000;
 
       const parts = [];
-      if (trieu > 0) {
-        parts.push(`${readGroupThree(trieu, false)} triệu`);
-      }
-      if (nghin > 0) {
-        parts.push(`${readGroupThree(nghin, trieu > 0)} nghìn`);
-      }
-      if (dong > 0) {
-        parts.push(`${readGroupThree(dong, trieu > 0 || nghin > 0)}`);
-      }
+      if (trieu > 0) parts.push(`${readGroupThree(trieu, false)} triệu`);
+      if (nghin > 0) parts.push(`${readGroupThree(nghin, trieu > 0)} nghìn`);
+      if (dong > 0) parts.push(`${readGroupThree(dong, trieu > 0 || nghin > 0)}`);
 
       const combined = parts.join(' ').trim();
       const capitalized = combined.charAt(0).toUpperCase() + combined.slice(1);
@@ -2889,6 +2484,13 @@
       closeModal('articlesModal');
       document.getElementById('articleReaderContent').innerHTML = art.content;
       openModal('articleReaderModal');
+    }
+
+    function toggleFaqAccordion() {
+      const content = document.getElementById('faqContent');
+      const chevron = document.getElementById('faqChevron');
+      content.classList.toggle('hidden');
+      chevron.classList.toggle('rotate-180');
     }
 
     function goHome(e) {
@@ -2932,19 +2534,6 @@
 
     function formatVND(num) {
       return Number(num || 0).toLocaleString('vi-VN') + ' đ';
-    }
-
-    function startFlashSaleCountdown() {
-      let totalSeconds = 6 * 3600 + 13 * 60 + 26;
-      setInterval(() => {
-        if (totalSeconds > 0) totalSeconds--;
-        const h = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
-        const m = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
-        const s = String(totalSeconds % 60).padStart(2, '0');
-        document.querySelectorAll('.flash-timer').forEach(el => {
-          el.textContent = `${h}:${m}:${s}`;
-        });
-      }, 1000);
     }
 
     let currentSlide = 1;
