@@ -137,35 +137,11 @@
 
         <!-- Dropdown Nạp Tiền -->
         <div class="relative" id="depositDropdownContainer">
-          <button onclick="toggleDepositDropdown()"
+          <button onclick="openDepositModal('bank')"
             class="h-10 px-3 sm:px-4 rounded-xl bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-semibold text-xs sm:text-sm flex items-center gap-1.5 shadow-md shadow-blue-600/25 transition-all">
-            <i class="fa-solid fa-wallet text-xs"></i>
+            <i class="fa-solid fa-building-columns text-xs"></i>
             <span>Nạp Tiền</span>
-            <i class="fa-solid fa-chevron-down text-[10px] opacity-80"></i>
           </button>
-
-          <!-- Menu Con Nạp Tiền -->
-          <div id="depositDropdownMenu" class="hidden absolute right-0 mt-2 w-60 rounded-2xl bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] shadow-2xl py-2 z-50 modal-enter">
-            <div class="px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-400">Chọn hình thức nạp</div>
-            <button onclick="openDepositModal('card')" class="w-full px-3.5 py-2.5 text-left hover:bg-slate-100 dark:hover:bg-[#1A2133] flex items-center gap-3 transition-colors">
-              <div class="w-8 h-8 rounded-lg bg-amber-500/15 text-amber-500 flex items-center justify-center shrink-0">
-                <i class="fa-solid fa-sim-card"></i>
-              </div>
-              <div>
-                <div class="text-sm font-semibold text-slate-800 dark:text-slate-100">Nạp thẻ cào tự động</div>
-                <div class="text-[11px] text-slate-500 dark:text-slate-400">Viettel, Vina, Mobi, Zing (10s)</div>
-              </div>
-            </button>
-            <button onclick="openDepositModal('bank')" class="w-full px-3.5 py-2.5 text-left hover:bg-slate-100 dark:hover:bg-[#1A2133] flex items-center gap-3 transition-colors">
-              <div class="w-8 h-8 rounded-lg bg-blue-500/15 text-blue-500 flex items-center justify-center shrink-0">
-                <i class="fa-solid fa-building-columns"></i>
-              </div>
-              <div>
-                <div class="text-sm font-semibold text-slate-800 dark:text-slate-100">Nạp ATM / Ví MoMo</div>
-                <div class="text-[11px] text-emerald-500 font-medium">Khuyến mãi +15% tự động</div>
-              </div>
-            </button>
-          </div>
         </div>
 
         <!-- NÚT BIỂU TƯỢNG HÌNH NGƯỜI (CHỈ HIỂN THỊ KHI ĐÃ ĐĂNG KÝ / ĐĂNG NHẬP) -->
@@ -295,7 +271,7 @@
               Hỗ trợ giải ngân trong 3 phút qua ATM / MoMo. Bảo hành thông tin trọn đời tại <strong>Shop Hồng Hải</strong>.
             </p>
             <button onclick="openDepositModal('bank')" class="mt-4 px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm shadow-lg">
-              Nạp Tiền Ngay +15% KM
+              Nạp Tiền Bank Ngay
             </button>
           </div>
         </div>
@@ -1031,70 +1007,60 @@
       </form>
 
       <!-- FORM ĐĂNG KÝ TÀI KHOẢN MỚI -->
-      <form id="registerForm" onsubmit="handleRegisterSubmit(event)" class="hidden space-y-4">
-        <!-- Chọn Avatar preset hoặc tải ảnh tùy chỉnh -->
+      <form id="registerForm" onsubmit="handleRegisterSubmit(event)" class="hidden space-y-3.5">
         <div>
-          <label class="block text-xs font-bold mb-2 text-slate-700 dark:text-slate-300">Ảnh đại diện (Avatar)</label>
-          <div class="flex flex-wrap items-center gap-2.5">
-            <button type="button" onclick="selectPresetAvatar('preset-1')" data-avatar="preset-1"
-              class="avatar-preset-btn w-11 h-11 rounded-full bg-gradient-to-tr from-blue-600 to-cyan-400 text-white flex items-center justify-center text-base ring-2 ring-blue-500 transition-all">
-              <i class="fa-solid fa-user-astronaut"></i>
+          <label class="block text-xs font-bold mb-1.5 text-slate-700 dark:text-slate-300">Chọn Avatar hoặc tải ảnh lên</label>
+          <div class="flex items-center gap-2.5 flex-wrap">
+            <button type="button" onclick="selectPresetAvatar('preset-1')" data-avatar="preset-1" class="avatar-preset-btn w-10 h-10 rounded-full bg-gradient-to-tr from-blue-600 to-cyan-400 text-white flex items-center justify-center ring-2 ring-blue-500 transition-all">
+              <i class="fa-solid fa-user-astronaut text-sm"></i>
             </button>
-            <button type="button" onclick="selectPresetAvatar('preset-2')" data-avatar="preset-2"
-              class="avatar-preset-btn w-11 h-11 rounded-full bg-gradient-to-tr from-amber-500 to-red-600 text-white flex items-center justify-center text-base opacity-70 hover:opacity-100 transition-all">
-              <i class="fa-solid fa-dragon"></i>
+            <button type="button" onclick="selectPresetAvatar('preset-2')" data-avatar="preset-2" class="avatar-preset-btn w-10 h-10 rounded-full bg-gradient-to-tr from-amber-500 to-red-600 text-white flex items-center justify-center opacity-70 hover:opacity-100 transition-all">
+              <i class="fa-solid fa-dragon text-sm"></i>
             </button>
-            <button type="button" onclick="selectPresetAvatar('preset-3')" data-avatar="preset-3"
-              class="avatar-preset-btn w-11 h-11 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-700 text-white flex items-center justify-center text-base opacity-70 hover:opacity-100 transition-all">
-              <i class="fa-solid fa-crown"></i>
+            <button type="button" onclick="selectPresetAvatar('preset-3')" data-avatar="preset-3" class="avatar-preset-btn w-10 h-10 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-700 text-white flex items-center justify-center opacity-70 hover:opacity-100 transition-all">
+              <i class="fa-solid fa-crown text-sm"></i>
             </button>
-            <button type="button" onclick="selectPresetAvatar('preset-4')" data-avatar="preset-4"
-              class="avatar-preset-btn w-11 h-11 rounded-full bg-gradient-to-tr from-purple-600 to-pink-500 text-white flex items-center justify-center text-base opacity-70 hover:opacity-100 transition-all">
-              <i class="fa-solid fa-bolt"></i>
+            <button type="button" onclick="selectPresetAvatar('preset-4')" data-avatar="preset-4" class="avatar-preset-btn w-10 h-10 rounded-full bg-gradient-to-tr from-purple-600 to-pink-500 text-white flex items-center justify-center opacity-70 hover:opacity-100 transition-all">
+              <i class="fa-solid fa-bolt text-sm"></i>
             </button>
 
             <label class="cursor-pointer px-3 py-2 rounded-xl bg-slate-100 dark:bg-[#0B0E17] hover:bg-slate-200 dark:hover:bg-[#1A2133] border border-slate-200 dark:border-[#1F2937] text-xs font-semibold flex items-center gap-1.5 transition-colors">
               <i class="fa-solid fa-upload text-blue-500"></i>
-              <span>Tải ảnh lên</span>
-              <input type="file" id="customAvatarInput" accept="image/*" onchange="handleCustomAvatarUpload(event)" class="hidden">
+              <span>Tải ảnh</span>
+              <input type="file" id="regAvatarFile" accept="image/*" onchange="handleCustomAvatarUpload(event)" class="hidden">
             </label>
           </div>
-          <p id="customAvatarFileName" class="text-[11px] text-emerald-500 mt-1 hidden"></p>
+          <p id="customAvatarFileName" class="hidden text-[11px] text-emerald-500 mt-1"></p>
         </div>
 
         <div>
-          <label class="block text-xs font-bold mb-1 text-slate-700 dark:text-slate-300">Tên hiển thị / Họ tên</label>
-          <input type="text" id="regNameInput" required placeholder="VD: Nguyễn Minh Khoa"
+          <label class="block text-xs font-bold mb-1 text-slate-700 dark:text-slate-300">Tên hiển thị</label>
+          <input type="text" id="regNameInput" required placeholder="VD: Hồng Hải"
             class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] text-xs sm:text-sm focus:outline-none focus:border-blue-500">
         </div>
 
         <div>
-          <label class="block text-xs font-bold mb-1 text-slate-700 dark:text-slate-300">Email liên kết bảo mật</label>
-          <input type="email" id="regEmailInput" required placeholder="tenban@gmail.com"
+          <label class="block text-xs font-bold mb-1 text-slate-700 dark:text-slate-300">Email</label>
+          <input type="email" id="regEmailInput" required placeholder="VD: honghai@gmail.com"
             class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] text-xs sm:text-sm focus:outline-none focus:border-blue-500">
         </div>
 
-        <!-- Mật khẩu + Thước đo độ mạnh mật khẩu -->
         <div>
-          <label class="block text-xs font-bold mb-1 text-slate-700 dark:text-slate-300">Mật khẩu</label>
+          <label class="block text-xs font-bold mb-1 text-slate-700 dark:text-slate-300">Mật khẩu bảo mật</label>
           <div class="relative">
-            <input type="password" id="regPasswordInput" oninput="evaluatePasswordStrength()" required placeholder="Tối thiểu 6 ký tự (nên có chữ hoa, số, ký tự đặc biệt)"
-              class="w-full px-3.5 pr-10 py-2.5 rounded-xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] text-xs sm:text-sm focus:outline-none focus:border-blue-500">
+            <input type="password" id="regPasswordInput" oninput="evaluatePasswordStrength()" required placeholder="Tối thiểu 6 ký tự..."
+              class="w-full pl-3.5 pr-10 py-2.5 rounded-xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] text-xs sm:text-sm focus:outline-none focus:border-blue-500">
             <button type="button" onclick="togglePasswordVisibility('regPasswordInput', 'regEyeIcon')" aria-label="Ẩn/hiện mật khẩu"
               class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-blue-500">
               <i id="regEyeIcon" class="fa-regular fa-eye"></i>
             </button>
           </div>
-
-          <!-- Thanh Password Strength Meter -->
-          <div class="mt-2 space-y-1">
-            <div class="w-full h-1.5 rounded-full bg-slate-200 dark:bg-[#0B0E17] overflow-hidden">
-              <div id="passwordStrengthBar" class="h-full w-0 bg-red-500 transition-all duration-300"></div>
-            </div>
-            <div class="flex justify-between text-[11px]">
-              <span class="text-slate-400">Độ mạnh mật khẩu:</span>
-              <span id="passwordStrengthLabel" class="font-bold text-slate-400">Chưa nhập</span>
-            </div>
+          <div class="mt-1.5 flex items-center justify-between text-[11px]">
+            <span class="text-slate-400">Độ mạnh mật khẩu:</span>
+            <span id="passwordStrengthLabel" class="font-bold text-slate-400">Chưa nhập</span>
+          </div>
+          <div class="w-full h-1.5 rounded-full bg-slate-200 dark:bg-[#0B0E17] overflow-hidden mt-1">
+            <div id="passwordStrengthBar" class="h-full w-0 bg-emerald-500 transition-all duration-300"></div>
           </div>
         </div>
 
@@ -1104,151 +1070,231 @@
             class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] text-xs sm:text-sm focus:outline-none focus:border-blue-500">
         </div>
 
-        <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-sm shadow-lg shadow-blue-600/30 transition-all">
-          Tạo tài khoản & Kích hoạt hồ sơ
+        <button type="submit" class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-lg shadow-emerald-600/30 transition-all">
+          Tạo tài khoản ngay
         </button>
       </form>
     </div>
   </div>
 
-  <!-- MODAL 5: HỒ SƠ CÁ NHÂN (MỞ KHI BẤM NÚT HÌNH NGƯỜI) -->
-  <div id="userProfileModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
-    <div class="w-full max-w-md rounded-3xl bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] p-6 shadow-2xl relative modal-enter">
-      <button onclick="closeModal('userProfileModal')" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 dark:bg-[#1F2937] hover:bg-red-500 hover:text-white flex items-center justify-center text-slate-400 transition-colors">
-        <i class="fa-solid fa-xmark text-sm"></i>
+  <!-- MODAL 5: HỒ SƠ CÁ NHÂN THU GỌN GỌN GÀNG (MỞ KHI BẤM NÚT HÌNH NGƯỜI) -->
+  <div id="userProfileModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-4">
+    <div class="w-full max-w-sm rounded-2xl bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] p-4 sm:p-5 shadow-2xl relative modal-enter">
+      <button onclick="closeModal('userProfileModal')" aria-label="Đóng hồ sơ"
+        class="absolute top-3 right-3 w-7 h-7 rounded-full bg-slate-100 dark:bg-[#1F2937] hover:bg-red-500 hover:text-white flex items-center justify-center text-slate-400 text-xs transition-colors">
+        <i class="fa-solid fa-xmark"></i>
       </button>
 
-      <!-- Avatar & Tên hiển thị -->
-      <div class="flex flex-col items-center text-center pb-4 border-b border-slate-200 dark:border-[#1F2937]">
-        <div id="profileModalAvatarBox" class="w-20 h-20 rounded-full bg-gradient-to-tr from-blue-600 to-cyan-400 text-white flex items-center justify-center text-3xl shadow-xl ring-4 ring-blue-500/25 overflow-hidden mb-3">
+      <!-- Avatar cỡ gọn 88px & Tên hiển thị -->
+      <div class="flex flex-col items-center text-center pb-3 border-b border-slate-200 dark:border-[#1F2937]">
+        <div id="profileModalAvatarBox" class="w-[88px] h-[88px] rounded-full bg-gradient-to-tr from-blue-600 to-cyan-400 text-white flex items-center justify-center text-2xl shadow-lg ring-2 ring-blue-500/30 overflow-hidden mb-2">
           <i class="fa-solid fa-user"></i>
         </div>
-        <h3 id="profileNameText" class="text-lg font-extrabold text-slate-900 dark:text-white"></h3>
-        <span class="mt-1 px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-500 text-[11px] font-bold">
+        <h3 id="profileNameText" class="text-base font-extrabold text-slate-900 dark:text-white leading-tight"></h3>
+        <span class="mt-1 px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-500 text-[10px] font-bold">
           <i class="fa-solid fa-shield-check mr-1"></i> Thành viên Shop Hồng Hải
         </span>
       </div>
 
-      <!-- Thông tin chi tiết: Email, Pass (ẩn/mở), Số dư -->
-      <div class="mt-4 space-y-2.5 text-xs sm:text-sm">
-        <div class="p-3 rounded-xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] flex items-center justify-between gap-2">
-          <span class="text-slate-500 dark:text-slate-400"><i class="fa-regular fa-envelope mr-1.5 text-blue-500"></i>Email:</span>
+      <!-- Thông tin chi tiết: Email, Mật khẩu (ẩn/mở), Số dư -->
+      <div class="mt-3 space-y-2 text-xs">
+        <div class="px-3 py-2 rounded-xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] flex items-center justify-between gap-2">
+          <span class="text-slate-500 dark:text-slate-400 shrink-0"><i class="fa-regular fa-envelope mr-1.5 text-blue-500"></i>Email:</span>
           <span id="profileEmailText" class="font-bold text-slate-800 dark:text-slate-100 truncate"></span>
         </div>
 
-        <div class="p-3 rounded-xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] flex items-center justify-between gap-2">
-          <span class="text-slate-500 dark:text-slate-400"><i class="fa-solid fa-key mr-1.5 text-amber-500"></i>Mật khẩu:</span>
-          <div class="flex items-center gap-2">
-            <span id="profilePasswordText" data-masked="true" class="font-mono font-bold text-slate-800 dark:text-slate-100">••••••••</span>
+        <div class="px-3 py-2 rounded-xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] flex items-center justify-between gap-2">
+          <span class="text-slate-500 dark:text-slate-400 shrink-0"><i class="fa-solid fa-key mr-1.5 text-amber-500"></i>Mật khẩu:</span>
+          <div class="flex items-center gap-1.5 min-w-0">
+            <span id="profilePasswordText" data-masked="true" class="font-mono font-bold text-slate-800 dark:text-slate-100 truncate">••••••••</span>
             <button type="button" onclick="toggleProfilePasswordReveal()" aria-label="Ẩn hoặc hiện mật khẩu"
-              class="w-7 h-7 rounded-lg bg-slate-200 dark:bg-[#1A2133] hover:bg-blue-600 hover:text-white flex items-center justify-center text-xs transition-colors">
+              class="w-6 h-6 rounded-md bg-slate-200 dark:bg-[#1A2133] hover:bg-blue-600 hover:text-white flex items-center justify-center text-[11px] shrink-0 transition-colors">
               <i id="profileRevealEyeIcon" class="fa-regular fa-eye"></i>
             </button>
           </div>
         </div>
 
-        <div class="p-3.5 rounded-xl bg-gradient-to-r from-amber-500/10 to-blue-500/10 border border-amber-500/30 flex items-center justify-between">
+        <div class="px-3 py-2.5 rounded-xl bg-gradient-to-r from-amber-500/10 to-blue-500/10 border border-amber-500/30 flex items-center justify-between">
           <span class="text-slate-600 dark:text-slate-300 font-semibold"><i class="fa-solid fa-coins mr-1.5 text-amber-500"></i>Số dư hiện tại:</span>
-          <span id="profileBalanceText" class="text-base sm:text-lg font-gaming font-extrabold text-amber-500">0 đ</span>
+          <span id="profileBalanceText" class="text-sm font-gaming font-extrabold text-amber-500">0 đ</span>
         </div>
       </div>
 
-      <!-- Các nút thao tác trong hồ sơ -->
-      <div class="mt-5 grid grid-cols-2 gap-2.5">
-        <button onclick="closeModal('userProfileModal'); openDepositModal('bank');" class="py-2.5 px-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-colors">
-          <i class="fa-solid fa-plus-circle"></i> Nạp tiền nhanh
+      <!-- Các nút thao tác gọn trong hồ sơ -->
+      <div class="mt-3.5 grid grid-cols-2 gap-2">
+        <button onclick="closeModal('userProfileModal'); openDepositModal('bank');" class="py-2 px-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-colors">
+          <i class="fa-solid fa-building-columns"></i> Nạp tiền Bank
         </button>
-        <button onclick="closeModal('userProfileModal'); openHistoryModal();" class="py-2.5 px-3 rounded-xl bg-slate-200 dark:bg-[#1F2937] hover:bg-slate-300 dark:hover:bg-[#273147] text-slate-800 dark:text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-colors">
+        <button onclick="closeModal('userProfileModal'); openHistoryModal();" class="py-2 px-2.5 rounded-xl bg-slate-200 dark:bg-[#1F2937] hover:bg-slate-300 dark:hover:bg-[#273147] text-slate-800 dark:text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-colors">
           <i class="fa-solid fa-bag-shopping"></i> Lịch sử mua
         </button>
       </div>
 
-      <button onclick="logoutUser()" class="mt-3 w-full py-2.5 rounded-xl bg-red-600/15 hover:bg-red-600 text-red-500 hover:text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all">
+      <button onclick="logoutUser()" class="mt-2 w-full py-2 rounded-xl bg-red-600/15 hover:bg-red-600 text-red-500 hover:text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-all">
         <i class="fa-solid fa-right-from-bracket"></i>
-        <span>Đăng xuất khỏi tài khoản</span>
+        <span>Đăng xuất</span>
       </button>
     </div>
   </div>
 
-  <!-- MODAL 6: NẠP TIỀN TỰ ĐỘNG -->
-  <div id="depositModal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="w-full max-w-md rounded-3xl bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] p-6 shadow-2xl relative modal-enter">
-      <button onclick="closeModal('depositModal')" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 dark:bg-[#1F2937] flex items-center justify-center text-slate-400">
-        <i class="fa-solid fa-xmark text-sm"></i>
+  <!-- MODAL 6: NẠP TIỀN BANK NÂNG CAO (NHẬP MỆNH GIÁ + DỊCH MỆNH GIÁ + GỢI Ý + QR + NỘI DUNG naptien...) -->
+  <div id="depositModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4">
+    <div class="w-full max-w-md max-h-[92vh] overflow-y-auto rounded-3xl bg-white dark:bg-[#131826] border border-slate-200 dark:border-[#1F2937] p-5 sm:p-6 shadow-2xl relative modal-enter">
+      <button onclick="closeModal('depositModal')" aria-label="Đóng nạp tiền"
+        class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 dark:bg-[#1F2937] hover:bg-red-500 hover:text-white flex items-center justify-center text-slate-400 text-xs transition-colors">
+        <i class="fa-solid fa-xmark"></i>
       </button>
 
-      <h3 class="text-lg font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
-        <i class="fa-solid fa-wallet text-blue-500"></i> Nạp Tiền Vào Tài Khoản
-      </h3>
+      <!-- BƯỚC 1: NHẬP MỆNH GIÁ & GỢI Ý NẠP BANK -->
+      <div id="bankDepositStep1" class="space-y-4">
+        <div>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-600/15 text-blue-500 text-[10px] font-extrabold uppercase tracking-wider">
+            <i class="fa-solid fa-building-columns"></i> Nạp Tiền Bank Tự Động
+          </span>
+          <h3 class="text-lg font-extrabold text-slate-900 dark:text-white mt-1.5">
+            Nạp Tiền Ngân Hàng Shop Hồng Hải
+          </h3>
+          <p class="text-[11px] text-slate-500 dark:text-slate-400">
+            Mệnh giá từ <strong class="text-slate-800 dark:text-slate-200">20.000đ</strong> đến <strong class="text-slate-800 dark:text-slate-200">10.000.000đ</strong>.
+          </p>
+        </div>
 
-      <div class="grid grid-cols-2 gap-2 p-1 rounded-xl bg-slate-100 dark:bg-[#0B0E17] mt-4">
-        <button id="tabCardBtn" onclick="switchDepositTab('card')" class="py-2 rounded-lg text-xs font-bold bg-blue-600 text-white transition-all">
-          Nạp Thẻ Cào
-        </button>
-        <button id="tabBankBtn" onclick="switchDepositTab('bank')" class="py-2 rounded-lg text-xs font-bold text-slate-600 dark:text-slate-400 transition-all">
-          ATM / Ví MoMo (+15%)
+        <!-- Ô nhập mệnh giá có chia dấu phẩy/chấm nghìn & chữ dịch mệnh giá -->
+        <div class="rounded-2xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] p-3.5 space-y-2">
+          <div class="flex items-center justify-between text-xs">
+            <label for="bankAmountInput" class="font-bold text-slate-700 dark:text-slate-300">Nhập mệnh giá nạp (VNĐ):</label>
+            <span class="text-[10px] text-slate-400">20.000đ – 10.000.000đ</span>
+          </div>
+
+          <div class="relative flex items-center">
+            <input type="text" inputmode="numeric" id="bankAmountInput" oninput="handleBankAmountInput()" placeholder="VD: 50.000"
+              class="w-full pl-3.5 pr-10 py-2.5 rounded-xl bg-white dark:bg-[#131826] border border-slate-300 dark:border-[#242E47] font-gaming font-extrabold text-lg sm:text-xl text-blue-600 dark:text-cyan-400 focus:outline-none focus:border-blue-500">
+            <span class="absolute right-3.5 font-bold text-sm text-slate-400">đ</span>
+          </div>
+
+          <!-- Dòng chữ dịch mệnh giá tiếng Việt -->
+          <div class="pt-1.5 border-t border-slate-200/80 dark:border-[#1F2937] flex items-start gap-2">
+            <span class="px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-500 text-[10px] font-extrabold shrink-0 mt-0.5">
+              DỊCH MỆNH GIÁ
+            </span>
+            <p id="bankAmountTranslatedText" class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 leading-snug">
+              Nhập mệnh giá từ 20.000đ đến 10.000.000đ để xem cách đọc tiền
+            </p>
+          </div>
+
+          <!-- Thông báo lỗi nếu ngoài khoảng 20.000đ - 10.000.000đ -->
+          <p id="bankAmountValidationMsg" class="hidden text-[11px] font-bold text-red-500 flex items-center gap-1">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <span id="bankAmountValidationText"></span>
+          </p>
+        </div>
+
+        <!-- Gợi ý nạp nhanh -->
+        <div>
+          <div class="text-[11px] font-bold text-slate-500 dark:text-slate-400 mb-2 flex items-center justify-between">
+            <span><i class="fa-solid fa-bolt text-amber-500 mr-1"></i> Gợi ý mệnh giá nạp nhanh:</span>
+          </div>
+          <div class="grid grid-cols-3 gap-1.5 sm:gap-2">
+            <button type="button" onclick="selectSuggestedBankAmount(20000)" class="py-2 px-2 rounded-xl bg-slate-100 dark:bg-[#0B0E17] hover:bg-blue-600 hover:text-white border border-slate-200 dark:border-[#1F2937] text-xs font-bold transition-all">20.000đ</button>
+            <button type="button" onclick="selectSuggestedBankAmount(50000)" class="py-2 px-2 rounded-xl bg-slate-100 dark:bg-[#0B0E17] hover:bg-blue-600 hover:text-white border border-slate-200 dark:border-[#1F2937] text-xs font-bold transition-all">50.000đ</button>
+            <button type="button" onclick="selectSuggestedBankAmount(100000)" class="py-2 px-2 rounded-xl bg-slate-100 dark:bg-[#0B0E17] hover:bg-blue-600 hover:text-white border border-slate-200 dark:border-[#1F2937] text-xs font-bold transition-all">100.000đ</button>
+            <button type="button" onclick="selectSuggestedBankAmount(200000)" class="py-2 px-2 rounded-xl bg-slate-100 dark:bg-[#0B0E17] hover:bg-blue-600 hover:text-white border border-slate-200 dark:border-[#1F2937] text-xs font-bold transition-all">200.000đ</button>
+            <button type="button" onclick="selectSuggestedBankAmount(500000)" class="py-2 px-2 rounded-xl bg-slate-100 dark:bg-[#0B0E17] hover:bg-blue-600 hover:text-white border border-slate-200 dark:border-[#1F2937] text-xs font-bold transition-all">500.000đ</button>
+            <button type="button" onclick="selectSuggestedBankAmount(1000000)" class="py-2 px-2 rounded-xl bg-slate-100 dark:bg-[#0B0E17] hover:bg-blue-600 hover:text-white border border-slate-200 dark:border-[#1F2937] text-xs font-bold transition-all">1.000.000đ</button>
+            <button type="button" onclick="selectSuggestedBankAmount(2000000)" class="py-2 px-2 rounded-xl bg-slate-100 dark:bg-[#0B0E17] hover:bg-blue-600 hover:text-white border border-slate-200 dark:border-[#1F2937] text-xs font-bold transition-all">2.000.000đ</button>
+            <button type="button" onclick="selectSuggestedBankAmount(5000000)" class="py-2 px-2 rounded-xl bg-slate-100 dark:bg-[#0B0E17] hover:bg-blue-600 hover:text-white border border-slate-200 dark:border-[#1F2937] text-xs font-bold transition-all">5.000.000đ</button>
+            <button type="button" onclick="selectSuggestedBankAmount(10000000)" class="py-2 px-2 rounded-xl bg-amber-500/15 hover:bg-amber-500 hover:text-slate-950 text-amber-500 border border-amber-500/30 text-xs font-extrabold transition-all">10.000.000đ</button>
+          </div>
+        </div>
+
+        <!-- Nút Lấy mã thanh toán -->
+        <button type="button" onclick="generateBankPaymentCode()"
+          class="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-extrabold text-sm shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2 transition-all active:scale-[0.99]">
+          <i class="fa-solid fa-qrcode"></i>
+          <span>Lấy mã thanh toán</span>
         </button>
       </div>
 
-      <form id="cardDepositForm" onsubmit="handleDepositSubmit(event)" class="mt-4 space-y-3">
-        <div>
-          <label class="block text-xs font-semibold mb-1">Loại thẻ</label>
-          <select class="w-full px-3 py-2.5 rounded-xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] text-xs sm:text-sm">
-            <option>Viettel (Chiết khấu 0% - Nhận 100%)</option>
-            <option>Vinaphone (Nhận 100%)</option>
-            <option>Mobifone (Nhận 100%)</option>
-            <option>Garena / Zing (Nhận 100%)</option>
-          </select>
+      <!-- BƯỚC 2: MENU THÔNG TIN CHUYỂN KHOẢN (QR, STK, CHỦ TK, MỆNH GIÁ, NỘI DUNG naptien...) -->
+      <div id="bankDepositStep2" class="hidden space-y-4">
+        <div class="flex items-center justify-between">
+          <button type="button" onclick="backToBankAmountStep()" class="text-xs font-bold text-blue-500 hover:underline flex items-center gap-1">
+            <i class="fa-solid fa-arrow-left"></i> Đổi mệnh giá
+          </button>
+          <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-500 text-[10px] font-extrabold uppercase">
+            Mã CK Đã Tạo
+          </span>
         </div>
-        <div>
-          <label class="block text-xs font-semibold mb-1">Mệnh giá thẻ</label>
-          <select id="cardAmountSelect" class="w-full px-3 py-2.5 rounded-xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] text-xs sm:text-sm">
-            <option value="20000">20.000 đ</option>
-            <option value="50000" selected>50.000 đ</option>
-            <option value="100000">100.000 đ</option>
-            <option value="200000">200.000 đ</option>
-            <option value="500000">500.000 đ</option>
-          </select>
-        </div>
-        <div class="grid grid-cols-2 gap-2.5">
-          <div>
-            <label class="block text-xs font-semibold mb-1">Số Seri</label>
-            <input type="text" placeholder="Nhập số seri..." required class="w-full px-3 py-2 rounded-xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] text-xs">
-          </div>
-          <div>
-            <label class="block text-xs font-semibold mb-1">Mã thẻ</label>
-            <input type="text" placeholder="Nhập mã thẻ..." required class="w-full px-3 py-2 rounded-xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] text-xs">
-          </div>
-        </div>
-        <button type="submit" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-sm shadow-lg transition-all">
-          Nạp Thẻ Ngay
-        </button>
-      </form>
 
-      <div id="bankDepositBox" class="hidden mt-4 space-y-3.5">
-        <div class="rounded-2xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] p-3.5 text-xs space-y-2">
-          <div class="flex justify-between">
-            <span class="text-slate-400">Ngân hàng:</span>
-            <span class="font-bold text-blue-500">MB BANK (Quân Đội)</span>
+        <div class="text-center">
+          <h3 class="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white">
+            Thông Tin Chuyển Khoản Bank
+          </h3>
+          <p class="text-[11px] text-slate-500 dark:text-slate-400">
+            Quét mã QR hoặc chuyển khoản đúng nội dung bên dưới
+          </p>
+        </div>
+
+        <!-- Khung mã QR & thông tin chi tiết -->
+        <div class="rounded-2xl bg-slate-100 dark:bg-[#0B0E17] border border-slate-200 dark:border-[#1F2937] p-4 space-y-3.5">
+          <!-- QR Code Visual -->
+          <div class="flex flex-col items-center justify-center">
+            <div class="p-2.5 rounded-2xl bg-white shadow-md border border-slate-200">
+              <div id="bankQrMatrix" class="w-28 h-28 grid grid-cols-7 gap-0.5 p-1 bg-white"></div>
+            </div>
+            <span class="mt-1.5 text-[10px] font-bold text-blue-500 uppercase tracking-wider">
+              MB BANK • VIETQR SHOP HỒNG HẢI
+            </span>
           </div>
-          <div class="flex justify-between">
-            <span class="text-slate-400">Số tài khoản:</span>
-            <span class="font-bold text-amber-500">0827068888</span>
-          </div>
-          <div class="flex justify-between">
-            <span class="text-slate-400">Chủ tài khoản:</span>
-            <span class="font-bold">NGUYEN HONG HAI</span>
-          </div>
-          <div class="flex justify-between">
-            <span class="text-slate-400">Nội dung CK:</span>
-            <span class="font-bold text-emerald-500">NAP HONGHAI</span>
+
+          <!-- Bảng thông tin STK, Chủ TK, Mệnh giá, Nội dung -->
+          <div class="space-y-2 text-xs border-t border-slate-200 dark:border-[#1F2937] pt-3">
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-slate-500 dark:text-slate-400">Ngân hàng:</span>
+              <strong class="text-slate-900 dark:text-white">MB Bank (Quân Đội)</strong>
+            </div>
+
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-slate-500 dark:text-slate-400">STK:</span>
+              <div class="flex items-center gap-1.5">
+                <strong id="transferStkText" class="font-mono text-sm text-amber-500">0827068888</strong>
+                <button type="button" onclick="copyTextValue('0827068888', 'Đã sao chép STK!')" class="px-2 py-0.5 rounded bg-blue-600/15 text-blue-500 text-[10px] font-bold hover:bg-blue-600 hover:text-white transition-colors">
+                  Copy
+                </button>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-slate-500 dark:text-slate-400">Tên chủ TK:</span>
+              <strong class="text-slate-900 dark:text-white uppercase">NGUYEN HONG HAI</strong>
+            </div>
+
+            <div class="flex items-start justify-between gap-2">
+              <span class="text-slate-500 dark:text-slate-400 shrink-0">Mệnh giá đã chọn:</span>
+              <div class="text-right">
+                <div id="transferAmountText" class="font-gaming font-extrabold text-sm text-red-500">50.000 đ</div>
+                <div id="transferAmountWordsText" class="text-[10px] text-emerald-500 font-semibold">Năm mươi nghìn đồng</div>
+              </div>
+            </div>
+
+            <div class="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-between gap-2">
+              <div class="min-w-0">
+                <span class="text-[10px] text-amber-500 font-bold block">Nội dung chuyển khoản:</span>
+                <strong id="transferContentText" class="font-mono text-xs sm:text-sm text-slate-900 dark:text-white break-all">naptien50000</strong>
+              </div>
+              <button type="button" onclick="copyCurrentTransferContent()" class="px-2.5 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-[11px] shrink-0 transition-colors">
+                Sao chép
+              </button>
+            </div>
           </div>
         </div>
-        <div class="grid grid-cols-3 gap-2">
-          <button onclick="quickBankDeposit(50000)" class="py-2 rounded-xl bg-blue-600/15 hover:bg-blue-600 hover:text-white text-blue-500 font-bold text-xs transition-colors">+50.000đ</button>
-          <button onclick="quickBankDeposit(100000)" class="py-2 rounded-xl bg-blue-600/15 hover:bg-blue-600 hover:text-white text-blue-500 font-bold text-xs transition-colors">+100.000đ</button>
-          <button onclick="quickBankDeposit(500000)" class="py-2 rounded-xl bg-blue-600/15 hover:bg-blue-600 hover:text-white text-blue-500 font-bold text-xs transition-colors">+500.000đ</button>
-        </div>
+
+        <!-- Nút Xác nhận tôi đã thanh toán -->
+        <button type="button" onclick="confirmUserPaidBank()"
+          class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-sm shadow-lg shadow-emerald-600/30 flex items-center justify-center gap-2 transition-all active:scale-[0.99]">
+          <i class="fa-solid fa-check-double"></i>
+          <span>Xác nhận tôi đã thanh toán</span>
+        </button>
       </div>
     </div>
   </div>
@@ -1339,6 +1385,27 @@
 
   <!-- TOAST NOTIFICATION -->
   <div id="toastContainer" class="fixed top-20 right-4 z-[60] flex flex-col gap-2 max-w-xs w-full pointer-events-none"></div>
+
+  <!-- KHỐI KIỂM TRA GIAO DỊCH 10 GIÂY CÓ BÁNH RĂNG XOAY Ở GÓC DƯỚI BÊN TRÁI -->
+  <div id="bankCheckingCornerWidget" class="hidden fixed bottom-4 left-4 z-[65] max-w-xs w-[calc(100vw-2rem)] sm:w-80 rounded-2xl bg-[#131826] border border-blue-500/40 p-3.5 shadow-2xl text-white modal-enter">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-cyan-400 shrink-0">
+        <i class="fa-solid fa-gear text-xl animate-spin"></i>
+      </div>
+      <div class="min-w-0 flex-1">
+        <div class="flex items-center justify-between gap-2">
+          <span class="text-xs font-extrabold text-white">Hệ thống đang kiểm tra...</span>
+          <span id="bankCheckCountdownBadge" class="font-mono text-[11px] font-bold text-amber-400">10s</span>
+        </div>
+        <p class="text-[11px] text-slate-300 mt-0.5 truncate">
+          Đang đối soát giao dịch Bank Shop Hồng Hải
+        </p>
+        <div class="w-full h-1.5 rounded-full bg-slate-800 overflow-hidden mt-2">
+          <div id="bankCheckProgressBar" class="h-full w-full bg-gradient-to-r from-blue-500 to-cyan-400 transition-all duration-1000"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
   <!-- ==================== JAVASCRIPT LOGIC HOÀN CHỈNH ==================== -->
@@ -2560,65 +2627,238 @@
       }
     }
 
-    // ==================== NẠP TIỀN ====================
-    function toggleDepositDropdown() {
-      document.getElementById('depositDropdownMenu').classList.toggle('hidden');
-    }
+    // ==================== NẠP TIỀN BANK NÂNG CAO & KIỂM TRA 10 GIÂY ====================
+    const MIN_BANK_DEPOSIT = 20000;
+    const MAX_BANK_DEPOSIT = 10000000;
+    let selectedBankAmount = 50000;
+    let currentBankTransferContent = 'naptien50000';
+    let bankCheckTimerInterval = null;
 
-    function openDepositModal(tab) {
-      document.getElementById('depositDropdownMenu').classList.add('hidden');
-      switchDepositTab(tab);
+    function openDepositModal() {
+      const dd = document.getElementById('depositDropdownMenu');
+      if (dd) dd.classList.add('hidden');
+
+      backToBankAmountStep();
+      selectSuggestedBankAmount(50000);
       openModal('depositModal');
     }
 
-    function switchDepositTab(tab) {
-      const cardForm = document.getElementById('cardDepositForm');
-      const bankBox = document.getElementById('bankDepositBox');
-      const tabCardBtn = document.getElementById('tabCardBtn');
-      const tabBankBtn = document.getElementById('tabBankBtn');
+    function backToBankAmountStep() {
+      document.getElementById('bankDepositStep1').classList.remove('hidden');
+      document.getElementById('bankDepositStep2').classList.add('hidden');
+    }
 
-      if (tab === 'card') {
-        cardForm.classList.remove('hidden');
-        bankBox.classList.add('hidden');
-        tabCardBtn.className = 'py-2 rounded-lg text-xs font-bold bg-blue-600 text-white transition-all';
-        tabBankBtn.className = 'py-2 rounded-lg text-xs font-bold text-slate-600 dark:text-slate-400 transition-all';
+    function parseRawBankAmount(str) {
+      const digitsOnly = String(str || '').replace(/\D/g, '');
+      return digitsOnly ? parseInt(digitsOnly, 10) : 0;
+    }
+
+    function selectSuggestedBankAmount(amount) {
+      const clamped = Math.max(MIN_BANK_DEPOSIT, Math.min(MAX_BANK_DEPOSIT, Number(amount) || MIN_BANK_DEPOSIT));
+      const input = document.getElementById('bankAmountInput');
+      input.value = clamped.toLocaleString('vi-VN');
+      handleBankAmountInput();
+    }
+
+    function handleBankAmountInput() {
+      const input = document.getElementById('bankAmountInput');
+      const rawAmount = parseRawBankAmount(input.value);
+
+      // Tự động chia dấu chấm phân tách hàng nghìn cho dễ nhìn khi đang nhập
+      if (rawAmount > 0) {
+        input.value = rawAmount.toLocaleString('vi-VN');
       } else {
-        cardForm.classList.add('hidden');
-        bankBox.classList.remove('hidden');
-        tabBankBtn.className = 'py-2 rounded-lg text-xs font-bold bg-blue-600 text-white transition-all';
-        tabCardBtn.className = 'py-2 rounded-lg text-xs font-bold text-slate-600 dark:text-slate-400 transition-all';
+        input.value = '';
+      }
+
+      const wordsEl = document.getElementById('bankAmountTranslatedText');
+      const errBox = document.getElementById('bankAmountValidationMsg');
+      const errText = document.getElementById('bankAmountValidationText');
+
+      if (rawAmount === 0) {
+        wordsEl.textContent = 'Nhập mệnh giá từ 20.000đ đến 10.000.000đ để xem cách đọc tiền';
+        errBox.classList.add('hidden');
+        selectedBankAmount = 0;
+        return;
+      }
+
+      wordsEl.textContent = convertNumberToVietnameseWords(rawAmount);
+
+      if (rawAmount < MIN_BANK_DEPOSIT) {
+        errText.textContent = `Mệnh giá tối thiểu là ${formatVND(MIN_BANK_DEPOSIT)}.`;
+        errBox.classList.remove('hidden');
+        selectedBankAmount = rawAmount;
+      } else if (rawAmount > MAX_BANK_DEPOSIT) {
+        errText.textContent = `Mệnh giá tối đa là ${formatVND(MAX_BANK_DEPOSIT)}.`;
+        errBox.classList.remove('hidden');
+        selectedBankAmount = rawAmount;
+      } else {
+        errBox.classList.add('hidden');
+        selectedBankAmount = rawAmount;
       }
     }
 
-    function handleDepositSubmit(e) {
-      e.preventDefault();
-      if (!appState.isLoggedIn || !appState.currentUser) {
-        closeModal('depositModal');
-        showToast('Vui lòng đăng nhập hoặc đăng ký tài khoản trước khi nạp tiền!', 'warning');
-        openAuthModal('register');
+    function generateBankPaymentCode() {
+      const inputVal = parseRawBankAmount(document.getElementById('bankAmountInput').value);
+
+      if (!inputVal || inputVal < MIN_BANK_DEPOSIT || inputVal > MAX_BANK_DEPOSIT) {
+        const errBox = document.getElementById('bankAmountValidationMsg');
+        const errText = document.getElementById('bankAmountValidationText');
+        errText.textContent = `Vui lòng nhập số tiền hợp lệ từ 20.000đ đến 10.000.000đ!`;
+        errBox.classList.remove('hidden');
+        showToast('Mệnh giá nạp phải nằm trong khoảng 20.000đ - 10.000.000đ!', 'warning');
         return;
       }
-      const amount = parseInt(document.getElementById('cardAmountSelect').value) || 50000;
-      appState.currentUser.balance += amount;
-      syncCurrentUserToStorage();
-      updateAuthUI();
-      closeModal('depositModal');
-      showToast(`Nạp thẻ thành công +${formatVND(amount)} vào tài khoản của bạn!`, 'success');
+
+      selectedBankAmount = inputVal;
+      currentBankTransferContent = `naptien${selectedBankAmount}`;
+
+      document.getElementById('transferStkText').textContent = '0827068888';
+      document.getElementById('transferAmountText').textContent = formatVND(selectedBankAmount);
+      document.getElementById('transferAmountWordsText').textContent = convertNumberToVietnameseWords(selectedBankAmount);
+      document.getElementById('transferContentText').textContent = currentBankTransferContent;
+
+      renderBankQrMatrix(currentBankTransferContent);
+
+      document.getElementById('bankDepositStep1').classList.add('hidden');
+      document.getElementById('bankDepositStep2').classList.remove('hidden');
     }
 
-    function quickBankDeposit(amount) {
-      if (!appState.isLoggedIn || !appState.currentUser) {
-        closeModal('depositModal');
-        showToast('Vui lòng đăng nhập hoặc đăng ký tài khoản trước khi nạp tiền!', 'warning');
-        openAuthModal('register');
-        return;
+    function renderBankQrMatrix(seedStr) {
+      const container = document.getElementById('bankQrMatrix');
+      let hash = 2166136261;
+      for (let i = 0; i < seedStr.length; i++) {
+        hash ^= seedStr.charCodeAt(i);
+        hash = Math.imul(hash, 16777619);
       }
-      const bonus = Math.round(amount * 1.15);
-      appState.currentUser.balance += bonus;
-      syncCurrentUserToStorage();
-      updateAuthUI();
+
+      // Tạo ma trận QR 7x7 sinh động theo nội dung naptien(menhgiadachon) với các ô định vị góc
+      const cells = [];
+      for (let r = 0; r < 7; r++) {
+        for (let c = 0; c < 7; c++) {
+          const isCornerFinder =
+            (r < 2 && c < 2) ||
+            (r < 2 && c > 4) ||
+            (r > 4 && c < 2);
+          const bit = ((hash >>> ((r * 7 + c) % 31)) & 1) === 1;
+          const dark = isCornerFinder || bit;
+          cells.push(`<div class="rounded-[2px] ${dark ? 'bg-slate-900' : 'bg-slate-100'}"></div>`);
+        }
+      }
+      container.innerHTML = cells.join('');
+    }
+
+    function copyCurrentTransferContent() {
+      copyTextValue(currentBankTransferContent, `Đã sao chép nội dung: ${currentBankTransferContent}`);
+    }
+
+    function copyTextValue(val, toastMsg) {
+      const temp = document.createElement('textarea');
+      temp.value = val;
+      document.body.appendChild(temp);
+      temp.select();
+      try {
+        document.execCommand('copy');
+      } catch (e) {
+        // Bỏ qua lỗi sao chép trên môi trường hạn chế
+      }
+      document.body.removeChild(temp);
+      showToast(toastMsg || 'Đã sao chép!', 'info');
+    }
+
+    function confirmUserPaidBank() {
       closeModal('depositModal');
-      showToast(`Nhận chuyển khoản thành công +${formatVND(bonus)} (Đã gồm +15% KM)!`, 'success');
+      startTenSecondBankVerification();
+    }
+
+    function startTenSecondBankVerification() {
+      if (bankCheckTimerInterval) {
+        clearInterval(bankCheckTimerInterval);
+        bankCheckTimerInterval = null;
+      }
+
+      const widget = document.getElementById('bankCheckingCornerWidget');
+      const badge = document.getElementById('bankCheckCountdownBadge');
+      const progressBar = document.getElementById('bankCheckProgressBar');
+
+      let remaining = 10;
+      badge.textContent = `${remaining}s`;
+      progressBar.style.width = '100%';
+      widget.classList.remove('hidden');
+
+      bankCheckTimerInterval = setInterval(() => {
+        remaining -= 1;
+        if (remaining > 0) {
+          badge.textContent = `${remaining}s`;
+          progressBar.style.width = `${(remaining / 10) * 100}%`;
+        } else {
+          clearInterval(bankCheckTimerInterval);
+          bankCheckTimerInterval = null;
+          progressBar.style.width = '0%';
+          widget.classList.add('hidden');
+
+          showToast('Nạp tiền không thành công — Chúng tôi chưa thấy tác động số dư nào từ bạn.', 'error');
+        }
+      }, 1000);
+    }
+
+    // Chuyển đổi số tiền sang chữ tiếng Việt (hỗ trợ đến 10.000.000đ)
+    function convertNumberToVietnameseWords(num) {
+      const n = Math.floor(Number(num) || 0);
+      if (n <= 0) return 'Không đồng';
+
+      const chuSo = ['không', 'một', 'hai', 'ba', 'bốn', 'năm', 'sáu', 'bảy', 'tám', 'chín'];
+
+      function readGroupThree(threeDigits, hasHigher) {
+        const tram = Math.floor(threeDigits / 100);
+        const chuc = Math.floor((threeDigits % 100) / 10);
+        const donvi = threeDigits % 10;
+        let out = '';
+
+        if (tram > 0 || hasHigher) {
+          out += `${chuSo[tram]} trăm`;
+        }
+
+        if (chuc > 1) {
+          out += ` ${chuSo[chuc]} mươi`;
+          if (donvi === 1) out += ' mốt';
+          else if (donvi === 4) out += ' tư';
+          else if (donvi === 5) out += ' lăm';
+          else if (donvi > 0) out += ` ${chuSo[donvi]}`;
+        } else if (chuc === 1) {
+          out += ' mười';
+          if (donvi === 1) out += ' một';
+          else if (donvi === 4) out += ' bốn';
+          else if (donvi === 5) out += ' lăm';
+          else if (donvi > 0) out += ` ${chuSo[donvi]}`;
+        } else if (donvi > 0) {
+          if (tram > 0 || hasHigher) out += ' lẻ';
+          if (donvi === 4 && (tram > 0 || hasHigher)) out += ' bốn';
+          else if (donvi === 5 && (tram > 0 || hasHigher)) out += ' năm';
+          else out += ` ${chuSo[donvi]}`;
+        }
+
+        return out.trim();
+      }
+
+      const trieu = Math.floor(n / 1000000);
+      const nghin = Math.floor((n % 1000000) / 1000);
+      const dong = n % 1000;
+
+      const parts = [];
+      if (trieu > 0) {
+        parts.push(`${readGroupThree(trieu, false)} triệu`);
+      }
+      if (nghin > 0) {
+        parts.push(`${readGroupThree(nghin, trieu > 0)} nghìn`);
+      }
+      if (dong > 0) {
+        parts.push(`${readGroupThree(dong, trieu > 0 || nghin > 0)}`);
+      }
+
+      const combined = parts.join(' ').trim();
+      const capitalized = combined.charAt(0).toUpperCase() + combined.slice(1);
+      return `${capitalized} đồng`;
     }
 
     // ==================== BÀI VIẾT & ĐIỀU HƯỚNG ====================
